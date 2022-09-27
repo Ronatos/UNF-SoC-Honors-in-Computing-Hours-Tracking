@@ -28,7 +28,8 @@ export default function Home() {
           <input type="submit" value="Log in"/>
         </form>
 
-        <a href='/' target={"_blank"}>Can't log in?</a>
+        <a href='/account' target={"_blank"}>Create an account</a>
+        <a href='/loginhelp' target={"_blank"}>Can't log in?</a>
       </main>
     </div>
   )
