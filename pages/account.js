@@ -58,8 +58,7 @@ export default function Home() {
           
           <div className="button-container">
           <br></br>
-            <input type="submit" />
-           
+            <input type="submit" value="Create Account"/>
           </div>
 
 
