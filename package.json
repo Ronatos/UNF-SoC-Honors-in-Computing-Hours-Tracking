@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "az webapp up"
   },
   "dependencies": {
     "bootstrap": "^5.2.1",
@@ -18,5 +19,8 @@
   "devDependencies": {
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1"
+  },
+  "engines" : {
+    "node" : ">=16"
   }
 }

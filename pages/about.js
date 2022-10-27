@@ -13,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {list.map(i=><p>{i}</p>)}
+      {/* {list.map(i=><p>{i}</p>)} */}
 
       <main className={styles.main}>
         <h1 className={styles.title}>

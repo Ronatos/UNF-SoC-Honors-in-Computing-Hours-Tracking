@@ -82,7 +82,7 @@ export default function Home() {
                     <input type="text" class="form-control" id="location" placeholder="Enter your location" value="Bay Area, San Francisco, CA"/>
                   </div>
                   <div class="form-group small text-muted">
-                    All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
+                    All of the fields on this page are optional and can be deleted at any time, and by filling them out, you&apos;re giving us consent to share this data wherever your user profile appears.
                   </div>
                   <button type="button" class="btn btn-primary">Update Profile</button>
                   <button style={{

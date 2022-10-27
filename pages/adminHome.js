@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/admin.module.css'
 /*from Chance, this is the admin home page includes links including link to View Reports
 
@@ -20,10 +21,14 @@ export default function Home() {
         </h1>
 
         <ul className={styles.nav}>
-            <li className={styles.nava}><a className={styles.navb} href="/report">View Pending Reports</a></li>
+            {/* <li className={styles.nava}><Link href="/report"><a className={styles.navb}>View Pending Reports</a></Link></li>
+            <li className={styles.nava}><Link href="#accountEdit"><a className={styles.navb}>Account Requests</a></Link></li>
+            <li className={styles.nava}><Link href="#accountEdit"><a className={styles.navb}>Report History</a></Link></li>
+            <li className={styles.nava}><Link href="#accountEdit"><a className={styles.navb}>View Accounts</a></Link></li> */}
+            {/* <li className={styles.nava}><a className={styles.navb} href="/report">View Pending Reports</a></li>
             <li className={styles.nava}><a className={styles.navb} href="#accountEdit">Account Requests</a></li>
             <li className={styles.nava}><a className={styles.navb} href="#accountEdit">Report History</a></li>
-            <li className={styles.nava}><a className={styles.navb} href="#accountEdit">View Accounts</a></li>
+            <li className={styles.nava}><a className={styles.navb} href="#accountEdit">View Accounts</a></li> */}
         </ul>
 
 </main>

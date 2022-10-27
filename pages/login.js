@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 let username = "Username"
 let password = "Password"
@@ -28,8 +29,8 @@ export default function Home() {
           <input type="submit" value="Log in"/>
         </form>
 
-        <a href='/account' target={"_blank"}>Create an account</a>
-        <a href='/loginhelp' target={"_blank"}>Can't log in?</a>
+        <Link href="/account">Create an account</Link>
+        <Link href="/loginhelp">Can&apos;t log in?</Link>
       </main>
     </div>
   )
