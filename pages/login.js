@@ -1,37 +1,46 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import unfLogo from '../public/UNF_Logo.gif'
+// import styles from '../styles/Home.module.css'
+import styles from '../styles/login.module.css'
 import Link from 'next/link'
 
 let username = "Username"
 let password = "Password"
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Login</title>
-        <meta name="description" content="Login page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+export default function Login() {
+    return (
+        <div>
+            <Head>
+                <title>Login</title>
+                <meta name="description" content="Login page" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-      <main className={styles.main}>
+            <header className={styles.header}>
+                <Image src={unfLogo} alt="UNF"/>
+            </header>
 
-        <h1 className={styles.description}>
-          UNF School of Computing <br></br> Honors in Computing Hours Tracking
-        </h1>
+            <main className={styles.main}>
+            {/* <main> */}
 
-        <form className={styles.description}>
-          <input type="text" value={username}/>
-          <br></br>
-          <input type="text" value={password}/>
-          <br></br>
-          <input type="submit" value="Log in"/>
-        </form>
+                <h1 className={styles.description}>
+                {/* <h1> */}
+                    UNF School of Computing <br></br> Honors in Computing Hours Tracking
+                </h1>
 
-        <Link href="/account">Create an account</Link>
-        <Link href="/loginhelp">Can&apos;t log in?</Link>
-      </main>
-    </div>
-  )
+                <form className={styles.description}>
+                {/* <form> */}
+                    <input type="text" defaultValue={username}/>
+                    <br></br>
+                    <input type="text" defaultValue={password}/>
+                    <br></br>
+                    <input type="submit" value="Log in"/>
+                </form>
+
+                <Link href="/account">Create an account</Link>
+                <Link href="/loginhelp">Can&apos;t log in?</Link>
+            </main>
+        </div>
+    )
 }
