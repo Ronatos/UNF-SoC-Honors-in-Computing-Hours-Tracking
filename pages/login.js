@@ -35,8 +35,15 @@ export default function Login() {
                     <input type="submit" value="Log in"/>
                 </form>
 
-                <Link href="/account">Create an account</Link>
-                <Link href="/loginhelp">Can&apos;t log in?</Link>
+                <div className={styles.links}>
+                    <Link href="/account_creation">Create an account</Link>
+                </div>
+
+                <div className={styles.links}>
+                    <Link href="/username_recovery">Forgot username?</Link>
+                    <span className={styles.linkSpacing}></span>
+                    <Link href="/password_reset">Forgot Password?</Link>
+                </div>
             </main>
         </div>
     )

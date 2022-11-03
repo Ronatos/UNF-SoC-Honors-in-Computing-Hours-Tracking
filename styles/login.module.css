@@ -15,6 +15,16 @@
     background-color: #0A233F;
 }
 
+.links {
+    color:#0A233F;
+    margin-top: 2%;
+    text-decoration: underline;
+}
+
+.linkSpacing {
+    padding: 10px;
+}
+
 .main {
     min-height: 50vh;
     padding: 4rem 0;
