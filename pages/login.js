@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import unfLogo from '../public/UNF_Logo.gif'
-// import styles from '../styles/Home.module.css'
+// import stylesOriginal from '../styles/Home.module.css'
 import styles from '../styles/login.module.css'
 import Link from 'next/link'
 
@@ -22,15 +22,12 @@ export default function Login() {
             </header>
 
             <main className={styles.main}>
-            {/* <main> */}
 
                 <h1 className={styles.description}>
-                {/* <h1> */}
                     UNF School of Computing <br></br> Honors in Computing Hours Tracking
                 </h1>
 
                 <form className={styles.description}>
-                {/* <form> */}
                     <input type="text" defaultValue={username}/>
                     <br></br>
                     <input type="text" defaultValue={password}/>
