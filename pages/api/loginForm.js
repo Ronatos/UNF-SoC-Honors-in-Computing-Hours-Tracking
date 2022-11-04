@@ -16,6 +16,8 @@ export default function handler(req, res) {
         return res.status(400).json({ data: 'Username or password not submitted.' })
     }
 
+    // The following several lines will be replaced with database logic once one is implemented.
+    // This just looks through the mock database and verifies an account with the specified credentials exists.
     const accountsDir = "db/accounts";
     let accounts = [];
 

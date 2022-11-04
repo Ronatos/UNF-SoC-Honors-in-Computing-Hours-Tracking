@@ -12,7 +12,7 @@ export default function AccountCreation() {
 
         const data = {
             username: event.target.username.value,
-            email: event.target.emailAddress.value,
+            email: event.target.email.value,
             nnumber: event.target.nnumber.value,
             password: event.target.password.value,
             passwordConfirmation: event.target.passwordConfirmation.value,
@@ -36,9 +36,9 @@ export default function AccountCreation() {
         // Update here
         if (response.status == 200) {
             alert(result.message)
-            Router.push("/")
+            Router.push("/login")
         }
-        else if (response.status == 401) {
+        else if (response.status == 400) {
             alert(result.message)
         }
     }
@@ -74,7 +74,7 @@ export default function AccountCreation() {
                     <input name='firstName' className={styles.input} type="text" placeholder="First Name" required/>
                     <br></br>
                     <input name='lastName' className={styles.input} type="text" placeholder="Last Name" required/>
-                    <input type="submit" value="Log in"/>
+                    <input type="submit" value="Create Account"/>
                 </form>
             </main>
         </div>
