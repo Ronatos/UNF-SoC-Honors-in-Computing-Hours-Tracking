@@ -2,20 +2,23 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
 
-import styles from '../styles/UsernameRecovery.module.css'
+import styles from '../styles/AccountCreation.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 
-export default function UsernameRecovery() {
+export default function PasswordReset() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
         const data = {
+            username: event.target.username.value,
             email: event.target.email.value,
+            password: event.target.password.value,
+            passwordConfirmation: event.target.passwordConfirmation.value,
         }
 
         const JSONdata = JSON.stringify(data)
-        const endpoint = '/api/username_recovery_form'
+        const endpoint = '/api/password_reset_form'
         const options = {
             method: 'POST',
             headers: {
@@ -40,8 +43,8 @@ export default function UsernameRecovery() {
     return (
         <div>
             <Head>
-                <title>Username Recovery</title>
-                <meta name="description" content="Username Recovery page" />
+                <title>Password Reset</title>
+                <meta name="description" content="Password Reset page" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -51,17 +54,19 @@ export default function UsernameRecovery() {
     
             <main>
                 <h1 className={styles.description}>
-                    Username Recovery
+                    Password Reset
                 </h1>
 
-                <p className={styles.p}>
-                    We&apos;ll send you an email containing your username(s)
-                </p>
-
                 <form className={styles.description} onSubmit={handleSubmit} method="post">
+                    <input name='username' className={styles.input} type="text" placeholder="Username" required/>
+                    <br></br>
                     <input name='email' className={styles.input} type="text" placeholder="Email Address" required/>
                     <br></br>
-                    <input type="submit" value="Recover Username"/>
+                    <input name='password' className={styles.input} type="password" placeholder="Password" required/>
+                    <br></br>
+                    <input name='passwordConfirmation' className={styles.input} type="password" placeholder="Confirm Password" required/>
+                    <br></br>
+                    <input type="submit" value="Reset Password"/>
                 </form>
             </main>
         </div>
