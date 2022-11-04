@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Router from 'next/router'
 
-import styles from '../styles/login.module.css'
+import styles from '../styles/Login.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 
 export default function Login() {
@@ -23,7 +23,7 @@ export default function Login() {
         const JSONdata = JSON.stringify(data)
 
         // API endpoint where we send form data.
-        const endpoint = '/api/loginForm'
+        const endpoint = '/api/login_form'
 
         // Form the request for sending data to the server.
         const options = {
@@ -46,7 +46,7 @@ export default function Login() {
 
         if (response.status == 200) {
             alert(result.message)
-            Router.push("/")
+            Router.push("/login")
         }
         else if (response.status == 401) {
             alert(result.message)

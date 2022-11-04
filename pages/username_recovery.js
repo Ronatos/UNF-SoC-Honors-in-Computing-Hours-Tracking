@@ -2,26 +2,20 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
 
-import styles from '../styles/AccountCreation.module.css'
+import styles from '../styles/UsernameRecovery.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 
-export default function AccountCreation() {
+export default function UsernameRecovery() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
         const data = {
-            username: event.target.username.value,
             email: event.target.email.value,
-            nnumber: event.target.nnumber.value,
-            password: event.target.password.value,
-            passwordConfirmation: event.target.passwordConfirmation.value,
-            firstName: event.target.firstName.value,
-            lastName: event.target.lastName.value,
         }
 
         const JSONdata = JSON.stringify(data)
-        const endpoint = '/api/account_creation_form'
+        const endpoint = '/api/username_recovery_form'
         const options = {
             method: 'POST',
             headers: {
@@ -46,8 +40,8 @@ export default function AccountCreation() {
     return (
         <div>
             <Head>
-                <title>Account Creation</title>
-                <meta name="description" content="Account Creation page" />
+                <title>Username Recovery</title>
+                <meta name="description" content="Username Recovery page" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -57,23 +51,15 @@ export default function AccountCreation() {
     
             <main>
                 <h1 className={styles.description}>
-                    Create an Account
+                    Username Recovery
                 </h1>
 
+                <p className={styles.p}>
+                    We&apos;ll send you an email containing your username(s)
+                </p>
+
                 <form className={styles.description} onSubmit={handleSubmit} method="post">
-                    <input name='username' className={styles.input} type="text" placeholder="Username" required/>
-                    <br></br>
                     <input name='email' className={styles.input} type="text" placeholder="Email Address" required/>
-                    <br></br>
-                    <input name='nnumber' className={styles.input} type="text" placeholder="N-Number" required/>
-                    <br></br>
-                    <input name='password' className={styles.input} type="password" placeholder="Password" required/>
-                    <br></br>
-                    <input name='passwordConfirmation' className={styles.input} type="password" placeholder="Confirm Password" required/>
-                    <br></br>
-                    <input name='firstName' className={styles.input} type="text" placeholder="First Name" required/>
-                    <br></br>
-                    <input name='lastName' className={styles.input} type="text" placeholder="Last Name" required/>
                     <br></br>
                     <input type="submit" value="Create Account"/>
                 </form>
