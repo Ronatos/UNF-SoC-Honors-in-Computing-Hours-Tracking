@@ -1,3 +1,6 @@
+let fs = require('fs')
+let path = require('path')
+
 export default function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
@@ -13,12 +16,18 @@ export default function handler(req, res) {
         return res.status(400).json({ data: 'Username or password not submitted.' })
     }
 
-    const credentialDB = {
-        username: "alex",
-        password: "test"
-    };
+    const accountsDir = "db/accounts";
+    let accounts = [];
 
-    if (credentialDB.username == body.username && credentialDB.password == body.password) {
+    // Loop through all the files in accounts directory and add them to the accounts array
+    fs.readdirSync(accountsDir).forEach(file => {
+        let filepath = path.join(accountsDir, file);
+        accounts.push(JSON.parse(fs.readFileSync(filepath, 'utf8')));
+    });
+
+    let accountIndex = accounts.findIndex(account => account.username === body.username);
+
+    if (accountIndex != -1 && accounts[accountIndex].username == body.username && accounts[accountIndex].password == body.password) {
         // 200 OK
         console.log("200 OK");
         res.status(200).json({ message: "Login successful."})
@@ -29,4 +38,3 @@ export default function handler(req, res) {
         res.status(401).json({message: "Invalid username or password."})
     }
 }
-  

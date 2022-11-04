@@ -1,49 +1,39 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import Router from 'next/router'
 
 import styles from '../styles/login.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 
-export default function Login() {
+export default function AccountCreation() {
 
-    // Handles the submit event on form submit.
     const handleSubmit = async (event) => {
-        // Stop the form from submitting and refreshing the page.
         event.preventDefault()
 
-        // Get data from the form.
         const data = {
             username: event.target.username.value,
+            email: event.target.emailAddress.value,
+            nnumber: event.target.nnumber.value,
             password: event.target.password.value,
+            passwordConfirmation: event.target.passwordConfirmation.value,
+            firstName: event.target.firstName.value,
+            lastName: event.target.lastName.value,
         }
 
-        // Send the data to the server in JSON format.
         const JSONdata = JSON.stringify(data)
-
-        // API endpoint where we send form data.
-        const endpoint = '/api/loginForm'
-
-        // Form the request for sending data to the server.
+        const endpoint = '/api/accountCreationForm'
         const options = {
-            // The method is POST because we are sending data.
             method: 'POST',
-            // Tell the server we're sending JSON.
             headers: {
                 'Content-Type': 'application/json',
             },
-            // Body of the request is the JSON data we created above.
             body: JSONdata,
         }
 
-        // Send the form data to our forms API and get a response.
         const response = await fetch(endpoint, options)
-
-        // Get the response data from server as JSON.
-        // If server returns the data submitted, that means the form works.
         const result = await response.json()
 
+        // Update here
         if (response.status == 200) {
             alert(result.message)
             Router.push("/")
@@ -56,38 +46,36 @@ export default function Login() {
     return (
         <div>
             <Head>
-                <title>Login</title>
-                <meta name="description" content="Login page" />
+                <title>Account Creation</title>
+                <meta name="description" content="Account Creation page" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <header className={styles.header}>
                 <Image src={unfLogo} alt="UNF"/>
             </header>
-
-            <main className={styles.main}>
-
-                <h1 className={styles.description}>
-                    UNF School of Computing <br></br> Honors in Computing Hours Tracking
+    
+            <main>
+                <h1>
+                    Create an Account
                 </h1>
 
-                <form className={styles.description} onSubmit={handleSubmit} method="post">
+                <form onSubmit={handleSubmit} method="post">
                     <input name='username' className={styles.input} type="text" placeholder="Username" required/>
+                    <br></br>
+                    <input name='email' className={styles.input} type="text" placeholder="Email Address" required/>
+                    <br></br>
+                    <input name='nnumber' className={styles.input} type="text" placeholder="N-Number" required/>
                     <br></br>
                     <input name='password' className={styles.input} type="password" placeholder="Password" required/>
                     <br></br>
+                    <input name='passwordConfirmation' className={styles.input} type="password" placeholder="Confirm Password" required/>
+                    <br></br>
+                    <input name='firstName' className={styles.input} type="text" placeholder="First Name" required/>
+                    <br></br>
+                    <input name='lastName' className={styles.input} type="text" placeholder="Last Name" required/>
                     <input type="submit" value="Log in"/>
                 </form>
-
-                <div className={styles.links}>
-                    <Link href="/account_creation">Create an account</Link>
-                </div>
-
-                <div className={styles.links}>
-                    <Link href="/username_recovery">Forgot username?</Link>
-                    <span className={styles.linkSpacing}></span>
-                    <Link href="/password_reset">Forgot Password?</Link>
-                </div>
             </main>
         </div>
     )
