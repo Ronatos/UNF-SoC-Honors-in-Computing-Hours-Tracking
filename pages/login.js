@@ -5,6 +5,7 @@ import Link from 'next/link'
 import styles from '../styles/login.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import RenderResult from 'next/dist/server/render-result'
+import Router from 'next/router'
 
 export default function Login() {
 
@@ -44,7 +45,13 @@ export default function Login() {
         // If server returns the data submitted, that means the form works.
         const result = await response.json()
 
-        alert(response.status);
+        if (response.status == 200) {
+            alert(result.message)
+            Router.push("/")
+        }
+        else if (response.status == 401) {
+            alert(result.message)
+        }
     }
 
     return (

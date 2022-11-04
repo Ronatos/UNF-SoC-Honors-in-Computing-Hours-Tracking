@@ -20,11 +20,13 @@ export default function handler(req, res) {
 
     if (credentialDB.username == body.username && credentialDB.password == body.password) {
         // 200 OK
-        res.status(200).json({ username: `${body.username}`, password: `${body.password}` })
+        console.log("200 OK");
+        res.status(200).json({ message: "Login successful."})
     }
     else {
-        // 400 Bad Request
-        res.status(400).json({ username: `${body.username}`, password: `${body.password}` })
+        // 401 Unauthorized
+        console.log("401 Unauthorized");
+        res.status(401).json({message: "Invalid username or password."})
     }
 }
   
