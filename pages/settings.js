@@ -36,7 +36,7 @@ export default function Home() {
                 <a style={{
 
                 }} href='#' target={"_blank"}>Project Settings</a></li>
-              <li><a href='#' target={"_blank"}>Home</a></li>
+              <li><a href='/student_homepage' target={"_blank"}>Home</a></li>
               <li ><a href='#' target={"_blank"}>Login</a></li>
             </ul>
           </nav>

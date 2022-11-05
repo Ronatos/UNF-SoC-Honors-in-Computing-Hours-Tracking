@@ -21,7 +21,7 @@ export default function Home() {
 
       
       <header className={styles.header}>
-                <Image src={unfLogo} alt="UNF"/>
+                <Image className={styles.logo} src={unfLogo} alt="UNF"/>
                 <div className={styles.link}> 
 
                   <Link href="/student_homepage">Noti</Link>
@@ -32,17 +32,28 @@ export default function Home() {
       </header>
       
       <main>
-      <div>
+      <div className={styles.container}>
         
-        <button>
-          Button
+        <button className={styles.btn}>
+          Create New
         </button>
         
       </div> 
       
+      <div className={styles.student_form}>
+        hi
+      </div>
+
+      <div className={styles.queue}>
+        yooo
+      </div>
+
+      <div className={styles.footer}>
+        foot
+      </div>
          
       
-      <div class="card-body tab-content">
+      {/* <div class="card-body tab-content">
               <div class="tab-pane active" id="profile">
                 <h6>YOUR PROFILE INFORMATION</h6>
                 <hr></hr>
@@ -76,7 +87,7 @@ export default function Home() {
       </div>        
 
       
-        </div>
+        </div> */}
       </main>
     </div>
   )
