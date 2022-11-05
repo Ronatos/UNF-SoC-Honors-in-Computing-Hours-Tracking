@@ -41,15 +41,59 @@ export default function Home() {
       </div> 
       
       <div className={styles.student_form}>
-        hi
+        <form>
+          <label>Enter your name:</label>
+          <input type="text" name="name" />
+          <br></br>
+          <label>Placeholder:</label>
+          <input type="text" name="name" />
+          <br></br>
+          <label>Placeholder:</label>
+          <input type="text" name="name" />
+          <br></br>
+          <label>Placeholder:</label>
+          <input type="text" name="name" />
+          <br></br>
+          <label>Event:</label>
+          <input type="text" name="name" />
+          <br></br>
+          <input type="radio" name="event" value="Freshman" />
+          <label for="event">FR</label>
+
+          <input type="radio" name="event" value="Sophomore" />
+          <label for="event">SOPH</label>
+
+          <input type="radio" name="event" value="Junior" />
+          <label for="event">JR</label>
+
+          <input type="radio" name="event" value="Senior" />
+          <label for="event">Senior</label>
+          <br></br>
+          <div className={styles.right_form}>
+            <label for="quantity">Hours Amount:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="50" />
+            <br></br>
+            <label for="text">Professor:</label>
+            <input type="text" name="name" />
+            <br></br>
+            <label for="notes_review">Notes:</label>
+            <br></br>
+            <textarea id="notes_review" name="notes_review" rows="4" cols="50">
+              Add any notes here about the event...
+
+            </textarea>
+
+
+          </div>
+        </form>
       </div>
 
       <div className={styles.queue}>
-        yooo
+        make this the queue section
       </div>
 
       <div className={styles.footer}>
-        foot
+        footer section 
       </div>
          
       
