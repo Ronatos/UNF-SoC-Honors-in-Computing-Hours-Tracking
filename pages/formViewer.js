@@ -7,6 +7,52 @@ will load report information
 let Approve = "Approve"
 let Deny = "Deny"
 export default function Home() {
+      // Handles the submit event on form submit.
+      const handleSubmit = async (event) => {
+        // Stop the form from submitting and refreshing the page.
+        event.preventDefault()
+
+        // Get data from the form.
+        const data = {
+            approve: event.target.approve.value,
+            deny: event.target.deny.value,
+        }
+
+        // Send the data to the server in JSON format.
+        const JSONdata = JSON.stringify(data)
+
+        // API endpoint where we send form data.
+        const endpoint = '/api/facultyapproval_form'
+
+        // Form the request for sending data to the server.
+        const options = {
+            // The method is POST because we are sending data.
+            method: 'POST',
+            // Tell the server we're sending JSON.
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Body of the request is the JSON data we created above.
+            body: JSONdata,
+        }
+
+        // Send the form data to our forms API and get a response.
+        const response = await fetch(endpoint, options)
+
+        // Get the response data from server as JSON.
+        // If server returns the data submitted, that means the form works.
+        const result = await response.json()
+
+        if (response.status == 200) {
+            alert(result.message)
+            Router.push("/facultyapproval_form")
+        }
+        else if (response.status == 401) {
+            alert(result.message)
+        }
+    }
+
+
     return (
 <div className={styles.container}>
       <Head>
@@ -21,34 +67,20 @@ export default function Home() {
 Student Form 
 </h1>
 
-<table className={styles.tableHead}>
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>UserName</th>
-        <th>Password</th>
-        <th>Leadership Event</th>
-        <th>Hours Logged</th>
-        <th>Sponsoring Faculty</th>
-        <th>Link to Account</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Sophia</td>
-         <td>Abuzeni</td>
-        <td>n01406901@unf.edu</td>
-        <td>sophiaabuzeni</td>
-        <td>InfoSci</td>
-        <td>UNF Leaders Convention</td>
-        <td>15</td>
-        <td>Karthikeyen Umapathy</td>
-        <td><a href="">View Student Account</a></td>
-    </tr>
-    </tbody>
-</table>
+  
+
+          <p><b>Student Name: </b> &nbsp; &nbsp; Sophia Abuzeni</p>
+         
+          <br></br>
+          <p><b>Event:</b> &nbsp; &nbsp; UNF Leaders Convention </p>
+          <br></br>
+            <p><b>Hours Amount: </b> &nbsp; &nbsp; 12 </p>
+            <br></br>
+            <p><b>Professor: </b> &nbsp; &nbsp; Karthikeyen Umapathy </p>
+            <br></br>
+           <p><b>Notes: </b> &nbsp; &nbsp; I was at the event for 12 hours and helped with informing new students.  </p>
+            
+
 
 <form className={styles.description}>
           <input type="radio" id="appr" name="store" value={Approve}/>
@@ -64,5 +96,5 @@ Student Form
 
 </main>
 </div>
-    )
+)
 }
