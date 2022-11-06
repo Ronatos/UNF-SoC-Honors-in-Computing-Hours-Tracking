@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
+
 import unfLogo from '../public/UNF_Logo.gif'
 import styles from '../styles/student.module.css'
 import Link from 'next/link'
+
+
+
 
 // import '../styles/setting.css'
 // import "\bootstrap\dist\css\bootstrap.min.css";
@@ -31,7 +34,7 @@ export default function Home() {
                 </div>
       </header>
       
-      <main>
+      <main className={styles.page_body}>
       <div className={styles.container}>
         
         <button className={styles.btn}>
@@ -39,6 +42,12 @@ export default function Home() {
         </button>
         
       </div> 
+
+      <div className={styles.queue}>
+        <h3>Queue:</h3>
+
+      
+      </div>
       
       <div className={styles.student_form}>
         <form>
@@ -88,13 +97,13 @@ export default function Home() {
         </form>
       </div>
 
-      <div className={styles.queue}>
-        make this the queue section
+      <div className='unf_footer'> 
+        <footer>
+          <p>UNF Leadership</p>
+        </footer>
       </div>
 
-      <div className={styles.footer}>
-        footer section 
-      </div>
+    
          
       
       {/* <div class="card-body tab-content">

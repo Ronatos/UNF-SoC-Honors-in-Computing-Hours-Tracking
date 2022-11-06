@@ -1,8 +1,10 @@
 .container {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+
 }
+
+
 
 /* for the unf logo */
 .logo {
@@ -56,27 +58,64 @@
     text-align: right
 }
 
-.linkSpacing {
+/* .linkSpacing {
     padding: 10px;
-}
+} */
 
 .main {
-    min-height: 50vh;
+    /* min-height: 50vh;
     padding: 4rem 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    margin: 0;
+    padding: 0;
+    
 }
 
 .student_form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 4px solid red;
+    /* border: 4px solid red; */
     width: 75%;
     height: 35em;
     background-color: #E6E6FA;
+    padding: 10px;
     color: black;
 }
+
+/* the queue section */
+.queue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 4px solid red; */
+    width: 20em;
+    /* float: right; */
+    background-color: #B3FFAE;
+    color: black;
+    position: fixed;
+    right: 1px;
+}
+
+.unf_footer {
+    /* (A1) Fix at the bottom */
+    position: fixed;
+    bottom: 0;
+    z-index: 9;
+    text-align: center;
+
+    /* (A2) DIM */
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+
+    /* (A3) CENTER */
+    display: flex;
+    align-items: center;
+}
+
+
