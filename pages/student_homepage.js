@@ -35,7 +35,7 @@ export default function Home() {
       </header>
       
       <main className={styles.page_body}>
-      <div className={styles.container}>
+        <div className={styles.container}>
         
         <button className={styles.btn}>
           Create New
@@ -52,7 +52,7 @@ export default function Home() {
       <div className={styles.student_form}>
         <form>
           <label>Enter your name:</label>
-          <input type="text" name="name" />
+          <input type="text" name="name" id="left_form" />
           <br></br>
           <label>Placeholder:</label>
           <input type="text" name="name" />
@@ -91,6 +91,8 @@ export default function Home() {
               Add any notes here about the event...
 
             </textarea>
+
+            
 
 
           </div>
