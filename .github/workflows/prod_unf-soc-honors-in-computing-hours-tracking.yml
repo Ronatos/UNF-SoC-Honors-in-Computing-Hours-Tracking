@@ -21,10 +21,12 @@ jobs:
         env:
           #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           profile: ${{ secrets.test }}
+        run: |
+          echo $profile
 
       - name: 'Verify env is loaded properly'
         run: |
-          echo $profile
+          echo $env.profile
 
       # https://github.com/actions/setup-node
       - name: Setup Node 16.x
