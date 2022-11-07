@@ -12,10 +12,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: Production
+    env:
+      az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
     steps:
-      - env:
-        uses: actions/checkout@v3
-        az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
 
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
