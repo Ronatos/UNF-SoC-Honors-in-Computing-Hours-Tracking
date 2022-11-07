@@ -31,8 +31,9 @@ jobs:
           npm run build
 
       # https://github.com/Azure/webapps-deploy
+      # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
       - name: 'Run Azure webapp deploy action using publish profile credentials'
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@0b651ed7546ecfc75024011f76944cb9b381ef1e
         env:
           AZ-PUBLISH-PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
         with:
