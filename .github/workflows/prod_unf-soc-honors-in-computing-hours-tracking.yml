@@ -21,6 +21,9 @@ jobs:
         env:
           az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
 
+      - name: 'Verify env is loaded properly'
+        run: echo $az-publish-profile
+
       # https://github.com/actions/setup-node
       - name: Setup Node 16.x
         uses: actions/setup-node@v3
