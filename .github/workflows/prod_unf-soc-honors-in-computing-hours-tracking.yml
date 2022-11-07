@@ -11,13 +11,19 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: Production
     steps:
-      # checkout the repo
-      - name: 'Checkout Github Action' 
-        uses: actions/checkout@v2
 
+      env:
+        az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+
+      # https://github.com/actions/checkout
+      - name: 'Checkout Github Action' 
+        uses: actions/checkout@v3
+
+      # https://github.com/actions/setup-node
       - name: Setup Node 16.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
 
@@ -26,9 +32,10 @@ jobs:
           npm install
           npm run build
 
+      # https://github.com/Azure/webapps-deploy
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'UNF-SoC-Honors-in-Computing-Hours-Tracking'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B294AD3369BE4A6CADEDFCB9668F8DC3 }}
+          publish-profile: $az-publish-profile
