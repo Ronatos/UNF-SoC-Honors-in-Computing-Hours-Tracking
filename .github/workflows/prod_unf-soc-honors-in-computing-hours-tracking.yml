@@ -20,11 +20,11 @@ jobs:
         uses: actions/checkout@v3
         env:
           #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          az-publish-profile: ${{ secrets.test }}
+          profile: ${{ secrets.test }}
 
       - name: 'Verify env is loaded properly'
         run: |
-          echo $az-publish-profile
+          echo $profile
 
       # https://github.com/actions/setup-node
       - name: Setup Node 16.x
