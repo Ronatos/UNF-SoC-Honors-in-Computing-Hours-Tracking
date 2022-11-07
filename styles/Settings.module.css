@@ -225,9 +225,6 @@
 
 
 /* bottom links which acts as settings nav */
-.tab {
-    /* padding: auto; */
-   
-   
-
+.tab:hover {
+    color:aqua;
 }

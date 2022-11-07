@@ -59,7 +59,7 @@ export default function Home() {
          
 
             <div className={styles.settings_footer}>
-              <h1>Email format</h1>
+              <h1>Update format</h1>
               <label>
                 <input type="radio" name="sendType" id="" checked/>
                 <span>Email</span>

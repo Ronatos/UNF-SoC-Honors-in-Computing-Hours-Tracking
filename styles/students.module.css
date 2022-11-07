@@ -192,3 +192,8 @@
     text-align: center;
 }
 
+
+.footer_link:hover {
+    color: aqua;
+    text-decoration: none;
+}

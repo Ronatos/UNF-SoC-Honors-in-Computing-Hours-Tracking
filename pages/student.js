@@ -21,7 +21,7 @@ export default function Home() {
         <Image className={styles.logo} src="/UNF_Logo.gif" alt="UNF" width={100} height={100}/>
           <div className={styles.link}>
               <div className={styles.links}>
-                <Link href="/student_homepage">Noti</Link>
+                <Link href="/settings">Noti</Link>
                 <Link href="/settings">Settings</Link>
               </div>
               
@@ -73,8 +73,8 @@ export default function Home() {
             <br></br>
             <label for="notes_review">Notes:</label>
             <br></br>
-            <textarea  className={styles.form_text} id="notes_review" name="notes_review" rows="4" cols="50">
-              Add any notes here about the event...
+            <textarea  className={styles.form_text} id="notes_review" placeholder="Add any notes here about the event..." name="notes_review" rows="4" cols="50">
+              
             </textarea>
           
           <div className={styles.btn_container}>
@@ -104,10 +104,10 @@ export default function Home() {
       <Image className={styles.footer_logo} src="/UNFFooter.svg" alt="UNF" width={300} height={100}/>
       <hr></hr>
           <div className={styles.footer_item2}>
-          <a target='_blank' href='https://www.unf.edu/catalog/about/About_UNF/' className={styles.footer_link}>About Us |</a>
-          <a target='_blank' href='https://www.unf.edu/privacy/' className={styles.footer_link}>Privacy |</a>
-          <a target='_blank' href='https://www.unf.edu/regulations-policies/' className={styles.footer_link}>Policy |</a>
-          <a target='_blank' href='https://www.unf.edu/contact/' className={styles.footer_link}>Contact Us</a>
+            <a target='_blank' href='https://www.unf.edu/catalog/about/About_UNF/' className={styles.footer_link}>About Us |</a>
+            <a target='_blank' href='https://www.unf.edu/privacy/' className={styles.footer_link}>Privacy |</a>
+            <a target='_blank' href='https://www.unf.edu/regulations-policies/' className={styles.footer_link}>Policy |</a>
+            <a target='_blank' href='https://www.unf.edu/contact/' className={styles.footer_link}>Contact Us</a>
           </div>
     </div> 
 
