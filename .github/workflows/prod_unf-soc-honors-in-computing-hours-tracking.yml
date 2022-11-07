@@ -14,18 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: Production
     steps:
-
-      - name: Set output via env. files (Testing)
-        id: set2
-        shell: pwsh
-        run: |
-          echo "VERSION2=V2" >> $Env:GITHUB_OUTPUT
-
-      - name: Consume output (Testing)
-        shell: bash
-        run: |
-          echo ${{ steps.set2.outputs.VERSION2 }}
-
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
         uses: actions/checkout@v3
@@ -38,13 +26,13 @@ jobs:
 
       - name: 'npm install and build'
         run: |
-          npm install
-          npm run build
+          npm install >> $GITHUB_OUTPUT
+          npm run build >> $GITHUB_OUTPUT
 
       # https://github.com/Azure/webapps-deploy
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
       - name: 'Run Azure webapp deploy action using publish profile credentials'
-        uses: azure/webapps-deploy@0b651ed7546ecfc75024011f76944cb9b381ef1e
+        uses: azure/webapps-deploy@v2
         env:
           AZ-PUBLISH-PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
         with:
