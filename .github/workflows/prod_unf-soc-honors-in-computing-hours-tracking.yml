@@ -13,6 +13,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: Production
+    env:
+        az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
     steps:
 
       # https://github.com/actions/checkout
@@ -32,10 +34,8 @@ jobs:
 
       # https://github.com/Azure/webapps-deploy
       - name: 'Run Azure webapp deploy action using publish profile credentials'
-        env:
-            az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'UNF-SoC-Honors-in-Computing-Hours-Tracking'
           slot-name: 'Production'
-          publish-profile: $env.az-publish-profile
+          publish-profile: ${{ az-publish-profile }}
