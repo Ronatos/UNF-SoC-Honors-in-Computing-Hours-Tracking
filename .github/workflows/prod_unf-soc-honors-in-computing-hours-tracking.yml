@@ -24,6 +24,7 @@ jobs:
             #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
             profile: ${{ secrets.test }}
         run: |
+          echo $profile
           echo $env.profile
 
       # https://github.com/actions/setup-node
