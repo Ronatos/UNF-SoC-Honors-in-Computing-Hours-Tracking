@@ -15,6 +15,12 @@ jobs:
     environment: Production
     steps:
 
+      - name: Set output via env. files (Testing)
+        id: set2
+        shell: pwsh
+        run: |
+          echo "VERSION2=V2" >> $Env:GITHUB_OUTPUT
+
       - name: Consume output (Testing)
         shell: bash
         run: |
