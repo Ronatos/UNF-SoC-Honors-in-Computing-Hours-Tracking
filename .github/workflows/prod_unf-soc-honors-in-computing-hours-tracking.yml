@@ -13,9 +13,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: Production
-    env:
-      INSTALL_LOG:
-      BUILD_LOG:
     steps:
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
@@ -31,14 +28,14 @@ jobs:
         id: install
         run: |
           echo 'INSTALL_LOG<<EOF' >> $GITHUB_ENV
-          npm install >> $GITHUB_OUTPUT
+          npm install >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: 'npm build'
         id: build
         run: |
           echo 'BUILD_LOG<<EOF' >> $GITHUB_ENV
-          npm run build >> $GITHUB_OUTPUT
+          npm run build >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       # https://github.com/Azure/webapps-deploy
