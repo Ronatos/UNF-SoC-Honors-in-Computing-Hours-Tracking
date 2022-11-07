@@ -47,7 +47,7 @@ export default function Home() {
             alert(result.message)
             Router.push("/facultyapproval_form")
         }
-        else if (response.status == 401) {
+        else if (response.status == 400) {
             alert(result.message)
         }
     }
@@ -82,11 +82,11 @@ Student Form
             
 
 
-<form className={styles.description}>
-          <input type="radio" id="appr" name="store" value={Approve}/>
+<form className={styles.description} onSubmit={handleSubmit} method="post">
+          <input type="radio" id="appr" name="approve" value={Approve}/>
           <label for="appr">Approve</label>
           <br></br>
-          <input type="radio" id="denied" name="store" value={Deny}/>
+          <input type="radio" id="denied" name="deny" value={Deny}/>
           <label for="denied">Deny</label>
           <br></br>
           <input type="submit" value="Submit"/>
