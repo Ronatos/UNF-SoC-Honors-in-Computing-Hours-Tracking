@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: '16.x'
 
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
       - name: 'npm install'
         id: install
         run: |
@@ -31,6 +32,7 @@ jobs:
           npm install >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
       - name: 'npm build'
         id: build
         run: |
