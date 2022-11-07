@@ -19,10 +19,12 @@ jobs:
       - name: 'Checkout Github Action' 
         uses: actions/checkout@v3
         env:
-          az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          az-publish-profile: ${{ secrets.test }}
 
       - name: 'Verify env is loaded properly'
-        run: echo $az-publish-profile
+        run: |
+          "$az-publish-profile"
 
       # https://github.com/actions/setup-node
       - name: Setup Node 16.x
