@@ -13,7 +13,7 @@ export default function handler(req, res) {
     // and returns early if they are not found
     if (!body.approved || !body.denied) {
         // Sends a HTTP bad request error code
-        return res.status(400).json({ data: 'Approval or Denial not submitted.' })
+        return res.status(400).json({ message: 'Approval or Denial not submitted.' })
     }
 
     // The following several lines will be replaced with database logic once one is implemented.
@@ -22,7 +22,7 @@ export default function handler(req, res) {
 
     let submits = [];
 
-    // Loop through all the files in accounts directory and add them to the accounts array
+    // Loop through all the files in submits directory and add them to the submits array
     fs.readdirSync(submitsDir).forEach(file => {
         let filepath = path.join(submitsDir, file);
         submits.push(JSON.parse(fs.readFileSync(filepath, 'utf8')));
@@ -36,8 +36,8 @@ export default function handler(req, res) {
         res.status(200).json({ message: "submission successful."})
     }
     else {
-        // 401 Unauthorized
-        console.log("401 Unauthorized");
+        // 400 Bad Request
+        console.log("400 Bad Request");
         res.status(401).json({message: "Invalid submission"})
     }
 }
