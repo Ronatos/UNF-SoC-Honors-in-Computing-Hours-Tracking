@@ -18,13 +18,11 @@ jobs:
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
         uses: actions/checkout@v3
-        env:
-          #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          profile: ${{ secrets.test }}
-        run: |
-          echo $profile
 
       - name: 'Verify env is loaded properly'
+        env:
+            #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+            profile: ${{ secrets.test }}
         run: |
           echo $env.profile
 
