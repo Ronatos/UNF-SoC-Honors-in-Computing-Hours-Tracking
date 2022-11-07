@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Production
     steps:
-
-      env:
+      - env:
         az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
 
       # https://github.com/actions/checkout
