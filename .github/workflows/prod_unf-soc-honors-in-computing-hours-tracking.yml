@@ -13,9 +13,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: Production
-    # outputs:
-    #   install-output: ${{ steps.install.outputs.log }}
-    #   build-output: ${{ steps.build.outputs }}
+    env:
+      INSTALL_LOG:
+      BUILD_LOG:
     steps:
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
