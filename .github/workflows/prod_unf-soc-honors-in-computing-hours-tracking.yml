@@ -13,9 +13,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: Production
-    outputs:
-      install-output: ${{ steps.install.outputs }}
-      build-output: ${{ steps.build.outputs }}
+    # outputs:
+    #   install-output: ${{ steps.install.outputs.log }}
+    #   build-output: ${{ steps.build.outputs }}
     steps:
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
@@ -30,12 +30,16 @@ jobs:
       - name: 'npm install'
         id: install
         run: |
+          echo 'INSTALL_LOG<<EOF' >> $GITHUB_ENV
           npm install >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_ENV
 
       - name: 'npm build'
         id: build
         run: |
+          echo 'BUILD_LOG<<EOF' >> $GITHUB_ENV
           npm run build >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_ENV
 
       # https://github.com/Azure/webapps-deploy
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
