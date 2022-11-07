@@ -34,8 +34,8 @@ jobs:
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         env:
-          az-publish-profile: Test
+          AZ-PUBLISH-PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
         with:
           app-name: 'UNF-SoC-Honors-in-Computing-Hours-Tracking'
           slot-name: 'Production'
-          publish-profile: $az-publish-profile
+          publish-profile: ${{ env.AZ-PUBLISH-PROFILE }}
