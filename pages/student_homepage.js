@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import unfLogo from '../public/UNF_Logo.gif'
-import styles from '../styles/student.module.css'
+import styles from '../styles/students.module.css'
 import Link from 'next/link'
 
 

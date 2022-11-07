@@ -104,10 +104,10 @@ export default function Home() {
       <Image className={styles.footer_logo} src="/UNFFooter.svg" alt="UNF" width={300} height={100}/>
       <hr></hr>
           <div className={styles.footer_item2}>
-            <a target='_blank' href='https://www.unf.edu/catalog/about/About_UNF/' className={styles.footer_link}>About Us |</a>
-            <a target='_blank' href='https://www.unf.edu/privacy/' className={styles.footer_link}>Privacy |</a>
-            <a target='_blank' href='https://www.unf.edu/regulations-policies/' className={styles.footer_link}>Policy |</a>
-            <a target='_blank' href='https://www.unf.edu/contact/' className={styles.footer_link}>Contact Us</a>
+            <a href='https://www.unf.edu/catalog/about/About_UNF/' className={styles.footer_link}>About Us |</a>
+            <a href='https://www.unf.edu/privacy/' className={styles.footer_link}>Privacy |</a>
+            <a href='https://www.unf.edu/regulations-policies/' className={styles.footer_link}>Policy |</a>
+            <a href='https://www.unf.edu/contact/' className={styles.footer_link}>Contact Us</a>
           </div>
     </div> 
 
