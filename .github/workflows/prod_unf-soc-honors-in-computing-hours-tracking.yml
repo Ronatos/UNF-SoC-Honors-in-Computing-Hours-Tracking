@@ -24,7 +24,7 @@ jobs:
 
       - name: 'Verify env is loaded properly'
         run: |
-          "$az-publish-profile"
+          echo $az-publish-profile
 
       # https://github.com/actions/setup-node
       - name: Setup Node 16.x
