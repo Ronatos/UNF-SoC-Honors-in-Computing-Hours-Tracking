@@ -19,14 +19,6 @@ jobs:
       - name: 'Checkout Github Action' 
         uses: actions/checkout@v3
 
-      - name: 'Verify env is loaded properly'
-        env:
-            #az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-            profile: ${{ secrets.test }}
-        run: |
-          echo $profile
-          echo $env.profile
-
       # https://github.com/actions/setup-node
       - name: Setup Node 16.x
         uses: actions/setup-node@v3
@@ -40,6 +32,8 @@ jobs:
 
       # https://github.com/Azure/webapps-deploy
       - name: 'Run Azure webapp deploy action using publish profile credentials'
+        env:
+            az-publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'UNF-SoC-Honors-in-Computing-Hours-Tracking'
