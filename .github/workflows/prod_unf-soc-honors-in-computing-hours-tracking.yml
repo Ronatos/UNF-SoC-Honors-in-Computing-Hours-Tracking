@@ -15,6 +15,11 @@ jobs:
     environment: Production
     steps:
 
+      - name: Consume output (Testing)
+        shell: bash
+        run: |
+          echo ${{ steps.set2.outputs.VERSION2 }}
+
       # https://github.com/actions/checkout
       - name: 'Checkout Github Action' 
         uses: actions/checkout@v3
