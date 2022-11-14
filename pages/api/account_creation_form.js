@@ -1,7 +1,16 @@
+const mysql = require('mysql2/promise');
+
 let fs = require('fs')
 let path = require('path')
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'Password1!',
+        database: 'test'
+    });
+
     const body = req.body
     console.log('body: ', body)
 
@@ -67,6 +76,10 @@ export default function handler(req, res) {
         let data = new Uint8Array(Buffer.from(JSON.stringify(body)));
         console.log(data);
         fs.writeFileSync(filename, data);
+
+        await connection.query(
+            `INSERT INTO accounts (username, password, email_address, n_number, first_name, last_name, role) VALUES (${body.username}, ${body.password}, ${body.email}, ${body.nnumber}, ${body.firstName}, ${body.lastName}, student);`
+        );
 
         res.status(200).json({ message: "Account creation successful."})
     }
