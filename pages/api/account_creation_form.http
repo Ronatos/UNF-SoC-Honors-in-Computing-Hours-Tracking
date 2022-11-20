@@ -1,0 +1,15 @@
+POST http://localhost:3000/api/account_creation_form
+Content-Type: application/json; charset=utf-8
+
+{
+    "username":"test",
+    "email":"test@test.com",
+    "nnumber":"n01234567",
+    "password":"test",
+    "passwordConfirmation":"test",
+    "firstName":"test",
+    "lastName":"test"
+}
+
+###
+GET https://google.com/

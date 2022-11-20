@@ -21,6 +21,7 @@
 # misc
 .DS_Store
 *.pem
+!DigiCertGlobalRootCA.crt.pem
 
 # debug
 npm-debug.log*
