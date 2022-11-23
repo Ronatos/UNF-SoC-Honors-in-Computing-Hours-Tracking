@@ -1,37 +1,12 @@
 const { pool: dbPool } = require('@/db/connection');
 
-let fs = require('fs')
-let path = require('path')
-
 export default async function handler(req, res) {
 
     const body = req.body
-    console.log('body: ', body)
-
-    // body = {
-    //     username: string,
-    //     email: string,
-    //     nnumber: string,
-    //     password: string,
-    //     passwordConfirmation: string,
-    //     firstName: string,
-    //     lastName: string,
-    // }
-
-    // The following several lines will be replaced with database logic once one is implemented.
-    // This just looks through the mock database and verifies an account with the specified credentials exists.
-    const accountsDir = "db/accounts";
-    let accounts = [];
-
-    // Loop through all the files in accounts directory and add them to the accounts array
-    fs.readdirSync(accountsDir).forEach(file => {
-        let filepath = path.join(accountsDir, file);
-        accounts.push(JSON.parse(fs.readFileSync(filepath, 'utf8')));
-    });
 
     // Verify the username isn't already taken
-    let accountIndex = accounts.findIndex(account => account.username === body.username);
-    if (accountIndex != -1) {
+    const existingUsernames = await dbPool.query("SELECT username FROM accounts WHERE username = ?;", [body.username]);
+    if (existingUsernames[0].length > 0) {
         console.log("400 Bad Request");
         res.status(400).json({message: "Username already in use."})
     }
@@ -59,20 +34,10 @@ export default async function handler(req, res) {
         res.status(400).json({message: "Passwords must match."})
     }
 
-    // Create the account. This is currently pointing to the mock database, and will need to be updated
-    // when we implement a real database.
-    // It's also really rough around the edges. I'm just dumping the contents of body in there for now.
+    // Create the account
     else {
         console.log("200 OK");
-
-        let filename = path.join(accountsDir, body.username + ".json");
-        console.log(filename);
-        let data = new Uint8Array(Buffer.from(JSON.stringify(body)));
-        console.log(data);
-        fs.writeFileSync(filename, data);
-
         await dbPool.query("INSERT INTO accounts (username, password, email_address, n_number, first_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?, 'student');", [body.username, body.password, body.email, body.nnumber, body.firstName, body.lastName]);
-
         res.status(200).json({ message: "Account creation successful."})
     }
 }
