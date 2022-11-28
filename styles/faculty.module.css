@@ -1,0 +1,50 @@
+.container {
+  padding: 0 2rem;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  text-align: center;
+  list-style-type: none;
+  margin: 10px;
+  padding: 0;
+  width: 300px;
+  background-color:rgb(199, 216, 231);
+}
+
+.nava:hover {
+  text-align: center;
+  display: block;
+  background-color:#555;
+  color: white;
+}
+
+
+.link {
+  color: red;
+  margin: 0 10em;
+  text-align: right
+}
+
+
+
+
+
+.tableHead th{
+  border: 1px solid white;
+}
+
+.tableHead td{
+  border: 1px solid white;
+  
+}
+

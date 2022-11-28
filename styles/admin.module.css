@@ -1,9 +1,9 @@
-.container {
+/*.container {
   padding: 0 2rem;
 }
-
+*/
 .main {
-  min-height: 100vh;
+  min-height: 50vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
@@ -24,20 +24,43 @@
 .nava:hover {
   text-align: center;
   display: block;
-  background-color:#555;
-  color: white;
+  background-color:rgb(25, 65, 110);
+  color: rgb(255, 255, 255);
+}
+
+.header {
+  width: 100%;
+  padding-left: 2%;
+  background-color: #0A233F;
 }
 
 
+.table  {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 1000px;
 
-
-
-.tableHead th{
-  border: 1px solid black;
 }
 
-.tableHead td{
-  border: 1px solid black;
-  
+.body {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  height: 500px;
 }
 
+.head {
+  display: block;
+}
+
+.thead, .tbody{
+  padding: 7px;
+  text-align: left;
+  width: 200px;
+  border-bottom: 1px solid #0A233F;
+}
+
+
+.trow:hover {
+  background-color:#C4ECFF;
+}

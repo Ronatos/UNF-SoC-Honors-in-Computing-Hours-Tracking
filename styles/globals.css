@@ -9,11 +9,15 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  margin: 5px;
 }
 
 * {
   box-sizing: border-box;
+  
 }
+
+
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -22,5 +26,24 @@ a {
   body {
     color: white;
     background: black;
+    overflow: hidden;
   }
 }
+
+/* the unf footer */
+footer {
+  background: #0a233f;
+  color: #fff !important;
+  padding-top: 30px;
+  height: 11em;
+}
+
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 70%;                
+  background-color:#00A0CC;
+  height: 1px;
+}
+

@@ -23,22 +23,22 @@ export default function searchFunction(document) {
       <main className={styles.main}>
 
 <h1 className={styles.title}>
-View Reports
+View Accounts
 </h1>
 
-<input type="text" id="input" onkeyup="searchFunction()" placeholder="Search for reports" title="searchInput" className="search-input" data-table="reports-list"></input>
+<input type="text" id="input" onkeyup="searchFunction()" placeholder="Search for Accounts" title="searchInput" className="search-input" data-table="reports-list"></input>
 
 <table className={styles.table} id="tableID">
     <thead className={styles.head}>
   <tr>
-  <th className={styles.thead}>Report ID</th>
-  <th className={styles.thead}>Date Submitted</th>
+  <th className={styles.thead}>Account ID</th>
+  <th className={styles.thead}>Role</th>
   <th className={styles.thead}>First Name</th>
     <th className={styles.thead}>Last Name</th>
-    <th className={styles.thead}>Sponsor</th>
-    <th className={styles.thead}>Event</th>
-    <th className={styles.thead}>Link to Account</th>
-    <th className={styles.thead}>Complete?</th>
+    <th className={styles.thead}>Total Hours Accumulated</th>
+    <th className={styles.thead}>Email</th>
+    <th className={styles.thead}>View Reports Submitted</th>
+    <th className={styles.thead}>Hours Met</th>
   </tr>
   </thead>
 
@@ -48,88 +48,88 @@ View Reports
   <tbody className={styles.body}>
   <tr className={styles.trow}>
     <td className={styles.tbody}>1124</td>
-    <td className={styles.tbody}>12/13/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Joshua</td>
     <td className={styles.tbody}>Antoine</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>43</td>
+    <td className={styles.tbody}>joshant@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>1153</td>
-    <td className={styles.tbody}>12/13/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Emily</td>
     <td className={styles.tbody}>Young</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>22</td>
+    <td className={styles.tbody}>eyoung@email.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>1123</td>
-    <td className={styles.tbody}>12/12/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Alex</td>
     <td className={styles.tbody}>White</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>2</td>
+    <td className={styles.tbody}>alexw@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>5321</td>
-    <td className={styles.tbody}>12/12/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Justin</td>
     <td className={styles.tbody}>Myers</td>
-    <td className={styles.tbody}>Dr.Kemper</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>54</td>
+    <td className={styles.tbody}>justinwings@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>1432</td>
-    <td className={styles.tbody}>12/12/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Ted</td>
     <td className={styles.tbody}>Walker</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>12</td>
+    <td className={styles.tbody}>walkertexasted@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>1135</td>
-    <td className={styles.tbody}>12/13/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Walter</td>
     <td className={styles.tbody}>Lee</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>53</td>
+    <td className={styles.tbody}>walterwite@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>1352</td>
-    <td className={styles.tbody}>12/12/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Richard</td>
     <td className={styles.tbody}>Robinson</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>21</td>
+    <td className={styles.tbody}>robertorobb@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>No</td>
   </tr>
 
   <tr className={styles.trow}>
     <td className={styles.tbody}>1535</td>
-    <td className={styles.tbody}>12/14/22</td>
+    <td className={styles.tbody}>Student</td>
     <td className={styles.tbody}>Jay</td>
     <td className={styles.tbody}>Hill</td>
-    <td className={styles.tbody}>Dr.Howard</td>
-    <td className={styles.tbody}>Leaders of America Event</td>
+    <td className={styles.tbody}>5</td>
+    <td className={styles.tbody}>jayjayjayj@gmail.com</td>
     <td className={styles.tbody}>Link</td>
     <td className={styles.tbody}>Yes</td>
   </tr>

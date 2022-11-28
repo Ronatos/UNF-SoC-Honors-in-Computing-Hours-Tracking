@@ -1,0 +1,201 @@
+/* unf header - very basic */
+.logo {
+    width: 100%;
+    height: 100%;
+    
+}
+
+.header {
+    width: 100%; 
+    padding-left: 2%;
+    background-color: #0A233F;
+    padding-top: 10px;
+}
+
+
+/* the header links - two links to the same page. */
+.link{
+    /* display: inline; */
+    margin: 5px;
+    /* position: fixed; */
+    text-align: right;
+}
+
+.links {
+    color: #eeeeee;
+    margin: 5px;
+    
+}
+
+
+
+/* container for btn  */
+.container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* create new form btn */
+.btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+}
+
+/* the student form */
+
+/* put form to center */
+.student_form {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 10px;
+    
+}
+
+.form_element {
+    border: solid 3px #393E46;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    width: 30em;
+    max-width: 90%;
+    margin: 0 auto;
+    
+}
+
+.form_label {
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+.form_input,
+.form_text {
+    padding: 0.4rem;
+    width: 100%; 
+    border: 1px solid #ccc;
+}
+
+
+/* the form btn style */
+.form_btn {
+    display: inline-block;
+    margin-right: 20px;
+    color: #fff;
+    border: none;
+    margin-top: 2rem;
+    padding: 0.6rem;
+    background-color: #4CAF50;
+    
+}
+
+.form_btn1 {
+    display: inline-block;
+    margin-right: 20px;
+    color: #fff;
+    border: none;
+    margin-top: 2rem;
+    padding: 0.6rem;
+    background-color: red;
+    
+}
+
+.form_btn:hover,
+.form_btn:focus,
+.form_btn1:hover,
+.form_btn1:focus {
+    
+    background-color: #272eb5;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: center;
+    /* margin: 10px; */
+}
+
+
+
+
+/* the queue section */
+.queue {
+    border: solid 5px #393E46;
+    width: 5%;
+    height: 10%;
+    
+}
+
+/*  */
+.queue_text {
+    margin: auto;
+    text-align: center;
+}
+
+.queue_container {
+    margin: auto;
+    text-align: center;
+}
+
+.link_text {
+    width: 60px;
+    background-color: red;
+    text-align: center;
+    float: left;
+    color: whitesmoke; 
+    line-height: 20px;
+}
+
+/* the green queue list */
+.link_text1 {
+    width: 60px;
+    background-color: green;
+    text-align: center;
+    float: left;
+    color: whitesmoke; 
+    line-height: 20px;
+}
+
+.link_text:hover,
+.link_text1:hover {
+    width: 60px;
+    background-color: #434bddc8;
+    color: whitesmoke;
+    text-align: center;
+    float: left;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* height: auto; */
+    /* padding-top: 40px; */
+    color: #fff;
+
+}
+
+.footer_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+.footer_link:hover {
+    color: aqua;
+    text-decoration: none;
+}
+
+

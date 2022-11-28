@@ -1,101 +1,91 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-// import '../styles/setting.css'
-// import "\bootstrap\dist\css\bootstrap.min.css";
+// import styles from '../styles/Home.module.css'
+import unfLogo from '../public/UNF_Logo.gif'
+import styles from '../styles/Settings.module.css'
+
+
+
 
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>ACCOUNT INFO</title>
+        <title>Settings</title>
         <meta name="description" content="The settings page for UNF Leadership" />
         <link rel="icon" href="/favicon.ico" />
        
       </Head>
 
-     
+    <div className={styles.container}>
+      <main className={styles.main}>
+        {/* <div className={styles.column}>
+          <div className={styles.row}>
+            <Image className={styles.avatar} src="/img_avatar.png" alt="UNF" width={100} height={100}/>
+            <p className={styles.user_name}>Joe Snow</p>
+          </div>
+        </div> */}
+          {/* <div className={styles.column1}>
+            <h1>Account Settings</h1>
+            <p>form text here</p>
+          </div> */}
+          
 
+          <div className={styles.settings}>
+            <h1>Get email updates when:</h1>
+          <form className={styles.form_main}>
+            <label className={styles.label}>
+              <input type="checkbox" name="name" value="new_event" />
+              <span className={styles.form_item}>Your form is denied.</span>
+            </label>
+            <label className={styles.label}>
+              <input type="checkbox" name="name" value="new_event" />
+              <span className={styles.form_item}>Your form is approved</span>
+            </label>
+            <label className={styles.label}>
+              <input type="checkbox" name="name" value="new_event" />
+              <span className={styles.form_item}>Information is invalid</span>
+            </label>
+            <label className={styles.label}>
+              <input type="checkbox" name="name" value="new_event" />
+              <span className={styles.form_item}>Incorrect documents</span>
+            </label>
+            
+          
+            <div className={styles.settings_content}>
+              <p>You may also receive other email notifications <br></br> your admin configured. <a href="#">Learn more</a></p>
+            </div>
+         
 
-      <main>
-        <div className='container'>
-          {/* nav bar account info */}
-          <nav className='top-nav'>
-            <ul style={{ 
-              listStyleType: 'none',
-              margin: 0,
-              padding: 0,
-              overflow: 'hidden',
-             }}>
+            <div className={styles.settings_footer}>
+              <h1>Update format</h1>
+              <label>
+                <input type="radio" name="sendType" id="" checked/>
+                <span>Email</span>
+              </label>
+              <label>
+                <input type="radio" name="sendType" id=""/>
+                <span>Text</span>
+              </label>
 
-              <li style={{
-                float: 'left'
-              }}>
-                <a style={{
+              {/* submit btn for settings */}
+              <div className={styles.send}>
+                <input type="submit" value="Save"/>
+              </div>
+            <div className={styles.setting_links}>
+              <a href='#' className={styles.tab}>Account</a>
+              <a href='#' className={styles.tab}>Password</a>
+              <a href='#' className={styles.tab}>Notifications</a>
+            </div>
+            </div>
+          </form>
+    
+  </div>
+</main>
+</div>
+</div>
 
-                }} href='#' target={"_blank"}>Project Settings</a></li>
-              <li><a href='#' target={"_blank"}>Home</a></li>
-              <li ><a href='#' target={"_blank"}>Login</a></li>
-            </ul>
-          </nav>
-        
-        </div>
-
-
-  
-      <div style={{ textAlign: 'center' }}>   
-        <h1>ACCOUNT INFO</h1>
-        <br></br>
-        <h5>GENERAL INFORMATION</h5>
-      </div>
-
-      <div className='container'>
-        <div className='leftbox'>
-          <nav> 
-            <a className="tab active"></a>
-            <i className="fa fa-user"></i>
-          </nav>
-        </div>
-      </div>    
-      
-      <div class="card-body tab-content">
-              <div class="tab-pane active" id="profile">
-                <h6>YOUR PROFILE INFORMATION</h6>
-                <hr></hr>
-                <form>
-                  <div class="form-group">
-                    <label for="fullName">Full Name:</label>
-                    <input type="text" class="form-control" id="fullName" aria-describedby="fullNameHelp" placeholder="Enter your fullname" value="Kenneth Valdez" />
-                    <small id="fullNameHelp" class="form-text text-muted">Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
-                  </div>
-                  <br></br>
-                  <div class="form-group">
-                    <label for="bio">Your Bio:</label>
-                    <textarea class="form-control" id="bio" rows="3" placeholder="Write something about yourself" value="I am a student at the University of North Florida. I am currently studying Computer Science."></textarea>
-                    <br></br>
-                    <button type="button" class="btn btn-primary">Save</button>
-                  </div>
-                  <br></br>
-                  <div class="form-group">
-                    <label for="location">Location:</label>
-                    <input type="text" class="form-control" id="location" placeholder="Enter your location" value="Bay Area, San Francisco, CA"/>
-                  </div>
-                  <div class="form-group small text-muted">
-                    All of the fields on this page are optional and can be deleted at any time, and by filling them out, you&apos;re giving us consent to share this data wherever your user profile appears.
-                  </div>
-                  <button type="button" class="btn btn-primary">Update Profile</button>
-                  <button style={{
-                    marginLeft: '10px'
-                  }} type="reset" class="btn btn-light">Reset Changes</button>
-
-                </form>
-      </div>        
-
-      
-        </div>
-      </main>
-    </div>
   )
 
 }
