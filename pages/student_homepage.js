@@ -99,11 +99,11 @@ export default function Home() {
         </form>
       </div>
 
-      <div className='unf_footer'> 
+      {/* <div className='unf_footer'> 
         <footer>
           <p>UNF Leadership</p>
         </footer>
-      </div>
+      </div> */}
 
     
          
