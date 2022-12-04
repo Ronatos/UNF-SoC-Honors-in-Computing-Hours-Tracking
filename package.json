@@ -14,9 +14,11 @@
     "mdb-react-ui-kit": "^5.0.0",
     "mysql2": "^2.3.3",
     "next": "12.3.1",
+    "pug": "^3.0.2",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-tooltip": "^4.5.1"
   },
   "devDependencies": {
     "eslint": "8.24.0",

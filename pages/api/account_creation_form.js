@@ -2,42 +2,56 @@ const { pool: dbPool } = require('@/db/connection');
 
 export default async function handler(req, res) {
 
-    const body = req.body
+    // body: JSON.stringify({
+    //     username: string,
+    //     email: n01234567@unf.edu,
+    //     password: string,
+    //     role: 'student', 'faculty', or 'admin'
+    // })
+    const body = req.body;
 
     // Verify the username isn't already taken
-    const existingUsernames = await dbPool.query("SELECT username FROM accounts WHERE username = ?;", [body.username]);
-    if (existingUsernames[0].length > 0) {
-        console.log("400 Bad Request");
-        res.status(400).json({message: "Username already in use."})
+    try {
+        const existingUsernames = await dbPool.query("SELECT username FROM accounts WHERE username = ?;", [body.username]);
+        if (existingUsernames[0].length > 0) {
+            console.log("400 Bad Request");
+            res.status(400).json({message: "Username already in use."});
+        }
+    }
+    catch (e) {
+        console.log("500 Internal Server Error");
+        res.status(500).json({message: e});
     }
 
     // Verify the email exists
-    // This simple regex check isn't going to work in production. The only real way to
-    // verify the existence of an email address is to send them an email, but this is simple enough
-    // to catch some small stuff for now.
-    else if (body.email.toLowerCase().match(/^\S+@\S+\.\S+$/) == null) {
+    if (body.email.match(/^n\d{8}@unf\.edu$/i) == null) {
         console.log("400 Bad Request");
-        res.status(400).json({message: "Must use a valid email."})
-    }
-
-    // The n-number is important enough that additional verification is likely a good idea
-    // in the form of an actual email sent to the individual at their n-number email address.
-    // A simple regex check will probably suffice here for now, but even that is kind of overkill.
-    else if (body.nnumber.toLowerCase().match(/n\d\d\d\d\d\d\d\d/) == null) {
-        console.log("400 Bad Request");
-        res.status(400).json({message: "Must enter a valid n-number."})
-    }
-
-    // Passwords just need to be the same as the confirmed password for now.
-    else if (body.password != body.passwordConfirmation) {
-        console.log("400 Bad Request");
-        res.status(400).json({message: "Passwords must match."})
+        res.status(400).json({message: "Must use a valid email."});
     }
 
     // Create the account
-    else {
-        console.log("200 OK");
-        await dbPool.query("INSERT INTO accounts (username, password, email_address, n_number, first_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?, 'student');", [body.username, body.password, body.email, body.nnumber, body.firstName, body.lastName]);
-        res.status(200).json({ message: "Account creation successful."})
+    console.log("200 OK");
+
+    // Create the account in 'email unverified' status
+    try {
+        const account_creation_results = await dbPool.query("INSERT INTO accounts (username, password, email_address, role, account_status) VALUES (?, ?, ?, ?, ?);", [body.username, body.password, body.email, body.role, 'email unverified']);
+
+        // Create a random 5 or 6 digit verification code
+        const array = new Uint32Array(1);
+        crypto.getRandomValues(array);
+
+        // Add it to the email_verification_codes table
+        await dbPool.query("INSERT INTO email_verification_codes (account_id, code) VALUES (?, ?);", [account_creation_results[0].insertId, String(array).substring(0, 6)]);
+        console.log("The verification code is " + String(array).substring(0, 6) + ". Remove this console log once email verification is complete.");
     }
+    catch (e) {
+        console.log("500 Internal Server Error");
+        res.status(500).json({message: e});
+    }
+
+    // Send an email with a verification code and instructions, enabling the user to submit it on /email_verification to verify their email
+    // We will likely want to use the UNF email tenant, which may lead us to the question
+    // of why we're not using SSO.
+
+    res.status(200).json({ message: "Account creation successful."})
 }

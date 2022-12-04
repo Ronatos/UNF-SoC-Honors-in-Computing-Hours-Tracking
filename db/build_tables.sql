@@ -10,6 +10,14 @@ CREATE TABLE accounts (
     UNIQUE (username)
 );
 
+CREATE TABLE email_verification_codes (
+    code_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL,
+    code VARCHAR(8) NOT NULL,
+    creation_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);
+
 CREATE TABLE entries (
     entry_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
