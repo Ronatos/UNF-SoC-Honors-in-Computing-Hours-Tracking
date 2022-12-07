@@ -28,7 +28,7 @@ export default function Home() {
         </h1>
 
         <ul className={styles.nav}>
-            <li className={styles.nava}><Link href="#accountEdit"><a className={styles.navb}>Account Requests</a></Link></li>
+            <li className={styles.nava}><Link href="/account_requests"><a className={styles.navb}>Account Requests</a></Link></li>
             <li className={styles.nava}><Link href="/report"><a className={styles.navb}>View Reports</a></Link></li>
             <li className={styles.nava}><Link href="/adminAccount"><a className={styles.navb}>View Accounts</a></Link></li> 
         </ul>
