@@ -1,0 +1,28 @@
+/* unf header - very basic */
+.logo {
+    width: 100%;
+    height: 100%;
+    
+}
+
+.header {
+    width: 100%; 
+    padding-left: 2%;
+    background-color: #0A233F;
+    padding-top: 10px;
+}
+
+
+/* the header links - two links to the same page. */
+.link{
+    /* display: inline; */
+    margin: 5px;
+    /* position: fixed; */
+    text-align: right;
+}
+
+.links {
+    color: #eeeeee;
+    margin: 5px;
+    
+}
