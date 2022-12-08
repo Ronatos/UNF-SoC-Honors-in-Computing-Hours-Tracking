@@ -11,6 +11,7 @@ import {useState} from 'react'
 
 export default function Home() {
 
+
     // use the useState hook to store the form data
     const [Form, setForm] = useState({
       firstN: '',
@@ -36,11 +37,31 @@ export default function Home() {
       
     }
 
-    const onSubmit = (e) => {
-      showData();
-      e.preventDefault();
+    const handleSubmit = async (event) => {
+      event.preventDefault();
 
-    }
+      const response = await fetch('/api/student_form_submit', {
+          method: 'POST', 
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              First_name: event.target.firstN.value,
+              Last_name: event.target.lastN.value,
+              email: event.target.email.value,
+
+          }),
+      });
+
+      const result = await response.json();
+
+      if (response.status == 200) {
+          // Router.push("/email_verification");
+      }
+      else if (response.status == 400) {
+          alert(result.message);
+      }
+  }
 
     
 
@@ -68,14 +89,14 @@ export default function Home() {
       <main className={styles.main}>
         
         <div className={styles.student_form}>
-          <form onSubmit={onSubmit} className={styles.form_element}>
+          <form onSubmit={handleSubmit} className={styles.form_element}>
             
             <label className={styles.form_label}>Student First Name:</label>
             <input onChange={onChange} className={styles.form_input} type="text" name="firstN" id="left_form" value={Form.name} />
             <br></br>
 
             <label>Student Last Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="lastN" />
+            <input onChange={onChange} className={styles.form_input} type="text" name="lastN"/>
             <br></br>
 
             <label className={styles.form_label}>Email:</label>
