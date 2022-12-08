@@ -12,17 +12,34 @@ import {useState} from 'react'
 export default function Home() {
 
     // use the useState hook to store the form data
-    const [name, setName] = useState('');
+    const [Form, setForm] = useState({
+      name: '',
+      email: '',
+      notes: '',
+    });
+    
 
     // handle the form input change
     const onChange = (e) => {
-      const { value } = e.target;
-      setName(value);
+      const { value, name } = e.target;
+
+      setForm(state => ({
+        ...state,
+        [name]: value,
+      }));
     }
 
     const showData = () => {
-      console.log('Name: ', name);
+      console.log('Form: ', Form);
+      
     }
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+
+    }
+
+    
 
     return (
         <div className={styles.container}>
@@ -48,16 +65,24 @@ export default function Home() {
       <main className={styles.main}>
         
         <div className={styles.student_form}>
-          <form className={styles.form_element}>
+          <form onSubmit={onSubmit} className={styles.form_element}>
+            
             <label className={styles.form_label}>Student First Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="name" id="left_form" />
+            <input onChange={onChange} className={styles.form_input} type="text" name="name" id="left_form" value={Form.name} />
             <br></br>
+
             <label>Student Last Name:</label>
             <input className={styles.form_input} type="text" name="name" />
             <br></br>
+
+            <label className={styles.form_label}>Email:</label>
+            <input onChange={onChange} className={styles.form_input} type="text" name="email" id="left_form" value={Form.email}/>
+            <br></br>
+
             <label>Event:</label>
             <input className={styles.form_input} type="text" name="name" />
             <br></br>
+
             <input type="radio" name="event" value="Freshman" />
             <label for="event">FR</label>
 
@@ -70,18 +95,35 @@ export default function Home() {
             <input type="radio" name="event" value="Senior" />
             <label for="event">Senior</label>
             <br></br>
+
             <div className={styles.right_form}>
             <label for="quantity">Hours Amount:</label>
             <input className={styles.form_input} type="number" id="quantity" name="quantity" min="1" max="50" />
             <br></br>
-            <label for="text">Professor:</label>
+
+            {/* <label for="text">Professor:</label>
             <input className={styles.form_input} type="text" name="name" />
+            <br></br> */}
+
+            <label for="text">Professor:</label>
+            <select className={styles.form_input} name="professor" id="professor">
+              <option value="professor">Professor</option>
+              <option value="professor">Professor</option>
+              <option value="professor">Professor</option>
+            </select>
             <br></br>
-            <label for="notes_review">Notes:</label>
-            <br></br>
-            <textarea  className={styles.form_text} id="notes_review" placeholder="Add any notes here about the event..." name="notes_review" rows="4" cols="50">
+
+
+            {/* <textarea  className={styles.form_text} id="notes_review" placeholder="Add any notes here about the event..." name="notes_review" rows="4" cols="50">
               
+            </textarea> */}
+
+            <label className={styles.form_label}>Notes:</label>
+            <textarea onChange={onChange} className={styles.form_input} type="text" name="notes" id="left_form" value={Form.notes}>
+
             </textarea>
+            <br></br>
+
           
           <div className={styles.btn_container}>
             <button onClick={showData} className={styles.form_btn}>Submit</button>
