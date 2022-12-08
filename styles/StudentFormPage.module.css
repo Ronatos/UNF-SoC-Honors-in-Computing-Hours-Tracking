@@ -1,16 +1,3 @@
-/* unf header - very basic */
-.logo {
-    width: 100%;
-    height: 100%;
-    
-}
-
-.header {
-    width: 100%; 
-    padding-left: 2%;
-    background-color: #0A233F;
-    padding-top: 10px;
-}
 
 
 /* the header links - two links to the same page. */
@@ -24,5 +11,35 @@
 .links {
     color: #eeeeee;
     margin: 5px;
-    
 }
+
+/* top nav header */
+.header {
+    width: 100%;
+    padding-left: 2%;
+    background-color: #0A233F;
+}
+
+.image {
+    cursor: pointer;
+}
+
+/* student form */
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+}
+
