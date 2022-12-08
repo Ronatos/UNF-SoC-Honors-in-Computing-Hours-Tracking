@@ -13,9 +13,11 @@ export default function Home() {
 
     // use the useState hook to store the form data
     const [Form, setForm] = useState({
-      name: '',
+      firstN: '',
+      lastN: '',
       email: '',
       notes: '',
+      professor: 'Unknown',
     });
     
 
@@ -35,6 +37,7 @@ export default function Home() {
     }
 
     const onSubmit = (e) => {
+      showData();
       e.preventDefault();
 
     }
@@ -68,11 +71,11 @@ export default function Home() {
           <form onSubmit={onSubmit} className={styles.form_element}>
             
             <label className={styles.form_label}>Student First Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="name" id="left_form" value={Form.name} />
+            <input onChange={onChange} className={styles.form_input} type="text" name="firstN" id="left_form" value={Form.name} />
             <br></br>
 
             <label>Student Last Name:</label>
-            <input className={styles.form_input} type="text" name="name" />
+            <input onChange={onChange} className={styles.form_input} type="text" name="lastN" />
             <br></br>
 
             <label className={styles.form_label}>Email:</label>
@@ -105,11 +108,19 @@ export default function Home() {
             <input className={styles.form_input} type="text" name="name" />
             <br></br> */}
 
+
+            {/* we have not really talked about how we will hold the professors for the future events. So I 
+              was thinking. A number system at the moment. We can change it later if need be. For the events, the professors
+              will give students their "event number" and the students will enter that number in the form. (will change if the group roast me and this idea)
+            */}
+
             <label for="text">Professor:</label>
-            <select className={styles.form_input} name="professor" id="professor">
-              <option value="professor">Professor</option>
-              <option value="professor">Professor</option>
-              <option value="professor">Professor</option>
+            <select onChange={onChange} className={styles.form_input} value={Form.professor} name="professor" id="professor">
+              <option value="Karthikeyan Umapathy">Professor#1</option>
+              <option value="Katie Tarnowska">Professor#2</option>
+              <option value="David Wisnosky">Professor#3</option>
+              <option value="Professor#4">Professor#4</option>
+              <option value="Unknown">Unknown</option>
             </select>
             <br></br>
 
@@ -126,7 +137,7 @@ export default function Home() {
 
           
           <div className={styles.btn_container}>
-            <button onClick={showData} className={styles.form_btn}>Submit</button>
+            <button className={styles.form_btn}>Submit</button>
             <button className={styles.form_btn1}>Clear</button>
           </div>
         </div>
