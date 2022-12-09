@@ -8,7 +8,7 @@ Shows unresolved reports
 
 
 */
-export default function searchFunction(document) {
+export default function Home() {
 
   const [dataResponse, setdataResponse] = useState([]);
 
@@ -59,7 +59,7 @@ View Reports
 
   {dataResponse.map((account) => {
   return (
-<div>
+<div key={account.entry_id}>
   <tbody>
 <tr className={styles.trow}>
 <td className={styles.tbody}>{account.entry_id}</td>

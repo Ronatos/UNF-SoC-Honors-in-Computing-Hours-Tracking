@@ -6,7 +6,7 @@ import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 /*from Chance, this is where the admin will settle account requests for admin account and faculty account requests
 
-*/
+
 
 async function approveAccount() {
     useEffect(() => {
@@ -19,7 +19,7 @@ async function approveAccount() {
 }
     }
 )}
-
+*/
 
 
 export default function Home() {
@@ -68,7 +68,7 @@ export default function Home() {
 
   {dataResponse.map((account) => {
   return (
-<div>
+<div key={account.account_id}>
   <tbody>
 <tr className={styles.trow}>
 <td className={styles.tbody}>{account.account_id}</td>
