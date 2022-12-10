@@ -14,7 +14,7 @@ const [dataResponse, setdataResponse] = useState([]);
 
 useEffect(() => {
   async function getPageData() {
-    const apiURLEndpoint = '/api/getAccounts';
+    const apiURLEndpoint = '/api/get_accounts';
     const response = await fetch(apiURLEndpoint);
     const res = await response.json();
     console.log(res);

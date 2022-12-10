@@ -3,6 +3,7 @@ import mysql from "mysql2/promise";
 
 export default async function handler(req, res) {
 
+
   try {
     const query = "SELECT * FROM accounts ORDER BY account_id DESC";
     const values = [];
