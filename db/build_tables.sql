@@ -14,7 +14,7 @@ CREATE TABLE email_verification_codes (
     code_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL,
     code VARCHAR(8) NOT NULL,
-    creation_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    creation_time DATETIME NOT NULL DEFAULT NOW(),
     FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );
 
@@ -46,4 +46,12 @@ CREATE TABLE report_filters (
     admin_id INT NOT NULL,
     filter_options TEXT NOT NULL, -- JSON objects. these may eventually be replaced by individual fields corresponding to key:value pairs
     FOREIGN KEY (admin_id) REFERENCES accounts(account_id)
+);
+
+CREATE TABLE sessions (
+    session_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL,
+    session_token INT UNSIGNED NOT NULL,
+    expiration_time DATETIME NOT NULL DEFAULT NOW(), -- sessions need to expire 30 minutes after creation. mysql doesn't support functions in datetime initilization, so it must be set manually afterwards
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );

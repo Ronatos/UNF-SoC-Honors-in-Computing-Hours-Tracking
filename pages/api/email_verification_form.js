@@ -11,8 +11,7 @@ export default async function handler(req, res) {
     // Verify the email is valid - not exactly necessary, but might save us a trip to the database
     if (body.email.match(/^n\d{8}@unf\.edu$/i) == null) {
         console.log("400 Bad Request");
-        res.status(400).json({message: "Must use a valid email."});
-        return;
+        return res.status(400).json({message: "Must use a valid email."});
     }
 
     // Get all data from database that will be needed at once to reduce # of queries
@@ -46,10 +45,9 @@ export default async function handler(req, res) {
     catch (e) {
         console.log(e); // there are technically 2 errors that could occur here - one should send a 500, the other a 400 (TypeError)
         console.log("400 Bad Request");
-        res.status(400).json({ message: "Invalid or expired verification code."});
-        return;
+        return res.status(400).json({ message: "Invalid or expired verification code."});
     }
 
     console.log("200 OK");
-    res.status(200).json({ message: "Email validation successful."});
+    return res.status(200).json({ message: "Email validation successful."});
 }

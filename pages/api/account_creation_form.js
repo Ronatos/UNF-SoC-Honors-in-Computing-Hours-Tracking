@@ -15,21 +15,18 @@ export default async function handler(req, res) {
         const existingUsernames = await dbPool.query("SELECT username FROM accounts WHERE username = ?;", [body.username]);
         if (existingUsernames[0].length > 0) {
             console.log("400 Bad Request. Username already in use.");
-            res.status(400).json({message: "Username already in use."});
-            return;
+            return res.status(400).json({message: "Username already in use."});
         }
     }
     catch (e) {
         console.log("500 Internal Server Error. 'SELECT username FROM accounts WHERE username = ?;' failed");
-        res.status(500).json({message: e});
-        return;
+        return res.status(500).json({message: e});
     }
 
     // Verify the email exists
     if (body.email.match(/^n\d{8}@unf\.edu$/i) == null) {
         console.log("400 Bad Request. Email doesn't match the regex.");
-        res.status(400).json({message: "Must use a valid email."});
-        return;
+        return res.status(400).json({message: "Must use a valid email."});
     }
 
     // Create the account
@@ -49,13 +46,12 @@ export default async function handler(req, res) {
     }
     catch (e) {
         console.log("500 Internal Server Error. Failed creation of the verification code.");
-        res.status(500).json({message: e});
-        return;
+        return res.status(500).json({message: e});
     }
 
     // Send an email with a verification code and instructions, enabling the user to submit it on /email_verification to verify their email
     // We will likely want to use the UNF email tenant, which may lead us to the question
     // of why we're not using SSO.
 
-    res.status(200).json({ message: "Account creation successful."});
+    return res.status(200).json({ message: "Account creation successful."});
 }
