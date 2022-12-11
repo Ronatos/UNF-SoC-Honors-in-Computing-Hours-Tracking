@@ -1,0 +1,8 @@
+### Verify email
+POST http://localhost:3000/api/email_verification_form
+Content-Type: application/json; charset=utf-8
+
+{
+    "email":"n01413497@unf.edu",
+    "code":"310245"
+}

@@ -1,3 +1,4 @@
+### Create student account
 POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
@@ -8,18 +9,18 @@ Content-Type: application/json; charset=utf-8
     "role": "student"
 }
 
-###
+### Create faculty account
 POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
 {
-    "username":"alex_faculty",
+    "username":"alex_faculty2",
     "email":"n01413497@unf.edu",
     "password":"king",
     "role": "faculty"
 }
 
-###
+### Create admin account
 POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
