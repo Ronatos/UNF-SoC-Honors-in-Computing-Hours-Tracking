@@ -74,7 +74,7 @@ Student Form
           <br></br>
           <p><b>Event:</b> &nbsp; &nbsp; UNF Leaders Convention </p>
           <br></br>
-            <p><b>Hours Amount: </b> &nbsp; &nbsp; 12 </p>
+            <p><b>Hours Amount: </b> &nbsp;git commit -m &nbsp; 12 </p>
             <br></br>
             <p><b>Professor: </b> &nbsp; &nbsp; Karthikeyen Umapathy </p>
             <br></br>
@@ -82,7 +82,18 @@ Student Form
             
 
 
-<form className={styles.description} onSubmit={handleSubmit} method="post">
+           <form className={styles.description}>
+          <input type="radio" id="appr" name="store" value={Approve}/>
+          <label for="appr">Approve</label>
+          <br></br>
+          <input type="radio" id="denied" name="store" value={Deny}/>
+          <label for="denied">Deny</label>
+          <br></br>
+          <input type="submit" value="Submit"/>
+        </form>
+
+
+{/* <form className={styles.description} onSubmit={handleSubmit} method="post">
           <input type="radio" id="appr" name="approve" value={Approve}/>
           <label for="appr">Approve</label>
           <br></br>
@@ -90,7 +101,7 @@ Student Form
           <label for="denied">Deny</label>
           <br></br>
           <input type="submit" value="Submit"/>
-        </form>
+        </form> */}
 
 
 
