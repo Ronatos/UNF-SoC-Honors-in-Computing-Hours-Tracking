@@ -9,12 +9,12 @@ Shows unresolved reports
 
 
 */
-export default function searchFunction(document) {
+export default function Home() {
 const [dataResponse, setdataResponse] = useState([]);
 
 useEffect(() => {
   async function getPageData() {
-    const apiURLEndpoint = '/api/getAccounts';
+    const apiURLEndpoint = '/api/get_accounts';
     const response = await fetch(apiURLEndpoint);
     const res = await response.json();
     console.log(res);
@@ -55,7 +55,7 @@ View Accounts
 
   {dataResponse.map((account) => {
   return (
-<div>
+<div key={account.account_id}>
   <tbody>
 <tr className={styles.trow}>
 <td className={styles.tbody}>{account.account_id}</td>

@@ -14,11 +14,13 @@ export default function Home() {
 
     // use the useState hook to store the form data
     const [Form, setForm] = useState({
-      firstN: '',
-      lastN: '',
+      First_Name: '',
+      Last_Name: '',
       email: '',
       notes: '',
       professor: 'Unknown',
+      event: '',
+      hours: '',
     });
     
 
@@ -37,31 +39,22 @@ export default function Home() {
       
     }
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
+    // handle the form submission
+    const onSubmit = (e) => {
+      if (form.name.lenght < 5) {
+        setError((state) => ({
+        name: 'Too short'
+        }));
+        return;
+      };
 
-      const response = await fetch('/api/student_form_submit', {
-          method: 'POST', 
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              First_name: event.target.firstN.value,
-              Last_name: event.target.lastN.value,
-              email: event.target.email.value,
+      const [error, setError ] = useState({
+        name: '',
+      })
 
-          }),
-      });
-
-      const result = await response.json();
-
-      if (response.status == 200) {
-          // Router.push("/email_verification");
-      }
-      else if (response.status == 400) {
-          alert(result.message);
-      }
-  }
+      showData();
+      e.preventDefault();
+    }
 
     
 
@@ -89,14 +82,14 @@ export default function Home() {
       <main className={styles.main}>
         
         <div className={styles.student_form}>
-          <form onSubmit={handleSubmit} className={styles.form_element}>
+          <form onSubmit={onSubmit} className={styles.form_element}>
             
             <label className={styles.form_label}>Student First Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="firstN" id="left_form" value={Form.name} />
+            <input onChange={onChange} className={styles.form_input} type="text" name="First_Name" id="left_form" value={Form.name} />
             <br></br>
 
             <label>Student Last Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="lastN"/>
+            <input onChange={onChange} className={styles.form_input} type="text" name="Last_Name"/>
             <br></br>
 
             <label className={styles.form_label}>Email:</label>
@@ -107,22 +100,22 @@ export default function Home() {
             <input className={styles.form_input} type="text" name="name" />
             <br></br>
 
-            <input type="radio" name="event" value="Freshman" />
+            <input onChange={onChange} type="radio" name="event" value="Freshman" />
             <label for="event">FR</label>
 
-            <input type="radio" name="event" value="Sophomore" />
+            <input onChange={onChange} type="radio" name="event" value="Sophomore" />
             <label for="event">SOPH</label>
 
-            <input type="radio" name="event" value="Junior" />
+            <input onChange={onChange} type="radio" name="event" value="Junior" />
             <label for="event">JR</label>
 
-            <input type="radio" name="event" value="Senior" />
+            <input onChange={onChange} type="radio" name="event" value="Senior" />
             <label for="event">Senior</label>
             <br></br>
 
             <div className={styles.right_form}>
             <label for="quantity">Hours Amount:</label>
-            <input className={styles.form_input} type="number" id="quantity" name="quantity" min="1" max="50" />
+            <input onChange={onChange} className={styles.form_input} type="number" id="quantity" name="hours" min="1" max="100" />
             <br></br>
 
             {/* <label for="text">Professor:</label>

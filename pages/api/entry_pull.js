@@ -4,7 +4,7 @@ import mysql from "mysql2/promise";
 export default async function handler(req, res) {
 
   try {
-    const query = "SELECT * FROM entries WHERE entry_status='Complete' ORDER BY entry_id";
+    const query = "SELECT * FROM entries WHERE entry_status='Approved' ORDER BY entry_id";
     const values = [];
     const [data] = await dbPool.query(query, values);
     dbconnection.end();

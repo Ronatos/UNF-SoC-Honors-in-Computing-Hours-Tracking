@@ -1,3 +1,4 @@
+import cookie from 'js-cookie'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -5,53 +6,35 @@ import Router from 'next/router'
 
 import styles from '../styles/Login.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
-
+import Cookies from 'js-cookie'
 
 
 export default function Login() {
 
-    // Handles the submit event on form submit.
     const handleSubmit = async (event) => {
-        // Stop the form from submitting and refreshing the page.
-        event.preventDefault()
+        event.preventDefault();
 
-        // Get data from the form.
-        const data = {
-            username: event.target.username.value,
-            password: event.target.password.value,
-        }
+        const loginToken = Cookies.get('unfHoursTrackingSessionToken');
 
-        // Send the data to the server in JSON format.
-        const JSONdata = JSON.stringify(data)
-
-        // API endpoint where we send form data.
-        const endpoint = '/api/login_form'
-
-        // Form the request for sending data to the server.
-        const options = {
-            // The method is POST because we are sending data.
+        const response = await fetch('/api/login_form', {
             method: 'POST',
-            // Tell the server we're sending JSON.
             headers: {
                 'Content-Type': 'application/json',
             },
-            // Body of the request is the JSON data we created above.
-            body: JSONdata,
-        }
+            body: JSON.stringify({
+                username: event.target.username.value,
+                password: event.target.password.value,
+                sessionToken: (loginToken == undefined) ? String(crypto.getRandomValues(new Uint32Array(1))) : loginToken
+            }),
+        });
 
-        // Send the form data to our forms API and get a response.
-        const response = await fetch(endpoint, options)
-
-        // Get the response data from server as JSON.
-        // If server returns the data submitted, that means the form works.
-        const result = await response.json()
+        const result = await response.json();
 
         if (response.status == 200) {
-            alert(result.message)
-            Router.push("/login")
+            Router.push("/home");
         }
-        else if (response.status == 401) {
-            alert(result.message)
+        else if (response.status == 400) {
+            alert(result.message);
         }
     }
 
@@ -82,13 +65,11 @@ export default function Login() {
                 </form>
 
                 <div className={styles.links}>
-                    <Link href="/account_creation">Create an account</Link>
-                </div>
-
-                <div className={styles.links}>
                     <Link href="/username_recovery">Forgot username?</Link>
                     <span className={styles.linkSpacing}></span>
                     <Link href="/password_reset">Forgot Password?</Link>
+                    <span className={styles.linkSpacing}></span>
+                    <Link href="/account_creation">Create an account</Link>
                 </div>
             </main>
         </div>

@@ -1,42 +1,48 @@
-let fs = require('fs')
-let path = require('path')
+const { pool: dbPool } = require('@/db/connection');
+const cookie = require('cookie');
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
-  
-    // Optional logging to see the responses
-    // in the command line where next.js app is running.
-    console.log('body: ', body)
   
     // Guard clause checks for username and password,
     // and returns early if they are not found
     if (!body.username || !body.password) {
-        // Sends a HTTP bad request error code
-        return res.status(400).json({ data: 'Username or password not submitted.' })
+        return res.status(400).json({ data: 'Username or password not submitted.' });
     }
 
-    // The following several lines will be replaced with database logic once one is implemented.
-    // This just looks through the mock database and verifies an account with the specified credentials exists.
-    const accountsDir = "db/accounts";
-    let accounts = [];
+    try {
+        // Verify an account with the specified credentials exists.
+        const {account_id, username, password} = (await dbPool.query("SELECT account_id, username, password FROM accounts WHERE username = ? AND password = ?;", [body.username, body.password]))[0][0];
 
-    // Loop through all the files in accounts directory and add them to the accounts array
-    fs.readdirSync(accountsDir).forEach(file => {
-        let filepath = path.join(accountsDir, file);
-        accounts.push(JSON.parse(fs.readFileSync(filepath, 'utf8')));
-    });
+        // Since we're logging in again, create a new token
+        const array = new Uint32Array(1);
+        crypto.getRandomValues(array);
 
-    let accountIndex = accounts.findIndex(account => account.username === body.username);
+        // Give it to the browser
+        res.setHeader("Set-Cookie", cookie.serialize("unfHoursTrackingSessionToken", body.sessionToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            maxAge: 60 * 30, // in seconds -- 60 * 30 for 30 minutes
+            sameSite: "strict",
+            path: "/"
+        }));
 
-    if (accountIndex != -1 && accounts[accountIndex].username == body.username && accounts[accountIndex].password == body.password) {
-        // 200 OK
+        // Flush out any old tokens
+        await dbPool.query("DELETE FROM sessions WHERE account_id = ?;", [account_id]);
+
+        // Set the new session token
+        await dbPool.query("INSERT INTO sessions (account_id, session_token) VALUES (?, ?);", [account_id, parseInt(body.sessionToken)]);
+
+        // Update the session to expire in 30 minutes
+        await dbPool.query("UPDATE sessions SET expiration_time = DATE_ADD(NOW(), INTERVAL 30 MINUTE) WHERE account_id = ?;", [account_id]);
+
         console.log("200 OK");
-        res.status(200).json({ message: "Login successful."})
+        return res.status(200).json({ message: "Login successful."});
     }
-    else {
-        // 401 Unauthorized
-        console.log("401 Unauthorized");
-        res.status(401).json({message: "Invalid username or password."})
+    catch (e) {
+        console.log(e);
+        console.log("401 Unauthorized. Invalid username and password combination.");
+        return res.status(500).json({message: e});
     }
 }

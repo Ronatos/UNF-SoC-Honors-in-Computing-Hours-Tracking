@@ -7,11 +7,12 @@ import mysql from "mysql2/promise";
 
 */
 
-
 export default async function handler(req, res) {
+  const body = req.body
+  console.log('body: ', body)
 
   try {
-    const query = "SELECT * FROM accounts WHERE account_status ='pending admin approval'";
+    const query = "DELETE FROM Accounts WHERE account_id = '" + body + "'";  //WILL NEED TO UPDATE INCASE OF SQL INJECTION
     const values = [];
     //const [data] = await dbPool.query(query, values);
     const [data] = await dbPool.query(query, values);
@@ -23,5 +24,3 @@ export default async function handler(req, res) {
     // res.status(500).json({ error: error.message });
   }
 }
-
-

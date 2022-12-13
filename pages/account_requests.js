@@ -6,24 +6,56 @@ import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 /*from Chance, this is where the admin will settle account requests for admin account and faculty account requests
 
+
 */
 
-async function approveAccount() {
-    useEffect(() => {
-        async function getPageData() {
-          const apiURLEndpoint = '/api/approveAccount';
-          const response = await fetch(apiURLEndpoint);
-          const res = await response.json();
-          console.log(res);
-        setdataResponse(res.accounts);
-}
-    }
-)}
+
+
 
 
 
 export default function Home() {
     const [dataResponse, setdataResponse] = useState([]);
+
+  const ApproveAccount = async (data) => {
+    const JSONdata = JSON.stringify(data);
+    const endpoint = '/api/approve_account';
+    const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+  }
+  const response = await fetch(endpoint, options)
+  const result = await response.json()
+  alert("Account request has been Approved!");
+  window.location.reload();
+  }
+
+  const DenyAccount = async (data) => {
+    const JSONdata = JSON.stringify(data);
+    const endpoint = '/api/approve_account';
+    const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+  }
+  const response = await fetch(endpoint, options)
+  const result = await response.json()
+  alert("Account request has been declined!");
+  window.location.reload();
+  }
+
+
 
     useEffect(() => {
       async function getPageData() {
@@ -68,7 +100,7 @@ export default function Home() {
 
   {dataResponse.map((account) => {
   return (
-<div>
+<div key={account.account_id}>
   <tbody>
 <tr className={styles.trow}>
 <td className={styles.tbody}>{account.account_id}</td>
@@ -79,8 +111,8 @@ export default function Home() {
 <td className={styles.tbody}>{account.password}</td>
 <td className={styles.tbody}>{account.email_address}</td>
 <td className={styles.tbody}>{account.account_status}
-<button type="button" onclick="approveAccount()">Approve</button>
-<button type="button" onclick="denyAccount()">Deny</button>
+<button onClick={()=>ApproveAccount(account.account_id)}>Approve</button>
+<button onClick={()=>DenyAccount(account.account_id)}>Deny</button>
 </td>
 </tr>
 </tbody>
