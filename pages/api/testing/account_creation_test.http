@@ -3,7 +3,7 @@ POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
 {
-    "username":"alex_student",
+    "username":"alex_student3",
     "email":"n01413497@unf.edu",
     "password":"king",
     "role": "student"

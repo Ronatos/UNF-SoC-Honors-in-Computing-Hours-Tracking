@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { pool: dbPool } = require('@/db/connection');
 
 export default async function handler(req, res) {
@@ -38,7 +39,7 @@ export default async function handler(req, res) {
 
         // Create a random 5 or 6 digit verification code
         const array = new Uint32Array(1);
-        crypto.getRandomValues(array);
+        crypto.webcrypto.getRandomValues(array);
 
         // Add it to the email_verification_codes table
         await dbPool.query("INSERT INTO email_verification_codes (account_id, code) VALUES (?, ?);", [account_creation_results[0].insertId, String(array).substring(0, 6)]);
@@ -46,6 +47,7 @@ export default async function handler(req, res) {
     }
     catch (e) {
         console.log("500 Internal Server Error. Failed creation of the verification code.");
+        console.log(e);
         return res.status(500).json({message: e});
     }
 
