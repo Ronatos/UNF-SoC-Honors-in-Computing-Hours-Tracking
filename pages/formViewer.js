@@ -14,8 +14,7 @@ export default function Home() {
 
         // Get data from the form.
         const data = {
-            approve: event.target.approve.value,
-            deny: event.target.deny.value,
+            approval: event.target.submit.value
         }
 
         // Send the data to the server in JSON format.
@@ -32,6 +31,7 @@ export default function Home() {
             headers: {
                 'Content-Type': 'application/json',
             },
+
             // Body of the request is the JSON data we created above.
             body: JSONdata,
         }
@@ -52,8 +52,11 @@ export default function Home() {
         }
     }
 
-
     return (
+
+  
+
+
 <div className={styles.container}>
       <Head>
         <title>Submitted Form</title>
@@ -74,13 +77,13 @@ Student Form
           <br></br>
           <p><b>Event:</b> &nbsp; &nbsp; UNF Leaders Convention </p>
           <br></br>
-            <p><b>Hours Amount: </b> &nbsp;git commit -m &nbsp; 12 </p>
+            <p><b>Hours Amount: </b> &nbsp; &nbsp; 12 </p>
             <br></br>
             <p><b>Professor: </b> &nbsp; &nbsp; Karthikeyen Umapathy </p>
             <br></br>
            <p><b>Notes: </b> &nbsp; &nbsp; I was at the event for 12 hours and helped with informing new students.  </p>
             
-
+{/* 
 
            <form className={styles.description}>
           <input type="radio" id="appr" name="store" value={Approve}/>
@@ -90,22 +93,28 @@ Student Form
           <label for="denied">Deny</label>
           <br></br>
           <input type="submit" value="Submit"/>
-        </form>
-
-
-{/* <form className={styles.description} onSubmit={handleSubmit} method="post">
-          <input type="radio" id="appr" name="approve" value={Approve}/>
-          <label for="appr">Approve</label>
-          <br></br>
-          <input type="radio" id="denied" name="deny" value={Deny}/>
-          <label for="denied">Deny</label>
-          <br></br>
-          <input type="submit" value="Submit"/>
         </form> */}
 
+
+<form className={styles.description} onSubmit={handleSubmit} method="post">
+          <input type="radio" id="appr" name="submit" value="approve"/>
+          <label htmlFor="appr">Approve</label>
+          <br></br>
+          <input type="radio" id="denied" name="submit" value="deny"/>
+          <label htmlFor="denied">Deny</label> 
+          <br></br>
+          <input type="submit" value="Submit"/>
+        </form>
+
+        {/* <button onClick={()=>Approve}>Approve</button>
+        <button onClick={()=>Deny}>Deny</button>
+            <br></br>
+          <input type="submit" value="Submit"/>
+       */}
 
 
 </main>
 </div>
-)
+    )
 }
+

@@ -23,8 +23,8 @@ CREATE TABLE entries (
     student_id INT NOT NULL,
     faculty_id INT NOT NULL,
     event_name VARCHAR(255) NOT NULL,
-    event_date DATE NOT NULL,
-    time_accrued TIME NOT NULL,
+    event_date DATE NOT NULL, -- but there could be a multi-day event. add start and end
+    time_accrued TIME NOT NULL, -- hours requested
     latest_comment VARCHAR(255),
     latest_commentor_id INT,
     entry_status VARCHAR(255), -- approved, denied, unreviewed
