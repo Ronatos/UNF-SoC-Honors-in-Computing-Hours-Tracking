@@ -12,49 +12,81 @@ import {useState} from 'react'
 export default function Home() {
 
 
-    // use the useState hook to store the form data
-    const [Form, setForm] = useState({
-      First_Name: '',
-      Last_Name: '',
-      email: '',
-      notes: '',
-      professor: 'Unknown',
-      event: '',
-      hours: '',
-    });
+    // // use the useState hook to store the form data
+    // const [Form, setForm] = useState({
+    //   First_Name: '',
+    //   Last_Name: '',
+    //   email: '',
+    //   notes: '',
+    //   professor: 'Unknown',
+    //   event: '',
+    //   hours: '',
+    // });
     
 
-    // handle the form input change
-    const onChange = (e) => {
-      const { value, name } = e.target;
+    // // handle the form input change
+    // const onChange = (e) => {
+    //   const { value, name } = e.target;
 
-      setForm(state => ({
-        ...state,
-        [name]: value,
-      }));
-    }
+    //   setForm(state => ({
+    //     ...state,
+    //     [name]: value,
+    //   }));
+    // }
 
-    const showData = () => {
-      console.log('Form: ', Form);
+    // const showData = () => {
+    //   console.log('Form: ', Form);
       
-    }
+    // }
+
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+
+      const response = await fetch('/api/student_form_submit', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            selected_professor: event.target.professor.value,
+            event_name: event.target.event.value,
+            event_date: event.target.password.value,
+            hours_submitted: event.target.role.value,
+            latest_comment: event.target.role.value
+          }),
+      });
+
+      const result = await response.json();
+
+      if (response.status == 200) {
+          Router.push("/email_verification");
+      }
+      else if (response.status == 400) {
+          alert(result.message);
+      }
+  }
+
+
+
+
 
     // handle the form submission
-    const onSubmit = (e) => {
-      if (form.name.lenght < 5) {
-        setError((state) => ({
-        name: 'Too short'
-        }));
-        return;
-      };
+    // const onSubmit = (e) => {
+    //   if (form.name.lenght < 5) {
+    //     setError((state) => ({
+    //     name: 'Too short'
+    //     }));
+    //     return;
+    //   };
 
-      const [error, setError ] = useState({
-        name: '',
-      })
+    //   const [error, setError ] = useState({
+    //     name: '',
+    //   })
 
-      showData();
-      e.preventDefault();
-    }
+    //   showData();
+    //   e.preventDefault();
+    // }
 
     
 
@@ -82,43 +114,22 @@ export default function Home() {
       <main className={styles.main}>
         
         <div className={styles.student_form}>
-          <form onSubmit={onSubmit} className={styles.form_element}>
+          <form onSubmit={handleSubmit} className={styles.form_element}>
             
-            <label className={styles.form_label}>Student First Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="First_Name" id="left_form" value={Form.name} />
+            <label className={styles.form_label}>Event:</label>
+            <input className={styles.form_input} type="text" name="event" id="left_form"/>
             <br></br>
 
-            <label>Student Last Name:</label>
-            <input onChange={onChange} className={styles.form_input} type="text" name="Last_Name"/>
-            <br></br>
-
-            <label className={styles.form_label}>Email:</label>
+            {/* <label className={styles.form_label}>Email:</label>
             <input onChange={onChange} className={styles.form_input} type="text" name="email" id="left_form" value={Form.email}/>
-            <br></br>
-
-            <label>Event:</label>
-            <input className={styles.form_input} type="text" name="name" />
-            <br></br>
-
-            <input onChange={onChange} type="radio" name="event" value="Freshman" />
-            <label for="event">FR</label>
-
-            <input onChange={onChange} type="radio" name="event" value="Sophomore" />
-            <label for="event">SOPH</label>
-
-            <input onChange={onChange} type="radio" name="event" value="Junior" />
-            <label for="event">JR</label>
-
-            <input onChange={onChange} type="radio" name="event" value="Senior" />
-            <label for="event">Senior</label>
-            <br></br>
+            <br></br> */}
 
             <div className={styles.right_form}>
-            <label for="quantity">Hours Amount:</label>
-            <input onChange={onChange} className={styles.form_input} type="number" id="quantity" name="hours" min="1" max="100" />
+            <label htmlFor="quantity">Hours Amount:</label>
+            <input className={styles.form_input} type="number" id="quantity" name="hours" min="1" max="100" />
             <br></br>
 
-            {/* <label for="text">Professor:</label>
+            {/* <label htmlFor="text">Professor:</label>
             <input className={styles.form_input} type="text" name="name" />
             <br></br> */}
 
@@ -128,8 +139,8 @@ export default function Home() {
               will give students their "event number" and the students will enter that number in the form. (will change if the group roast me and this idea)
             */}
 
-            <label for="text">Professor:</label>
-            <select onChange={onChange} className={styles.form_input} value={Form.professor} name="professor" id="professor">
+            <label htmlFor="text">Professor:</label>
+            <select className={styles.form_input} name="professor" id="professor">
               <option value="Karthikeyan Umapathy">Professor#1</option>
               <option value="Katie Tarnowska">Professor#2</option>
               <option value="David Wisnosky">Professor#3</option>
@@ -144,7 +155,7 @@ export default function Home() {
             </textarea> */}
 
             <label className={styles.form_label}>Notes:</label>
-            <textarea onChange={onChange} className={styles.form_input} type="text" name="notes" id="left_form" value={Form.notes}>
+            <textarea className={styles.form_input} type="text" name="notes" id="left_form">
 
             </textarea>
             <br></br>
