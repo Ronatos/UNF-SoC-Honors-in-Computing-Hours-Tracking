@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/students.module.css'
 // for form input information 
-import {useState} from 'react'
+// import {useState} from 'react'
  
 // the new student page - started over 
 
@@ -13,48 +13,48 @@ export default function Home() {
 
 
     // use the useState hook to store the form data
-    const [Form, setForm] = useState({
-      First_Name: '',
-      Last_Name: '',
-      email: '',
-      notes: '',
-      professor: 'Unknown',
-      event: '',
-      hours: '',
-    });
+    // const [Form, setForm] = useState({
+    //   First_Name: '',
+    //   Last_Name: '',
+    //   email: '',
+    //   notes: '',
+    //   professor: 'Unknown',
+    //   event: '',
+    //   hours: '',
+    // });
     
 
     // handle the form input change
-    const onChange = (e) => {
-      const { value, name } = e.target;
+    // const onChange = (e) => {
+    //   const { value, name } = e.target;
 
-      setForm(state => ({
-        ...state,
-        [name]: value,
-      }));
-    }
+    //   setForm(state => ({
+    //     ...state,
+    //     [name]: value,
+    //   }));
+    // }
 
-    const showData = () => {
-      console.log('Form: ', Form);
+    // const showData = () => {
+    //   console.log('Form: ', Form);
       
-    }
+    // }
 
-    // handle the form submission
-    const onSubmit = (e) => {
-      if (form.name.lenght < 5) {
-        setError((state) => ({
-        name: 'Too short'
-        }));
-        return;
-      };
+    // // handle the form submission
+    // const onSubmit = (e) => {
+    //   if (form.name.lenght < 5) {
+    //     setError((state) => ({
+    //     name: 'Too short'
+    //     }));
+    //     return;
+    //   };
 
-      const [error, setError ] = useState({
-        name: '',
-      })
+    //   const [error, setError ] = useState({
+    //     name: '',
+    //   })
 
-      showData();
-      e.preventDefault();
-    }
+    //   showData();
+    //   e.preventDefault();
+    // }
 
     
 
@@ -82,7 +82,7 @@ export default function Home() {
       <main className={styles.main}>
         
         <div className={styles.student_form}>
-          <form onSubmit={onSubmit} className={styles.form_element}>
+          {/* <form onSubmit={onSubmit} className={styles.form_element}>
             
             <label className={styles.form_label}>Student First Name:</label>
             <input onChange={onChange} className={styles.form_input} type="text" name="First_Name" id="left_form" value={Form.name} />
@@ -116,7 +116,7 @@ export default function Home() {
             <div className={styles.right_form}>
             <label for="quantity">Hours Amount:</label>
             <input onChange={onChange} className={styles.form_input} type="number" id="quantity" name="hours" min="1" max="100" />
-            <br></br>
+            <br></br> */}
 
             {/* <label for="text">Professor:</label>
             <input className={styles.form_input} type="text" name="name" />
@@ -128,7 +128,7 @@ export default function Home() {
               will give students their "event number" and the students will enter that number in the form. (will change if the group roast me and this idea)
             */}
 
-            <label for="text">Professor:</label>
+            {/* <label for="text">Professor:</label>
             <select onChange={onChange} className={styles.form_input} value={Form.professor} name="professor" id="professor">
               <option value="Karthikeyan Umapathy">Professor#1</option>
               <option value="Katie Tarnowska">Professor#2</option>
@@ -136,13 +136,13 @@ export default function Home() {
               <option value="Professor#4">Professor#4</option>
               <option value="Unknown">Unknown</option>
             </select>
-            <br></br>
+            <br></br> */}
 
 
             {/* <textarea  className={styles.form_text} id="notes_review" placeholder="Add any notes here about the event..." name="notes_review" rows="4" cols="50">
               
             </textarea> */}
-
+{/* 
             <label className={styles.form_label}>Notes:</label>
             <textarea onChange={onChange} className={styles.form_input} type="text" name="notes" id="left_form" value={Form.notes}>
 
@@ -155,7 +155,7 @@ export default function Home() {
             <button className={styles.form_btn1}>Clear</button>
           </div>
         </div>
-      </form>
+      </form> */}
       <div className={styles.queue}> 
         <h3 className={styles.queue_text}>Queue:</h3>
           <div className={styles.queue_container}>
