@@ -1,5 +1,6 @@
 const { pool: dbPool } = require('@/db/connection');
 const cookie = require('cookie');
+const crypto = require('crypto');
 
 export default async function handler(req, res) {
     // Get data submitted in request's body.
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
 
         // Since we're logging in again, create a new token
         const array = new Uint32Array(1);
-        crypto.getRandomValues(array);
+        crypto.webcrypto.getRandomValues(array);
 
         // Give it to the browser
         res.setHeader("Set-Cookie", cookie.serialize("unfHoursTrackingSessionToken", body.sessionToken, {
