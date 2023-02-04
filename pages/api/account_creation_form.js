@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     }
     catch (e) {
         console.log("500 Internal Server Error. 'SELECT username FROM accounts WHERE username = ?;' failed");
+        console.log(e);
         return res.status(500).json({message: e});
     }
 
