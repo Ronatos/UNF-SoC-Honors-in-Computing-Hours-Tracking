@@ -47,11 +47,3 @@ CREATE TABLE report_filters (
     filter_options TEXT NOT NULL, -- JSON objects. these may eventually be replaced by individual fields corresponding to key:value pairs
     FOREIGN KEY (admin_id) REFERENCES accounts(account_id)
 );
-
-CREATE TABLE sessions (
-    session_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    account_id INT NOT NULL,
-    session_token INT UNSIGNED NOT NULL,
-    expiration_time DATETIME NOT NULL DEFAULT NOW(), -- sessions need to expire 30 minutes after creation. mysql doesn't support functions in datetime initilization, so it must be set manually afterwards
-    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
-);

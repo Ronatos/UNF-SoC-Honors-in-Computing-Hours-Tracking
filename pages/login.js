@@ -1,39 +1,33 @@
-import cookie from 'js-cookie'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Router from 'next/router'
-import {useEffect} from 'react'
 
 import styles from '../styles/Login.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
-import Cookies from 'js-cookie'
 
 export default function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const loginToken = Cookies.get('unfHoursTrackingSessionToken');
-
-        const response = await fetch('/api/login_form', {
+      
+        const response = await fetch('/api/sessions', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 username: event.target.username.value,
-                password: event.target.password.value,
-                sessionToken: (loginToken == undefined) ? String(crypto.getRandomValues(new Uint32Array(1))) : loginToken
-            }),
+                password: event.target.password.value
+            })
         });
 
         const result = await response.json();
 
-        if (response.status == 200) {
-            Router.push("/home");
+        if (response.ok) {
+            return Router.push("/home");
         }
-        else if (response.status == 400) {
+        else {
             alert(result.message);
         }
     }
