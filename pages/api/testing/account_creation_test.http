@@ -3,7 +3,7 @@ POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
 {
-    "username":"alex_student3",
+    "username":"student_test",
     "email":"n01413497@unf.edu",
     "password":"king",
     "role": "student"
@@ -14,7 +14,7 @@ POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
 {
-    "username":"alex_faculty2",
+    "username":"faculty_test",
     "email":"n01413497@unf.edu",
     "password":"king",
     "role": "faculty"
@@ -25,7 +25,7 @@ POST http://localhost:3000/api/account_creation_form
 Content-Type: application/json; charset=utf-8
 
 {
-    "username":"alex_admin",
+    "username":"admin_test",
     "email":"n01413497@unf.edu",
     "password":"king",
     "role": "admin"
