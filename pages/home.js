@@ -5,8 +5,17 @@ import React from 'react';
 import Router from 'next/router'
 import { withSessionSsr } from './lib/config/withSession';
 
-import styles from '../styles/Login.module.css'
+import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
+
+const handleLogout = async () => {
+    const response = await fetch('/api/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
 
 const Home = ({ user }) => (
     <div>
@@ -18,6 +27,7 @@ const Home = ({ user }) => (
 
         <header className={styles.header}>
             <Image src={unfLogo} alt="UNF"/>
+            <button onClick={handleLogout}>Logout</button>
         </header>
 
         <main className={styles.main}>
