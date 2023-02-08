@@ -1,16 +1,15 @@
 const crypto = require('crypto');
-const { pool: dbPool } = require('@/db/connection');
+const { pool: dbPool } = require('@/db/connection'); // Database connection
 
 export default async function handler(req, res) {
   const body = req.body;
 
   const eventName = body.event || "";
   const hours = body.hours || 0;
-  const eventDate = body.event_date || "";
+  const eventDate = body.event_date ? body.event_date : new Date().toISOString().substr(0, 10);
   const facultyId = body.professor || "";
   const latestComment = body.notes || "";
 
-  // Insert the form data into the database | we are using a mySQL database
   try {
     const formData = await dbPool.query("INSERT INTO entries (event_name, time_accrued, event_date, faculty_id, latest_comment) VALUES (?, ?, ?, ?, ?);", [eventName, hours, eventDate, facultyId, latestComment]);
     console.log("Form data successfully stored in database.");
