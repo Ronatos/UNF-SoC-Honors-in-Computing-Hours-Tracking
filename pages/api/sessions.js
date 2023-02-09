@@ -9,6 +9,7 @@ async function createSessionRoute(req, res) {
         const body = req.body;
 
         const account_status = (await dbPool.query("SELECT account_status FROM accounts WHERE username = ? AND password = ?;", [body.username, body.password]))[0][0];
+        const role = (await dbPool.query("SELECT role FROM accounts WHERE username = ? AND password = ?;", [body.username, body.password]))[0][0];
 
         if (account_status == undefined) {
             return res.status(403).json({message: "Invalid username and password combination."});
@@ -20,7 +21,7 @@ async function createSessionRoute(req, res) {
 
         req.session.user = {
             username: body.username,
-            isAdmin: true
+            role: role.role
         };
         await req.session.save();
         return res.send({ ok: true });

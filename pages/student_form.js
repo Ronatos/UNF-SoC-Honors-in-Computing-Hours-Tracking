@@ -11,7 +11,7 @@ export const getServerSideProps = withSessionSsr(
     async ({req, res}) => {
         const user = req.session.user;
 
-        if(!user) {
+        if(!user || user.role != 'student') {
             return {
                 notFound: true,
             }
