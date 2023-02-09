@@ -23,7 +23,7 @@ async function createSessionRoute(req, res) {
             isAdmin: true
         };
         await req.session.save();
-        res.send({ ok: true });
+        return res.send({ ok: true });
     
     }
     return res.status(404).send("");

@@ -8,3 +8,5 @@ export function withSessionRoute(handler) {
 export function withSessionSsr(handler) {
     return withIronSessionSsr(handler, ironOptions);
 }
+
+export const server = process.env.NODE_ENV == "development" ? 'http://localhost:3000' : 'https://unf.edu';
