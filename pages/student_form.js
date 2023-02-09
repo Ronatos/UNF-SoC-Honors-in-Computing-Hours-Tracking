@@ -70,11 +70,11 @@ const StudentForm = ({ user, faculty_list }) => (
         </Head>
 
         <header className={styles.header}>
-            <Link href="/student_home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+            <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
         </header>
 
         <div className={styles.breadcrumb}>
-            <Link href="/student_home">Home</Link>
+            <Link href="/home">Home</Link>
         </div>
 
         <h1 className={styles.description}>
