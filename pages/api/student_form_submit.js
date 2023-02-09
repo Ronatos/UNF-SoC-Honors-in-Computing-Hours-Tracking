@@ -1,23 +1,33 @@
-const crypto = require('crypto');
-const { pool: dbPool } = require('@/db/connection'); // Database connection
+const { pool: dbPool } = require('@/db/connection');
 
 export default async function handler(req, res) {
-  const body = req.body;
 
-  const eventName = body.event || "";
-  const hours = body.hours || 0;
-  const eventDate = body.event_date ? body.event_date : new Date().toISOString().substr(0, 10);
-  const facultyId = body.professor || "";
-  const latestComment = body.notes || "";
+    /*
+        body: JSON.stringify({
+                username: user.username,
+                event: event.target.event.value,
+                date: event.target.date.value,
+                hours: event.target.hours.value,
+                faculty_id: event.target.faculty_id.value
+                comment: event.target.notes.value
+            }),
+    */
+    const body = req.body;
 
-  try {
-    const formData = await dbPool.query("INSERT INTO entries (event_name, time_accrued, event_date, faculty_id, latest_comment) VALUES (?, ?, ?, ?, ?);", [eventName, hours, eventDate, facultyId, latestComment]);
-    console.log("Form data successfully stored in database.");
-  } catch (e) {
-    console.log("Error storing form data in database.");
-    console.log(e);
-    return res.status(500).json({message: e});
-  }
+    try {
+        const student = (await dbPool.query("SELECT account_id FROM accounts WHERE username = ?;", [body.username]))[0][0];
 
-  return res.status(200).json({message: "Form data stored in database successfully."});
+        if (body.comment == "") {
+            const entry_results = await dbPool.query("INSERT INTO entries (student_id, faculty_id, event_name, event_date, time_accrued, entry_status) VALUES (?, ?, ?, ?, ?, 'unreviewed');", [student.account_id, body.faculty_id, body.event, body.date, body.hours]);
+            console.log(entry_results);
+        }
+        else {
+            const entry_results = await dbPool.query("INSERT INTO entries (student_id, faculty_id, event_name, event_date, time_accrued, latest_comment, latest_commentor_id, entry_status) VALUES (?, ?, ?, ?, ?, ?, ?, 'unreviewed');", [student.account_id, body.faculty_id, body.event, body.date, body.hours, body.comment, student.account_id]);
+            console.log(entry_results);
+        }
+        return res.status(200).json({message: "Form data stored in database successfully."});
+    }
+    catch (e) {
+        return res.status(500).json(e);
+    }
 }
