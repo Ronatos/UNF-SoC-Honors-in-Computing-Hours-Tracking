@@ -44,11 +44,8 @@ Student Submitted Forms
 </h3>
 
       <ol className={styles.nav}>
-            <li className={styles.nava}><a className={styles.navb} href="formViewer">SOPHIA ABUZENI (N01406901)</a></li>
-            <li className={styles.nava}><a className={styles.navb} href="">ALEX PEREZ (N01413497)</a></li>
-            <li className={styles.nava}><a className={styles.navb} href="">CHRISTOPHER CLARK (N01242244)</a></li>
-            <li className={styles.nava}><a className={styles.navb} href="">CHANCE ABENES (N01419623)</a></li>
-        </ol>
+            <li className={styles.nava}><a className={styles.navb} href="formViewer">View Forms</a></li>
+      </ol>
 
 
 </main>
