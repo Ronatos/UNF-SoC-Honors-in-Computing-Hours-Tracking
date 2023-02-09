@@ -16,7 +16,7 @@ export default function Home() {
         // Stop the form from submitting and refreshing the page.
         event.preventDefault()
 
-        Router.push("/faculty_homepage");
+        Router.push("/facultyFormQueue");
 
         // Get data from the form.
         const data = {

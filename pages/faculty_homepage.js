@@ -44,7 +44,7 @@ Student Submitted Forms
 </h3>
 
       <ol className={styles.nav}>
-            <li className={styles.nava}><a className={styles.navb} href="formViewer">View Forms</a></li>
+            <li className={styles.nava}><a className={styles.navb} href="facultyFormQueue">View Queue</a></li>
       </ol>
 
 

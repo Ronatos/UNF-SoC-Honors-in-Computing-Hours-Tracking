@@ -1,8 +1,6 @@
 import mysql from "mysql2/promise";
 const { pool: dbPool } = require('@/db/connection');
 
-
-
 export default async function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
@@ -19,10 +17,7 @@ export default async function handler(req, res) {
 
         const aquery = "UPDATE entries SET entry_status = '" + body.approval + "' WHERE entry_id = 1";
         console.log(aquery)
-        
-        const values = [];
-        const [data] = await dbPool.query(query, values);
-        dbconnection.end();
+        const entity = await dbPool.query(aquery);
         
        // const values = [];
       //  const [data] = await dbPool.query(query, values);
@@ -30,7 +25,7 @@ export default async function handler(req, res) {
       res.status(200).json({ entries: data });
       } catch (error) {
         // unhide to check error
-        // res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
       }
     
     
