@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react';
 import newFormIcon from '../public/new_form.png';
 import viewFormsIcon from '../public/view_forms.png';
-import { withSessionSsr } from './lib/config/withSession';
+import { withSessionSsr, server } from './lib/config/withSession';
 
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
@@ -16,6 +16,27 @@ export const getServerSideProps = withSessionSsr(
         if(!user) {
             return {
                 notFound: true,
+            }
+        }
+
+        if (user.role == 'faculty') {
+            const response = await fetch(server + '/api/faculty_home_build', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: user.username,
+                }),
+            });
+        
+            const entry_list_package = await response.json();
+            const entry_list = entry_list_package.entry_list;
+
+            console.log(entry_list);
+    
+            return {
+                props: { user, entry_list }
             }
         }
 
@@ -34,7 +55,20 @@ const handleLogout = async () => {
     });
 }
 
-const Home = ({ user }) => {
+const updateForm = async() => {
+    const response = await fetch('/api/update_form', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            // entry_id: ,
+            // new_status: ,
+        }),
+    });
+}
+
+const Home = ({ user, entry_list }) => {
     if (user.role == 'student') {
         return (
             <div>
@@ -67,7 +101,84 @@ const Home = ({ user }) => {
         )
     }
     else if (user.role == 'faculty') {
-        return;
+        if (entry_list.length == 0) {
+            return (
+                <div>
+                    <Head>
+                        <title>Faculty Home</title>
+                        <meta name="description" content="Faculty home page" />
+                        <link rel="icon" href="/favicon.ico" />
+                    </Head>
+    
+                    <header className={styles.header}>
+                        <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                    </header>
+    
+                    <main>
+                        {/* Needs work */}
+                        {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
+    
+                        <h1 className={styles.description}>Nothing to work on right now. Check back later!</h1>
+                    </main>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <Head>
+                        <title>Faculty Home</title>
+                        <meta name="description" content="Faculty home page" />
+                        <link rel="icon" href="/favicon.ico" />
+                    </Head>
+    
+                    <header className={styles.header}>
+                        <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                    </header>
+    
+                    <main>
+                        {/* Needs work */}
+                        {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
+    
+                        {/* Needs styling! */}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className={styles.container}>Student Name</th>
+                                    <th className={styles.container}>Event</th>
+                                    <th className={styles.container}>Event Date</th>
+                                    <th className={styles.container}>Hours</th>
+                                    <th className={styles.container}>Comment</th>
+                                    <th className={styles.container}>Status</th>
+                                </tr>
+                            </thead>
+                            {entry_list.map((entry) => {
+                                return (
+                                    <tbody key={entry.entry_id}>
+                                        {/* <form id="row" onSubmit={updateForm} method="post"> */}
+                                            <tr>
+                                                {/* <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input> */}
+                                                <td>{entry.last_name}, {entry.first_name}</td>
+                                                <td>{entry.event_name}</td>
+                                                <td>{entry.event_date}</td>
+                                                <td>{entry.time_accrued}</td>
+                                                <td>{entry.latest_comment}</td>
+                                                <td>{entry.latest_commentor_id}</td>
+                                                <td>
+                                                    {/* Needs work */}
+                                                    <button type="submit" form="row" value="approved">Approve</button>
+                                                    <button type="submit" form="row" value="denied">Deny</button>
+                                                </td>
+                                            </tr>
+                                        {/* </form> */}
+                                    </tbody>
+                                );
+                            })}
+                        </table>
+                    </main>
+                </div>
+            )
+        }
     }
     else if (user.role == 'administrator') {
         return;
