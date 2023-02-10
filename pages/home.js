@@ -141,7 +141,7 @@ const Home = ({ user, entry_list }) => {
                         {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
     
                         {/* Needs styling! */}
-                        <table>
+                        <table className={styles.table}>
                             <thead>
                                 <tr>
                                     <th className={styles.container}>Student Name</th>
@@ -156,14 +156,13 @@ const Home = ({ user, entry_list }) => {
                                 return (
                                     <tbody key={entry.entry_id}>
                                         {/* <form id="row" onSubmit={updateForm} method="post"> */}
-                                            <tr>
+                                            <tr className={styles.tableRow}>
                                                 {/* <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input> */}
-                                                <td>{entry.last_name}, {entry.first_name}</td>
-                                                <td>{entry.event_name}</td>
-                                                <td>{entry.event_date}</td>
-                                                <td>{entry.time_accrued}</td>
-                                                <td>{entry.latest_comment}</td>
-                                                <td>{entry.latest_commentor_id}</td>
+                                                <td className={styles.tableData}>{entry.last_name}, {entry.first_name}</td>
+                                                <td className={styles.tableData}>{entry.event_name}</td>
+                                                <td className={styles.tableData}>{entry.event_date}</td>
+                                                <td className={styles.tableData}>{entry.time_accrued}</td>
+                                                <td className={styles.tableData}>{entry.latest_comment}</td>
                                                 <td>
                                                     {/* Needs work */}
                                                     <button type="submit" form="row" value="approved">Approve</button>
