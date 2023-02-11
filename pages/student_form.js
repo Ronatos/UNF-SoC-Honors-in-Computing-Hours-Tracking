@@ -82,9 +82,9 @@ const StudentForm = ({ user, faculty_list }) => (
         <header className={styles.header}>
             <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             <span className={styles.headerContent}>
-                <button type="button" className={styles.headerContent} onClick={logout}>Notifications</button>
-                <button type="button" className={styles.headerContent} onClick={logout}>Settings</button>
-                <button type="button" className={styles.headerContent} onClick={logout}>Logout</button>
+                <button type="button" className={styles.headerButton}>Notifications</button>
+                <button type="button" className={styles.headerButton}>Settings</button>
+                <button type="button" className={styles.headerButton}>Logout</button>
             </span>
         </header>
 
