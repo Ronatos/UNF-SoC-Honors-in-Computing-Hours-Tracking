@@ -14,8 +14,7 @@ export default function Home() {
 
 useEffect(() => {
   async function getPageData() {
-    const apiURLEndpoint = '/api/entry_pull';
-    const response = await fetch(apiURLEndpoint);
+    const response = await fetch('/api/entry_pull');
     const res = await response.json();
     console.log(res);
   setdataResponse(res.accounts);
@@ -53,6 +52,7 @@ View Reports
     <th className={styles.thead}>Comment ID</th>
     <th className={styles.thead}>Entry Status</th>
     <th className={styles.thead}>Semester</th>
+    <th className={styles.thead}>Excel</th>
   </tr>
   </thead>
   </table>
@@ -70,6 +70,8 @@ View Reports
 <td className={styles.tbody}>{account.latest_comment}</td>
 <td className={styles.tbody}>{account.latest_commentor_id}</td>
 <td className={styles.tbody}>{account.entry_status}</td>
+<td className={styles.tbody}>{account.Semester}</td>
+<button onClick={()=>CreateExcel(account.entry_id)}>Excel</button>
 <td className={styles.tbody}>{}</td>
 </tr>
 </tbody>
