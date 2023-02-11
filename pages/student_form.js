@@ -61,6 +61,16 @@ const handleSubmit = async (event) => {
     }
 };
 
+const logout = async () => {
+    const response = await fetch('/api/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    Router.push("/login");
+}
+
 const StudentForm = ({ user, faculty_list }) => (
     <div>
         <Head>
@@ -71,6 +81,11 @@ const StudentForm = ({ user, faculty_list }) => (
 
         <header className={styles.header}>
             <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+            <span className={styles.headerContent}>
+                <button type="button" className={styles.headerContent} onClick={logout}>Notifications</button>
+                <button type="button" className={styles.headerContent} onClick={logout}>Settings</button>
+                <button type="button" className={styles.headerContent} onClick={logout}>Logout</button>
+            </span>
         </header>
 
         <div className={styles.breadcrumb}>

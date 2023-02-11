@@ -13,9 +13,19 @@
 }
 
 .header {
-    width: 100%; 
+    display: flex;
+    width: 100%;
     padding-left: 2%;
     background-color: #0A233F;
+    justify-content: space-between;
+}
+
+.headerContent {
+    display: flex;
+    align-self: flex-end;
+    column-gap: 5%;
+    justify-content: space-evenly;
+    margin-right: 2%;
 }
 
 .image:hover {

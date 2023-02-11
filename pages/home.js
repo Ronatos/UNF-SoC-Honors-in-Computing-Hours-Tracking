@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react';
+import Router from 'next/router'
 import newFormIcon from '../public/new_form.png';
 import viewFormsIcon from '../public/view_forms.png';
 import { withSessionSsr, server } from './lib/config/withSession';
@@ -46,13 +47,14 @@ export const getServerSideProps = withSessionSsr(
     }
 );
 
-const handleLogout = async () => {
+const logout = async () => {
     const response = await fetch('/api/logout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         }
     });
+    Router.push("/login");
 }
 
 const updateForm = async() => {
@@ -80,6 +82,11 @@ const Home = ({ user, entry_list }) => {
 
                 <header className={styles.header}>
                     <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                    <span className={styles.headerContent}>
+                        <button type="button" className={styles.headerContent} onClick={logout}>Notifications</button>
+                        <button type="button" className={styles.headerContent} onClick={logout}>Settings</button>
+                        <button type="button" className={styles.headerContent} onClick={logout}>Logout</button>
+                    </span>
                 </header>
 
                 <main className={styles.main}>
