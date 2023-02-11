@@ -92,11 +92,11 @@ const StudentForm = ({ user, faculty_list }) => (
                 <input name="date" type="date" className={styles.input} data-tip="The date you attended the event." required/><ReactTooltip place="bottom"/>
                 <br></br>
 
-                {faculty_list.map((faculty) => (
-                    <select name="faculty_id" key={faculty.account_id} className={styles.input}>
-                        <option value={faculty.account_id}>{faculty.first_name} {faculty.last_name}</option>
-                    </select>
-                ))}
+                <select name="faculty_id" className={styles.input}>
+                    {faculty_list.map((faculty) => (
+                        <option key={faculty.account_id} value={faculty.account_id}>{faculty.first_name} {faculty.last_name}</option>
+                    ))}
+                </select>
                 <br></br>
 
                 <textarea name="comment" maxLength="255" className={styles.input} placeholder="Additional comments for your instructor?" cols="50"></textarea>
