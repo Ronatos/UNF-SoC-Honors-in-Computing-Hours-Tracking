@@ -104,3 +104,33 @@
 .tableRow {
     border-bottom: 1pt solid black;
 }
+
+.approveButton {
+    background-color: #0A233F;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.approveButton:hover {
+    background: #008EA9;
+    color: white;
+}
+
+.denyButton {
+    background-color: #0A233F;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.denyButton:hover {
+    background: #C41F4B;
+    color: white;
+}

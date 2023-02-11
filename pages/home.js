@@ -127,9 +127,6 @@ const Home = ({ user, entry_list }) => {
                     </header>
     
                     <main>
-                        {/* Needs work */}
-                        {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
-    
                         <h1 className={styles.description}>Nothing to work on right now. Check back later!</h1>
                     </main>
                 </div>
@@ -157,7 +154,6 @@ const Home = ({ user, entry_list }) => {
                         {/* Needs work */}
                         {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
     
-                        {/* Needs styling! */}
                         <table className={styles.table}>
                             <thead>
                                 <tr>
@@ -182,8 +178,8 @@ const Home = ({ user, entry_list }) => {
                                                 <td className={styles.tableData}>{entry.latest_comment}</td>
                                                 <td>
                                                     {/* Needs work */}
-                                                    <button type="submit" form="row" value="approved">Approve</button>
-                                                    <button type="submit" form="row" value="denied">Deny</button>
+                                                    <button type="submit" form="row" className={styles.approveButton} value="approved">Approve</button>
+                                                    <button type="submit" form="row" className={styles.denyButton} value="denied">Deny</button>
                                                 </td>
                                             </tr>
                                         {/* </form> */}
