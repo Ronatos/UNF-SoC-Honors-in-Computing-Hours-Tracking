@@ -84,7 +84,7 @@ const StudentForm = ({ user, faculty_list }) => (
             <span className={styles.headerContent}>
                 <button type="button" className={styles.headerButton}>Notifications</button>
                 <button type="button" className={styles.headerButton}>Settings</button>
-                <button type="button" className={styles.headerButton}>Logout</button>
+                <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
             </span>
         </header>
 
