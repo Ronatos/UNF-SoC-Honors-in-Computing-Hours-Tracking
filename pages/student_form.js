@@ -54,7 +54,7 @@ const handleSubmit = async (event) => {
     const result = await response.json();
 
     if (response.status == 200) {
-        Router.push("/student_submitted_forms");
+        Router.push("/home");
     }
     else {
         alert(result.message);

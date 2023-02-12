@@ -26,10 +26,9 @@ CREATE TABLE entries (
     event_date DATE NOT NULL, -- but there could be a multi-day event. add start and end
     time_accrued INT NOT NULL, -- hours requested
     latest_comment VARCHAR(255),
-    entry_status VARCHAR(255), -- approved, denied, unreviewed
+    entry_status VARCHAR(255), -- Approved, Denied, Unreviewed
     FOREIGN KEY (student_id) REFERENCES accounts(account_id),
-    FOREIGN KEY (faculty_id) REFERENCES accounts(account_id),
-    FOREIGN KEY (latest_commentor_id) REFERENCES accounts(account_id)
+    FOREIGN KEY (faculty_id) REFERENCES accounts(account_id)
 );
 
 CREATE TABLE notifications (

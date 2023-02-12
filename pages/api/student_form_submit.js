@@ -18,11 +18,11 @@ export default async function handler(req, res) {
         const student = (await dbPool.query("SELECT account_id FROM accounts WHERE username = ?;", [body.username]))[0][0];
 
         if (body.comment == "") {
-            const entry_results = await dbPool.query("INSERT INTO entries (student_id, faculty_id, event_name, event_date, time_accrued, entry_status) VALUES (?, ?, ?, ?, ?, 'unreviewed');", [student.account_id, body.faculty_id, body.event, body.date, body.hours]);
+            const entry_results = await dbPool.query("INSERT INTO entries (student_id, faculty_id, event_name, event_date, time_accrued, entry_status) VALUES (?, ?, ?, ?, ?, 'Unreviewed');", [student.account_id, body.faculty_id, body.event, body.date, body.hours]);
             console.log(entry_results);
         }
         else {
-            const entry_results = await dbPool.query("INSERT INTO entries (student_id, faculty_id, event_name, event_date, time_accrued, latest_comment, entry_status) VALUES (?, ?, ?, ?, ?, ?, 'unreviewed');", [student.account_id, body.faculty_id, body.event, body.date, body.hours, body.comment]);
+            const entry_results = await dbPool.query("INSERT INTO entries (student_id, faculty_id, event_name, event_date, time_accrued, latest_comment, entry_status) VALUES (?, ?, ?, ?, ?, ?, 'Unreviewed');", [student.account_id, body.faculty_id, body.event, body.date, body.hours, body.comment]);
             console.log(entry_results);
         }
         return res.status(200).json({message: "Form data stored in database successfully."});

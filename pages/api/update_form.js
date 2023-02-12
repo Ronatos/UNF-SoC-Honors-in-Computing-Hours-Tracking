@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     /*
         body: JSON.stringify({
             entry_id: int,
-            new_status: 'approved' or 'denied',
+            new_status: 'Approved' or 'Denied',
         }),
     */
 

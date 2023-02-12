@@ -89,6 +89,25 @@
     padding-bottom: 2%;
 }
 
+.newFormButton {
+    border: none;
+    padding: 12px 20px;
+    background: #0A233F;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.resubmitButton {
+    background-color: #A7A8A9;
+    color: #0A233F;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 10px;
+    font-size: 1rem;
+    cursor: default;
+}
+
 .table {
     margin-top: 2%;
     margin-left: auto;
