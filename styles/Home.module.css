@@ -1,3 +1,10 @@
+.breadcrumb {
+    font-size: 0.75rem;
+    text-align: left;
+    list-style: none;
+    color:#0A233F;
+}
+
 .container {
     padding: 0 2rem;
 }

@@ -7,7 +7,9 @@ export default async function handler(req, res) {
     //     username: string,
     //     email: n01234567@unf.edu,
     //     password: string,
-    //     role: 'student', 'faculty', or 'admin'
+    //     role: 'student', 'faculty', or 'admin',
+    //     first_name: string,
+    //     last_name: string,
     // })
     const body = req.body;
 
@@ -36,7 +38,9 @@ export default async function handler(req, res) {
 
     // Create the account in 'email unverified' status
     try {
-        const account_creation_results = await dbPool.query("INSERT INTO accounts (username, password, email_address, role, account_status) VALUES (?, ?, ?, ?, ?);", [body.username, body.password, body.email, body.role, 'email unverified']);
+
+
+        const account_creation_results = await dbPool.query("INSERT INTO accounts (username, password, email_address, role, first_name, last_name, account_status) VALUES (?, ?, ?, ?, ?, ?, ?);", [body.username, body.password, body.email, body.role, body.first_name, body.last_name, 'email unverified']);
 
         // Create a random 5 or 6 digit verification code
         const array = new Uint32Array(1);

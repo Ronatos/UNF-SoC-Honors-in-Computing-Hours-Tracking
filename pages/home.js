@@ -267,8 +267,31 @@ const Home = ({ user, entry_list }) => {
             )
         }
     }
-    else if (user.role == 'administrator') {
-        return;
+    else if (user.role == 'admin') {
+        return (
+            <div>
+                <Head>
+                    <title>Administrator Home</title>
+                    <meta name="description" content="Administrator home page" />
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
+
+                <header className={styles.header}>
+                    <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                    <span className={styles.headerContent}>
+                        <button type="button" className={styles.headerButton}>Notifications</button>
+                        <button type="button" className={styles.headerButton}>Settings</button>
+                        <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
+                    </span>
+                </header>
+
+                <main className={styles.description}>
+                    <Link href="/account_requests"><button type="button" className={styles.approveButton}>Account Requests</button></Link>
+                    <Link href="/report"><button type="button" className={styles.approveButton}>View Reports</button></Link>
+                    {/* <Link href="/adminAccount"><button type="button" className={styles.approveButton}>View Accounts</button></Link> */}
+                </main>
+            </div>
+        )
     }
 };
 

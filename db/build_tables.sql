@@ -3,8 +3,8 @@ CREATE TABLE accounts (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email_address VARCHAR(18) NOT NULL, -- must be n########@unf.edu
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     role VARCHAR(8) NOT NULL, -- student, admin, or faculty
     account_status VARCHAR(255) NOT NULL, -- active, email unverified, pending admin approval
     UNIQUE (username)
