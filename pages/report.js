@@ -8,9 +8,44 @@ Shows unresolved reports
 
 
 */
-export default function Home() {
 
+function exportTableToExcel(tableID, filename = ''){
+  var downloadLink;
+  var dataType = 'application/vnd.ms-excel';
+  var tableSelect = document.getElementById(tableID);
+  var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+  
+  // Specify file name
+  filename = filename?filename+'.xls':'excel_data.xls';
+  
+  // Create download link element
+  downloadLink = document.createElement("a");
+  
+  document.body.appendChild(downloadLink);
+  
+  if(navigator.msSaveOrOpenBlob){
+      var blob = new Blob(['\ufeff', tableHTML], {
+          type: dataType
+      });
+      navigator.msSaveOrOpenBlob( blob, filename);
+  }else{
+      // Create a link to the file
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  
+      // Setting the file name
+      downloadLink.download = filename;
+      
+      //triggering the function
+      downloadLink.click();
+  }
+}
+
+export default function Home() {
+  const [query, setQuery] = useState("")
   const [dataResponse, setdataResponse] = useState([]);
+
+
+ 
 
 useEffect(() => {
   async function getPageData() {
@@ -22,6 +57,8 @@ useEffect(() => {
 
 getPageData();
 }, []);
+
+
 
   return (
 <div className={styles.container}>
@@ -37,8 +74,8 @@ getPageData();
 <h1 className={styles.title}>
 View Reports
 </h1>
-<input type="text" id="input"  placeholder="Search for reports" title="searchInput" className="search-input" data-table="reports-list"></input>
-
+<input type="text" id="input"  placeholder="Search for reports" className="search-input" data-table="reports-list" onChange={event => setQuery(event.target.value)}></input>
+<button onClick={()=>exportTableToExcel("tableID")}>Excel</button>
 <table className={styles.table} id="tableID">
     <thead className={styles.head}>
   <tr>
@@ -52,12 +89,34 @@ View Reports
     <th className={styles.thead}>Comment ID</th>
     <th className={styles.thead}>Entry Status</th>
     <th className={styles.thead}>Semester</th>
-    <th className={styles.thead}>Excel</th>
   </tr>
   </thead>
   </table>
 
-  {dataResponse.map((account) => {
+  {
+  dataResponse.filter(account => {
+    if (query === '') {
+      return account;
+    } 
+    if (account.latest_comment.toLowerCase().includes(query.toLowerCase())) {
+      return account;
+    }
+    if (account.event_name.toLowerCase().includes(query.toLowerCase())) {
+      return account;
+    }
+    if (account.entry_id.toString().includes(query.toLowerCase())) {
+      return account;
+    }
+    if (account.student_id.toString().includes(query.toLowerCase())) {
+      return account;
+    }
+    if (account.faculty_id.toString().includes(query.toLowerCase())) {
+      return account;
+    }
+    if (account.event_date.toString().includes(query.toLowerCase())) {
+      return account;
+    }
+    }).map((account) => {
   return (
 <div key={account.entry_id}>
   <tbody>
@@ -65,13 +124,13 @@ View Reports
 <td className={styles.tbody}>{account.entry_id}</td>
 <td className={styles.tbody}>{account.student_id}</td>
 <td className={styles.tbody}>{account.faculty_id}</td>
+<td className={styles.tbody}>{account.event_name}</td>
 <td className={styles.tbody}>{account.event_date}</td>
 <td className={styles.tbody}>{account.time_accrued}</td>
 <td className={styles.tbody}>{account.latest_comment}</td>
 <td className={styles.tbody}>{account.latest_commentor_id}</td>
-<td className={styles.tbody}>{account.entry_status}</td>
+<td className={styles.tbody}>{account.entry_status}</td> 
 <td className={styles.tbody}>{account.Semester}</td>
-<button onClick={()=>CreateExcel(account.entry_id)}>Excel</button>
 <td className={styles.tbody}>{}</td>
 </tr>
 </tbody>
