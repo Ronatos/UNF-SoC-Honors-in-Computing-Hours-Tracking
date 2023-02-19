@@ -85,8 +85,8 @@ const updateForm = async() => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            // entry_id: form.element
-            // new_status: ,
+            entry_id: event.target.entry_id.value,
+            new_status: event.target.new_status.value
         }),
     });
 }
@@ -250,10 +250,10 @@ const Home = ({ user, entry_list }) => {
                                             <td className={styles.tableData}>{entry.time_accrued}</td>
                                             <td className={styles.tableData}>{entry.latest_comment}</td>
                                             <td>
-                                                <form id="row" onSubmit={updateForm} method="post">
+                                                <form onSubmit={updateForm} method="post">
                                                     <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
-                                                    <button type="submit" form="row" className={styles.approveButton} value="Approved">Approve</button>
-                                                    <button type="submit" form="row" className={styles.denyButton} value="Denied">Deny</button>
+                                                    <input type="submit" className={styles.approveButton} name="new_status" value="Approved"/>
+                                                    <input type="submit" className={styles.denyButton} name="new_status" value="Denied"/>
                                                 </form>
                                             </td>
                                         </tr>
