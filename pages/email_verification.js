@@ -27,7 +27,7 @@ export default function EmailVerification() {
 
         if (response.status == 200) {
             alert(result.message);
-            Router.push("/login");
+            Router.push("/");
         }
         else if (response.status == 400) {
             alert(result.message);
@@ -43,11 +43,11 @@ export default function EmailVerification() {
             </Head>
 
             <header className={styles.header}>
-                <Link href="/login"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             </header>
 
             <div className={styles.breadcrumb}>
-                <Link href="/login">Home</Link>
+                <Link href="/">Home</Link>
                 <span> &#62; </span>
                 <Link href="/account_creation">Account Creation</Link>
             </div>

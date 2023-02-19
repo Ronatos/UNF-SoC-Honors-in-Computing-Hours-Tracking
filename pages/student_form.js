@@ -68,7 +68,7 @@ const logout = async () => {
             'Content-Type': 'application/json'
         }
     });
-    Router.push("/login");
+    Router.push("/");
 }
 
 const StudentForm = ({ user, faculty_list }) => (

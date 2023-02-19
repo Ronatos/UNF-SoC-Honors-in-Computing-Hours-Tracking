@@ -30,7 +30,7 @@ export default function UsernameRecovery() {
         // Update here
         if (response.status == 200) {
             alert(result.message)
-            Router.push("/login")
+            Router.push("/")
         }
         else if (response.status == 400) {
             alert(result.message)

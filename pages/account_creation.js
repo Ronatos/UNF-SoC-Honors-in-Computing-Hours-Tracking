@@ -46,11 +46,11 @@ export default function AccountCreation() {
             </Head>
 
             <header className={styles.header}>
-                <Link href="/login"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             </header>
 
             <div className={styles.breadcrumb}>
-                <Link href="/login">Home</Link>
+                <Link href="/">Home</Link>
             </div>
 
             <main>

@@ -75,7 +75,7 @@ const logout = async () => {
             'Content-Type': 'application/json'
         }
     });
-    Router.push("/login");
+    Router.push("/");
 }
 
 const updateForm = async() => {
@@ -85,7 +85,7 @@ const updateForm = async() => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            // entry_id: ,
+            // entry_id: form.element
             // new_status: ,
         }),
     });
@@ -243,21 +243,20 @@ const Home = ({ user, entry_list }) => {
                             {entry_list.map((entry) => {
                                 return (
                                     <tbody key={entry.entry_id}>
-                                        {/* <form id="row" onSubmit={updateForm} method="post"> */}
-                                            <tr className={styles.tableRow}>
-                                                {/* <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input> */}
-                                                <td className={styles.tableData}>{entry.last_name}, {entry.first_name}</td>
-                                                <td className={styles.tableData}>{entry.event_name}</td>
-                                                <td className={styles.tableData}>{entry.event_date}</td>
-                                                <td className={styles.tableData}>{entry.time_accrued}</td>
-                                                <td className={styles.tableData}>{entry.latest_comment}</td>
-                                                <td>
-                                                    {/* Needs work */}
+                                        <tr className={styles.tableRow}>
+                                            <td className={styles.tableData}>{entry.last_name}, {entry.first_name}</td>
+                                            <td className={styles.tableData}>{entry.event_name}</td>
+                                            <td className={styles.tableData}>{entry.event_date}</td>
+                                            <td className={styles.tableData}>{entry.time_accrued}</td>
+                                            <td className={styles.tableData}>{entry.latest_comment}</td>
+                                            <td>
+                                                <form id="row" onSubmit={updateForm} method="post">
+                                                    <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
                                                     <button type="submit" form="row" className={styles.approveButton} value="Approved">Approve</button>
                                                     <button type="submit" form="row" className={styles.denyButton} value="Denied">Deny</button>
-                                                </td>
-                                            </tr>
-                                        {/* </form> */}
+                                                </form>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 );
                             })}
