@@ -256,8 +256,8 @@ const Home = ({ user, entry_list }) => {
                                             <td>
                                                 <form onSubmit={updateForm} method="post">
                                                     <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
-                                                    <input type="submit" className={styles.approveButton} name="new_status" value="Approved"/>
-                                                    <input type="submit" className={styles.denyButton} name="new_status" value="Denied"/>
+                                                    <input type="submit" className={styles.approveButton} name="new_status" value="Approve"/>
+                                                    <input type="submit" className={styles.denyButton} name="new_status" value="Deny"/>
                                                 </form>
                                             </td>
                                         </tr>

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const body = req.body;
 
     try {
-        const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [body.new_status, body.entry_id]))[0][0];
+        const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [(body.new_status == 'Approve' ? 'Approved' : 'Denied'), body.entry_id]))[0][0];
 
         return res.status(200).json({
             
