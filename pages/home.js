@@ -78,7 +78,9 @@ const logout = async () => {
     Router.push("/");
 }
 
-const updateForm = async() => {
+const updateForm = async(event) => {
+    event.preventDefault();
+
     const response = await fetch('/api/update_form', {
         method: 'POST',
         headers: {
@@ -89,6 +91,7 @@ const updateForm = async() => {
             new_status: event.target.new_status.value
         }),
     });
+    window.location.reload(false);
 }
 
 const Home = ({ user, entry_list }) => {
@@ -240,10 +243,11 @@ const Home = ({ user, entry_list }) => {
                                     <th className={styles.container}>Status</th>
                                 </tr>
                             </thead>
-                            {entry_list.map((entry) => {
-                                return (
-                                    <tbody key={entry.entry_id}>
-                                        <tr className={styles.tableRow}>
+
+                            <tbody>
+                                {entry_list.map((entry) => {
+                                    return (                           
+                                        <tr key={entry.entry_id} className={styles.tableRow}>
                                             <td className={styles.tableData}>{entry.last_name}, {entry.first_name}</td>
                                             <td className={styles.tableData}>{entry.event_name}</td>
                                             <td className={styles.tableData}>{entry.event_date}</td>
@@ -257,9 +261,9 @@ const Home = ({ user, entry_list }) => {
                                                 </form>
                                             </td>
                                         </tr>
-                                    </tbody>
-                                );
-                            })}
+                                    );
+                                })}
+                            </tbody>
                         </table>
                     </main>
                 </div>
