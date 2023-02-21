@@ -8,44 +8,6 @@ import {useEffect, useState} from "react";
 export default function Home() {
     const [dataResponse, setdataResponse] = useState([]);
 
-    const ApproveAccount = async (data) => {
-        const JSONdata = JSON.stringify(data);
-        const endpoint = '/api/approve_account';
-        const options = {
-            // The method is POST because we are sending data.
-            method: 'POST',
-            // Tell the server we're sending JSON.
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Body of the request is the JSON data we created above.
-            body: JSONdata,
-        }
-        const response = await fetch(endpoint, options)
-        const result = await response.json()
-        alert("Account request has been Approved!");
-        window.location.reload();
-    } 
-
-    const DenyAccount = async (data) => {
-        const JSONdata = JSON.stringify(data);
-        const endpoint = '/api/approve_account';
-        const options = {
-            // The method is POST because we are sending data.
-            method: 'POST',
-            // Tell the server we're sending JSON.
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Body of the request is the JSON data we created above.
-            body: JSONdata,
-        }
-        const response = await fetch(endpoint, options)
-        const result = await response.json()
-        alert("Account request has been declined!");
-        window.location.reload();
-    }
-
     useEffect(() => {
         async function getPageData() {
             const apiURLEndpoint = '/api/account_request_pull';
@@ -57,6 +19,22 @@ export default function Home() {
     
         getPageData();
     }, []);
+
+    const updateForm = async(event) => {
+        event.preventDefault();
+    
+        const response = await fetch('/api/update_account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                account_id: event.target.account_id.value,
+                action: event.target.action.value
+            }),
+        });
+        window.location.reload(false);
+    }
 
     return (
         <div>
@@ -100,8 +78,11 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.email_address}</td>
                                     <td className={styles.tableData}>{account.role}</td>
                                     <td>
-                                        <button className={styles.approveButton} onClick={()=>ApproveAccount(account.account_id)}>Approve</button>
-                                        <button className={styles.denyButton} onClick={()=>DenyAccount(account.account_id)}>Deny</button>
+                                        <form onSubmit={updateForm} method="post">
+                                            <input name="account_id" type="hidden" value={account.account_id} readOnly></input>
+                                            <input type="submit" className={styles.approveButton} name="action" value="Approve"/>
+                                            <input type="submit" className={styles.denyButton} name="action" value="Deny"/>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
