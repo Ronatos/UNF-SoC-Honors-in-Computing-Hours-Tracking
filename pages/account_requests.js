@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import Router from 'next/router'
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
@@ -19,6 +20,16 @@ export default function Home() {
     
         getPageData();
     }, []);
+
+    const logout = async () => {
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        Router.push("/");
+    }
 
     const updateForm = async(event) => {
         event.preventDefault();
@@ -49,7 +60,7 @@ export default function Home() {
                 <span className={styles.headerContent}>
                     <button type="button" className={styles.headerButton}>Notifications</button>
                     <button type="button" className={styles.headerButton}>Settings</button>
-                    <button type="button" className={styles.headerButton}>Logout</button>
+                    <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                 </span>
             </header>
       
