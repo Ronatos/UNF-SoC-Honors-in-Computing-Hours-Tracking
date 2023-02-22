@@ -109,7 +109,7 @@ const Home = ({ user, entry_list }) => {
                         <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
                         <span className={styles.headerContent}>
                             <button type="button" className={styles.headerButton}>Notifications</button>
-                            <button type="button" className={styles.headerButton}>Settings</button>
+                            <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
                             <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                         </span>
                     </header>
@@ -135,7 +135,7 @@ const Home = ({ user, entry_list }) => {
                         <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
                         <span className={styles.headerContent}>
                             <button type="button" className={styles.headerButton}>Notifications</button>
-                            <button type="button" className={styles.headerButton}>Settings</button>
+                            <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
                             <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                         </span>
                     </header>
@@ -199,7 +199,7 @@ const Home = ({ user, entry_list }) => {
                         <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
                         <span className={styles.headerContent}>
                             <button type="button" className={styles.headerButton}>Notifications</button>
-                            <button type="button" className={styles.headerButton}>Settings</button>
+                            <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
                             <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                         </span>
                     </header>
@@ -223,7 +223,7 @@ const Home = ({ user, entry_list }) => {
                         <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
                         <span className={styles.headerContent}>
                             <button type="button" className={styles.headerButton}>Notifications</button>
-                            <button type="button" className={styles.headerButton}>Settings</button>
+                            <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
                             <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                         </span>
                     </header>
@@ -283,7 +283,7 @@ const Home = ({ user, entry_list }) => {
                     <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
                     <span className={styles.headerContent}>
                         <button type="button" className={styles.headerButton}>Notifications</button>
-                        <button type="button" className={styles.headerButton}>Settings</button>
+                        <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
                         <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                     </span>
                 </header>

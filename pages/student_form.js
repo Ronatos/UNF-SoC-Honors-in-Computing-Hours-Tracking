@@ -6,6 +6,8 @@ import Router from 'next/router'
 import styles from '../styles/Student.module.css'
 import unfLogo from '../public/UNF_Logo.gif';
 import { server, withSessionSsr } from './lib/config/withSession';
+import { useHistory } from 'react-router-dom';
+
 
 export const getServerSideProps = withSessionSsr(
     async ({req, res}) => {
@@ -71,6 +73,10 @@ const logout = async () => {
     Router.push("/");
 }
 
+
+
+
+
 const StudentForm = ({ user, faculty_list }) => (
     <div>
         <Head>
@@ -83,7 +89,7 @@ const StudentForm = ({ user, faculty_list }) => (
             <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             <span className={styles.headerContent}>
                 <button type="button" className={styles.headerButton}>Notifications</button>
-                <button type="button" className={styles.headerButton}>Settings</button>
+                <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
                 <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
             </span>
         </header>
@@ -121,5 +127,7 @@ const StudentForm = ({ user, faculty_list }) => (
         </main>
     </div>
 );
+
+
 
 export default StudentForm;
