@@ -5,13 +5,14 @@ export default async function handler(req, res) {
     /*
         body: JSON.stringify({
             entry_id: int,
-            new_status: 'Approved' or 'Denied',
+            new_status: 'Approve' or 'Deny',
         }),
     */
 
     const body = req.body;
 
     try {
+        console.log("body.news_status: " + body.new_status);
         const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [(body.new_status == 'Approve' ? 'Approved' : 'Denied'), body.entry_id]))[0][0];
 
         return res.status(200).json({

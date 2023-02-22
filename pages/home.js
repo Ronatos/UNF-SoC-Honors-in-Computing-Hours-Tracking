@@ -257,7 +257,8 @@ const Home = ({ user, entry_list }) => {
                                                 <form onSubmit={updateForm} method="post">
                                                     <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
                                                     <input type="submit" className={styles.approveButton} name="new_status" value="Approve"/>
-                                                    <input type="submit" className={styles.denyButton} name="new_status" value="Deny"/>
+                                                    <input type="submit" className={styles.denyButton} name="new_status" value="Deny"/> 
+                                                    {/* Button value is not being passed in at all. Sherif wants a confirmation window anyways. */}
                                                 </form>
                                             </td>
                                         </tr>
