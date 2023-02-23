@@ -27,6 +27,7 @@ CREATE TABLE entries (
     time_accrued INT NOT NULL, -- hours requested
     latest_comment VARCHAR(255),
     entry_status VARCHAR(255), -- Approved, Denied, Unreviewed
+    semester VARCHAR(255), -- Fall, Spring, Summer
     FOREIGN KEY (student_id) REFERENCES accounts(account_id),
     FOREIGN KEY (faculty_id) REFERENCES accounts(account_id)
 );

@@ -130,7 +130,7 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.latest_comment}</td>
                                     <td className={styles.tableData}>{account.latest_commentor_id}</td>
                                     <td className={styles.tableData}>{account.entry_status}</td> 
-                                    <td className={styles.tableData}>{account.Semester}</td>
+                                    <td className={styles.tableData}>{account.semester}</td>
                                     <td className={styles.tableData}>{}</td>
                                 </tr>
                             </tbody>
