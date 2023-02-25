@@ -61,7 +61,7 @@ export default function UsernameRecovery() {
                 <form className={styles.description} onSubmit={handleSubmit} method="post">
                     <input name='email' className={styles.input} type="text" placeholder="Email Address" required/>
                     <br></br>
-                    <input type="submit" value="Recover Username"/>
+                    <input type="submit" value="Recover Username(s)"/>
                 </form>
             </main>
         </div>
