@@ -25,8 +25,13 @@ export default function EmailVerification() {
 
         const result = await response.json();
 
-        alert(result.message);
-        window.location.reload(false);
+        if (response.status == 200) {
+            alert(result.message);
+            Router.push("/");
+        }
+        else if (response.status == 400) {
+            alert(result.message);
+        }
     }
 
     return (
@@ -52,19 +57,17 @@ export default function EmailVerification() {
                     Verify your Email Address
                 </h1>
 
-                <p className={styles.descriptionSmall}>
-                    You will receive an email with a code from unfsochonorsincomputing@gmail.com.
-                    <br></br>
-                    If you need us to resend the code, please enter your email address and leave the code blank.
-                </p>
-
                 <form className={styles.description} onSubmit={handleSubmit} method="post">
                     <input name='email' className={styles.input} type="email" placeholder="Email Address" required/>
                     <br></br>
-                    <input name='code' className={styles.input} type="text" placeholder="Verification code"/>
+                    <input name='code' className={styles.input} type="text" placeholder="Verification code" required/>
                     <br></br>
                     <input type="submit" value="Verify"/>
                 </form>
+
+                <div className={styles.link}>
+                    <Link href="/email_verification">Resend verification email</Link>
+                </div>
             </main>
         </div>
     );
