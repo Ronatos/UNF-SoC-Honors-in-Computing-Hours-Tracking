@@ -34,10 +34,11 @@ yarn-error.log*
 .env
 .env.local
 .env.cloud
+sendgrid.env
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+next-env.d.tssendgrid.env

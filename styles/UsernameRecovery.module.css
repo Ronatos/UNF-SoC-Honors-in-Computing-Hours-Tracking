@@ -1,3 +1,10 @@
+.breadcrumb {
+    font-size: 0.75rem;
+    text-align: left;
+    list-style: none;
+    color:#0A233F;
+}
+
 .description {
     margin: 3rem 0;
     line-height: 1.5;
@@ -16,6 +23,10 @@
     border-color: #A7A8A9;
     border-style: solid;
     height: 2rem;
+}
+
+.image:hover {
+    cursor: pointer;
 }
 
 .p {
