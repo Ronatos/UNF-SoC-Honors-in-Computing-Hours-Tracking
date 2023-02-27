@@ -25,13 +25,8 @@ export default function EmailVerification() {
 
         const result = await response.json();
 
-        if (response.status == 200) {
-            alert(result.message);
-            Router.push("/login");
-        }
-        else if (response.status == 400) {
-            alert(result.message);
-        }
+        alert(result.message);
+        window.location.reload(false);
     }
 
     return (
@@ -43,11 +38,11 @@ export default function EmailVerification() {
             </Head>
 
             <header className={styles.header}>
-                <Link href="/login"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             </header>
 
             <div className={styles.breadcrumb}>
-                <Link href="/login">Home</Link>
+                <Link href="/">Home</Link>
                 <span> &#62; </span>
                 <Link href="/account_creation">Account Creation</Link>
             </div>
@@ -57,17 +52,19 @@ export default function EmailVerification() {
                     Verify your Email Address
                 </h1>
 
+                <p className={styles.descriptionSmall}>
+                    You will receive an email with a code from unfsochonorsincomputing@gmail.com.
+                    <br></br>
+                    If you need us to resend the code, please enter your email address and leave the code blank.
+                </p>
+
                 <form className={styles.description} onSubmit={handleSubmit} method="post">
                     <input name='email' className={styles.input} type="email" placeholder="Email Address" required/>
                     <br></br>
-                    <input name='code' className={styles.input} type="text" placeholder="Verification code" required/>
+                    <input name='code' className={styles.input} type="text" placeholder="Verification code"/>
                     <br></br>
                     <input type="submit" value="Verify"/>
                 </form>
-
-                <div className={styles.link}>
-                    <Link href="/email_verification">Resend verification email</Link>
-                </div>
             </main>
         </div>
     );

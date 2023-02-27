@@ -6,9 +6,7 @@ import styles from '../styles/Settings.module.css'
 
 
 
-
-
-export default function Home() {
+export default function AccountSettings() {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,18 +18,8 @@ export default function Home() {
 
     <div className={styles.container}>
       <main className={styles.main}>
-        {/* <div className={styles.column}>
-          <div className={styles.row}>
-            <Image className={styles.avatar} src="/img_avatar.png" alt="UNF" width={100} height={100}/>
-            <p className={styles.user_name}>Joe Snow</p>
-          </div>
-        </div> */}
-          {/* <div className={styles.column1}>
-            <h1>Account Settings</h1>
-            <p>form text here</p>
-          </div> */}
-          
-
+      
+    
           <div className={styles.settings}>
             <h1>Get email updates when:</h1>
           <form className={styles.form_main}>

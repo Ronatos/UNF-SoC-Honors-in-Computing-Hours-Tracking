@@ -14,12 +14,15 @@ export default async function handler(req, res) {
         const id = req.id 
         const body = req.body
         console.log('body: ', body)
-        const entity = await dbPool.query("UPDATE entries SET entry_status = 'Approved' WHERE entry_id = 1");
+
+        const aquery = "UPDATE entries SET entry_status = '" + body.approval + "' WHERE entry_id = 1";
+        console.log(aquery)
+        const entity = await dbPool.query(aquery);
         
        // const values = [];
       //  const [data] = await dbPool.query(query, values);
-    console.log (entity)
-        res.status(200).json({ entries: data });
+       console.log (entity)
+      res.status(200).json({ entries: data });
       } catch (error) {
         // unhide to check error
         res.status(500).json({ error: error.message });

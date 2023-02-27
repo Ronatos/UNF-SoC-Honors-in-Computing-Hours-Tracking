@@ -1,0 +1,55 @@
+.breadcrumb {
+    font-size: 0.75rem;
+    text-align: left;
+    list-style: none;
+    color:#0A233F;
+}
+
+.description {
+    margin: 3rem 0;
+    line-height: 1.5;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    padding-left: 2%;
+    background-color: #0A233F;
+    justify-content: space-between;
+}
+
+.headerButton {
+    background-color: inherit;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.headerButton:hover {
+    background: white;
+    color: #0A233F;
+}
+
+.headerContent {
+    display: flex;
+    align-self: flex-end;
+    column-gap: 5%;
+    justify-content: space-evenly;
+    margin-right: 2%;
+}
+
+.image:hover {
+    cursor: pointer;
+}
+
+.input {
+    margin: 1%;
+    border-radius: 4px;
+    border-color: #A7A8A9;
+    border-style: solid;
+    height: 2rem;
+}

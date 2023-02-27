@@ -21,7 +21,9 @@ export default function AccountCreation() {
                 username: event.target.username.value,
                 email: event.target.email.value,
                 password: event.target.password.value,
-                role: event.target.role.value
+                role: event.target.role.value,
+                first_name: event.target.first_name.value,
+                last_name: event.target.first_name.value,
             }),
         });
 
@@ -44,11 +46,11 @@ export default function AccountCreation() {
             </Head>
 
             <header className={styles.header}>
-                <Link href="/login"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             </header>
 
             <div className={styles.breadcrumb}>
-                <Link href="/login">Home</Link>
+                <Link href="/">Home</Link>
             </div>
 
             <main>
@@ -62,6 +64,10 @@ export default function AccountCreation() {
                     <input name='email' className={styles.input} type="email" placeholder="Email" data-tip="UNF email required" required/><ReactTooltip place="bottom"/>
                     <br></br>
                     <input name='password' className={styles.input} type="password" placeholder="Password" required/>
+                    <br></br>
+                    <input name='first_name' className={styles.input} type="text" placeholder="First Name" required/>
+                    <br></br>
+                    <input name='last_name' className={styles.input} type="text" placeholder="Last Name" required/>
                     <br></br>
                     <div className={styles.radio}>
                         <input name='role' type="radio" id="student" value="student" required/>
