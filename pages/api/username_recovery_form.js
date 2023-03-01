@@ -1,43 +1,40 @@
-const { pool: dbPool } = require('@/db/connection');
-const sgMail = require('@sendgrid/mail')
+let fs = require('fs')
+let path = require('path')
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
+    const body = req.body
+    console.log('body: ', body)
 
     // body = {
     //     email: string,
     // }
-    
-    const body = req.body
 
-    try {
-        const accounts = (await dbPool.query("SELECT username FROM accounts WHERE email_address = ?;", [body.email]))[0];
-        console.log(accounts);
-        let usernames = [];
-        accounts.forEach(account => {
-            usernames.push(account.username);
-        })
-        
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-        const msg = {
-            to: body.email, // Change to your recipient
-            from: 'unfsochonorsincomputing@gmail.com', // Change to your verified sender
-            subject: 'Honors in Computing Hours Tracking - Username Recovery',
-            text: 'Your username(s): ' + usernames,
-            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    // The following several lines will be replaced with database logic once one is implemented.
+    // This just looks through the mock database and verifies an account with the specified credentials exists.
+    const accountsDir = "db/accounts";
+    let accounts = [];
+
+    // Loop through all the files in accounts directory and add them to the accounts array
+    fs.readdirSync(accountsDir).forEach(file => {
+        let filepath = path.join(accountsDir, file);
+        accounts.push(JSON.parse(fs.readFileSync(filepath, 'utf8')));
+    });
+
+    // Loop through all accounts and get the list of usernames associated with the specified email
+    let associatedUsernames = [];
+    accounts.forEach(account => {
+        if (account.email === body.email) {
+            associatedUsernames.push(account.username);
         }
-        sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-        return res.status(200).json({ message: "Email sent."});
-    }
-    catch (e) {
-        console.log(e); // there are technically 2 errors that could occur here - one should send a 500, the other a 400 (TypeError)
+    });
+
+    // The only thing that would generate a bad request for now is not matching any emails on file
+    if (associatedUsernames.length == 0) {
         console.log("400 Bad Request");
-        return res.status(400).json({ message: "Unknown email address."});
+        res.status(400).json({message: "No usernames are associated with that email address."})
+    }
+    else {
+        console.log("200 OK");
+        res.status(200).json({ message: "Your username(s): " + associatedUsernames})
     }
 }
