@@ -3,10 +3,8 @@ const { pool: dbPool } = require('@/db/connection');
 export default async function handler(req, res) {
 
     /*
-        body: JSON.stringify({
-            account_id: int,
-            action: 'Approve' or 'Deny',
-        }),
+       APPROVE UPDATES ACCOUNT
+       DENY DELETES ITS EXISTENCE COMPLETELY
     */
 
     const body = req.body;
