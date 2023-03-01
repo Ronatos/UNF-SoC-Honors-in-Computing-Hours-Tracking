@@ -302,7 +302,7 @@ const Home = ({ user, entry_list }) => {
                 <main className={styles.description}>
                     <Link href="/account_requests"><button type="button" className={styles.approveButton}>Account Requests</button></Link>
                     <Link href="/reports"><button type="button" className={styles.approveButton}>View Reports</button></Link>
-                    {/* <Link href="/adminAccount"><button type="button" className={styles.approveButton}>View Accounts</button></Link> */}
+                    <Link href="/adminAccount"><button type="button" className={styles.approveButton}>View Accounts</button></Link>
                 </main>
             </div>
         )

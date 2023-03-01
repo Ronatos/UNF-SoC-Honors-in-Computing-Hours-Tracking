@@ -76,6 +76,7 @@ export default function Home() {
                             <th className={styles.container}>Name</th>
                             <th className={styles.container}>Email</th>
                             <th className={styles.container}>Role</th>
+                            <th className={styles.container}>Status</th>
                             <th className={styles.container}>Action</th>
                         </tr>
                     </thead>
@@ -87,6 +88,7 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.username}</td>
                                     <td className={styles.tableData}>{account.last_name}, {account.first_name}</td>
                                     <td className={styles.tableData}>{account.email_address}</td>
+                                    <td className={styles.tableData}>{account.account_status}</td>
                                     <td className={styles.tableData}>{account.role}</td>
                                     <td>
                                     <button value="Approve" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.approveButton}>
