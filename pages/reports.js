@@ -117,6 +117,9 @@ export default function Home() {
                         if (account.event_date.toString().includes(query.toLowerCase())) {
                             return account;
                         }
+                        if (account.semester.toLowerCase().includes(query.toLowerCase())) {
+                            return account;
+                        }
                     }).map((account) => {
                         return (
                             <tbody key={account.entry_id}>

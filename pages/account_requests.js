@@ -31,17 +31,17 @@ export default function Home() {
         Router.push("/");
     }
 
-    const updateForm = async(event) => {
-        event.preventDefault();
-    
+    const updateForm = async(event, id) => {
+      //  event.preventDefault();
         const response = await fetch('/api/update_account', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                account_id: event.target.account_id.value,
-                action: event.target.action.value
+                account_id: id,
+                action: event
+               
             }),
         });
         window.location.reload(false);
@@ -76,6 +76,7 @@ export default function Home() {
                             <th className={styles.container}>Name</th>
                             <th className={styles.container}>Email</th>
                             <th className={styles.container}>Role</th>
+                            <th className={styles.container}>Status</th>
                             <th className={styles.container}>Action</th>
                         </tr>
                     </thead>
@@ -87,13 +88,15 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.username}</td>
                                     <td className={styles.tableData}>{account.last_name}, {account.first_name}</td>
                                     <td className={styles.tableData}>{account.email_address}</td>
+                                    <td className={styles.tableData}>{account.account_status}</td>
                                     <td className={styles.tableData}>{account.role}</td>
                                     <td>
-                                        <form onSubmit={updateForm} method="post">
-                                            <input name="account_id" type="hidden" value={account.account_id} readOnly></input>
-                                            <input type="submit" className={styles.approveButton} name="action" value="Approve"/>
-                                            <input type="submit" className={styles.denyButton} name="action" value="Deny"/>
-                                        </form>
+                                    <button value="Approve" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.approveButton}>
+                                        Approve
+                                    </button>
+                                    <button value="Deny" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.denyButton}>
+                                        Deny
+                                    </button>
                                     </td>
                                 </tr>
                             </tbody>

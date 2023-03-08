@@ -1,6 +1,5 @@
 const crypto = require('crypto');
 const { pool: dbPool } = require('@/db/connection');
-const sgMail = require('@sendgrid/mail')
 
 export default async function handler(req, res) {
 
@@ -46,37 +45,20 @@ export default async function handler(req, res) {
         // Create a random 5 or 6 digit verification code
         const array = new Uint32Array(1);
         crypto.webcrypto.getRandomValues(array);
-        const code = String(array).substring(0, 6);
 
         // Add it to the email_verification_codes table
-        await dbPool.query("INSERT INTO email_verification_codes (account_id, code) VALUES (?, ?);", [account_creation_results[0].insertId, code]);
-        console.log("The verification code is " + code + ". Remove this console log once email verification is complete.");
-
-        // using Twilio SendGrid's v3 Node.js Library
-        // https://github.com/sendgrid/sendgrid-nodejs
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-
-        const msg = {
-            to: body.email, // Change to your recipient
-            from: 'unfsochonorsincomputing@gmail.com', // Change to your verified sender
-            subject: 'Honors in Computing Hours Tracking - Email Verification',
-            text: 'Your code is ' + code + '. Please validate your email in the next 10 minutes.'
-            // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-        }
-        sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-
-        return res.status(200).json({ message: "Account creation successful."});
+        await dbPool.query("INSERT INTO email_verification_codes (account_id, code) VALUES (?, ?);", [account_creation_results[0].insertId, String(array).substring(0, 6)]);
+        console.log("The verification code is " + String(array).substring(0, 6) + ". Remove this console log once email verification is complete.");
     }
     catch (e) {
         console.log("500 Internal Server Error. Failed creation of the verification code.");
         console.log(e);
         return res.status(500).json({message: e});
     }
+
+    // Send an email with a verification code and instructions, enabling the user to submit it on /email_verification to verify their email
+    // We will likely want to use the UNF email tenant, which may lead us to the question
+    // of why we're not using SSO.
+
+    return res.status(200).json({ message: "Account creation successful."});
 }

@@ -81,14 +81,18 @@ const logout = async () => {
 const updateForm = async(event) => {
     event.preventDefault();
 
+    let Approve = "Approved";
+    let Deny = "Denied";
+
     const response = await fetch('/api/update_form', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+           
             entry_id: event.target.entry_id.value,
-            new_status: event.target.new_status.value
+            entry_status: event.target.entry_status.value
         }),
     });
     window.location.reload(false);
@@ -230,8 +234,10 @@ const Home = ({ user, entry_list }) => {
     
                     <main>
                         {/* Needs work */}
-                        {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
-    
+                        <div className={styles.description}>
+                        <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="entry-list"></input>
+                        </div>
+
                         <table className={styles.table}>
                             <thead>
                                 <tr>
@@ -254,12 +260,16 @@ const Home = ({ user, entry_list }) => {
                                             <td className={styles.tableData}>{entry.time_accrued}</td>
                                             <td className={styles.tableData}>{entry.latest_comment}</td>
                                             <td>
-                                                <form onSubmit={updateForm} method="post">
+                                                {/* <form onSubmit={updateForm} method="post">
                                                     <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
                                                     <input type="submit" className={styles.approveButton} name="new_status" value="Approve"/>
                                                     <input type="submit" className={styles.denyButton} name="new_status" value="Deny"/> 
-                                                    {/* Button value is not being passed in at all. Sherif wants a confirmation window anyways. */}
-                                                </form>
+                                                </form> */}
+                                            <form onSubmit={updateForm} method="post">
+                                            <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
+                                            <input type="submit" className={styles.approveButton} name="entry_status" value="Approve"/>
+                                            <input type="submit" className={styles.denyButton} name="entry_status" value="Deny"/>
+                                        </form>
                                             </td>
                                         </tr>
                                     );
@@ -292,7 +302,7 @@ const Home = ({ user, entry_list }) => {
                 <main className={styles.description}>
                     <Link href="/account_requests"><button type="button" className={styles.approveButton}>Account Requests</button></Link>
                     <Link href="/reports"><button type="button" className={styles.approveButton}>View Reports</button></Link>
-                    {/* <Link href="/adminAccount"><button type="button" className={styles.approveButton}>View Accounts</button></Link> */}
+                    <Link href="/adminAccount"><button type="button" className={styles.approveButton}>View Accounts</button></Link>
                 </main>
             </div>
         )

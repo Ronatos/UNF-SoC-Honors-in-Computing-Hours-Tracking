@@ -6,7 +6,7 @@ CREATE TABLE accounts (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     role VARCHAR(8) NOT NULL, -- student, admin, or faculty
-    account_status VARCHAR(255) NOT NULL, -- active, email unverified, pending admin approval
+    account_status VARCHAR(255) NOT NULL, -- active, email unverified, status pending
     UNIQUE (username)
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE entries (
     event_date DATE NOT NULL, -- but there could be a multi-day event. add start and end
     time_accrued INT NOT NULL, -- hours requested
     latest_comment VARCHAR(255),
-    entry_status VARCHAR(255), -- Approved, Denied, Unreviewed
+    entry_status VARCHAR(255), -- Approved, Denied, Status Pending
     semester VARCHAR(255), -- Fall, Spring, Summer
     FOREIGN KEY (student_id) REFERENCES accounts(account_id),
     FOREIGN KEY (faculty_id) REFERENCES accounts(account_id)
