@@ -9,11 +9,17 @@ export default async function handler(req, res) {
         }),
     */
 
-        const body = req.body;
+    const body = req.body;
 
-        try {
+    try {
+        // console.log("body.news_status: " + body.new_status);
+        // const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [(body.new_status == 'Approve' ? 'Approved' : 'Denied'), body.entry_id]))[0][0];
+
+        // return res.status(200).json({
             
-          const entryStatus = body.entry_status;
+        // });
+
+        const entryStatus = body.entry_status;
           const entryId = body.entry_id;
         
           if (entryStatus == 'Approve') {
@@ -22,11 +28,11 @@ export default async function handler(req, res) {
           } else {
             const updateData = await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [body.entry_status == "Denied", entryId]);
             return res.status(200).json({});
-          }
-        } catch (e) {
-          console.log(e);
-          return res.status(500).json({message: e});
-        }
+    }
+} catch (e) {
+        console.log(e);
+        return res.status(500).json({message: e});
+    }
 }
 
 

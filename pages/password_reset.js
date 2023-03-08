@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
+import Link from 'next/link';
 
 import styles from '../styles/AccountCreation.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
@@ -49,8 +50,12 @@ export default function PasswordReset() {
             </Head>
 
             <header className={styles.header}>
-                <Image src={unfLogo} alt="UNF"/>
+                <Link href="/"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
             </header>
+
+            <div className={styles.breadcrumb}>
+                <Link href="/">Home</Link>
+            </div>
     
             <main>
                 <h1 className={styles.description}>

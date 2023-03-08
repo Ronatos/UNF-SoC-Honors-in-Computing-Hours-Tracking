@@ -32,12 +32,17 @@ export default function Home() {
     }
 
     const updateForm = async(event, id) => {
-      //  event.preventDefault();
+        // event.preventDefault();
+    
         const response = await fetch('/api/update_account', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
+            // body: JSON.stringify({
+            //     account_id: event.target.account_id.value,
+            //     action: event.target.action.value
+            // }),
             body: JSON.stringify({
                 account_id: id,
                 action: event
@@ -91,12 +96,17 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.account_status}</td>
                                     <td className={styles.tableData}>{account.role}</td>
                                     <td>
-                                    <button value="Approve" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.approveButton}>
-                                        Approve
-                                    </button>
-                                    <button value="Deny" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.denyButton}>
-                                        Deny
-                                    </button>
+                                        {/* <form onSubmit={updateForm} method="post">
+                                            <input name="account_id" type="hidden" value={account.account_id} readOnly></input>
+                                            <input type="submit" className={styles.approveButton} name="action" value="Approve"/>
+                                            <input type="submit" className={styles.denyButton} name="action" value="Deny"/>
+                                        </form> */}
+                                        <button value="Approve" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.approveButton}>
+                                            Approve
+                                        </button>
+                                        <button value="Deny" onClick={event => updateForm(event.target.value, account.account_id)} className={styles.denyButton}>
+                                            Deny
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

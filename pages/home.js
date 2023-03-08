@@ -90,8 +90,9 @@ const updateForm = async(event) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-           
+
             entry_id: event.target.entry_id.value,
+            // new_status: event.target.new_status.value
             entry_status: event.target.entry_status.value
         }),
     });
@@ -234,10 +235,11 @@ const Home = ({ user, entry_list }) => {
     
                     <main>
                         {/* Needs work */}
+                        {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
                         <div className={styles.description}>
                         <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="entry-list"></input>
                         </div>
-
+    
                         <table className={styles.table}>
                             <thead>
                                 <tr>
@@ -269,7 +271,7 @@ const Home = ({ user, entry_list }) => {
                                             <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
                                             <input type="submit" className={styles.approveButton} name="entry_status" value="Approve"/>
                                             <input type="submit" className={styles.denyButton} name="entry_status" value="Deny"/>
-                                        </form>
+                                                </form>
                                             </td>
                                         </tr>
                                     );
