@@ -63,8 +63,7 @@ export default function Home() {
             <header className={styles.header}>
                 <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
                 <span className={styles.headerContent}>
-                    <button type="button" className={styles.headerButton}>Notifications</button>
-                    <Link href="/account_settings"><button type="button" className={styles.headerButton}>Settings</button></Link>
+                    {/* Removed old links, they were not needed for production */}
                     <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
                 </span>
             </header>
