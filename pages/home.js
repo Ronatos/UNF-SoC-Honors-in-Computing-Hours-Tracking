@@ -165,7 +165,7 @@ const Home = ({ user, entry_list }) => {
                                     <tbody key={entry.entry_id}>
                                         {/* <form id="row" onSubmit={updateForm} method="post"> */}
                                             <tr className={styles.tableRow}>
-                                                {/* <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input> */}
+                                                {/* <td name="entry_id" type="hidden" value={entry.entry_id} readOnly>{entry.entry_id}</td> */}
                                                 <td className={styles.tableData}>{entry.last_name}, {entry.first_name}</td>
                                                 <td className={styles.tableData}>{entry.event_name}</td>
                                                 <td className={styles.tableData}>{entry.event_date}</td>
@@ -174,7 +174,7 @@ const Home = ({ user, entry_list }) => {
                                                 <td className={styles.tableData}>{entry.entry_status}</td>
                                                 <td>
                                                     {/* Needs work */}
-                                                    {/* <button type="submit" form="row" className={styles.resubmitButton} value="resubmit">Resubmit</button> */}
+                                                    <Link href="/student_Form_Resubmit"><button type="button" className={styles.newFormButton}>Edit Hours</button></Link>
                                                 </td>
                                             </tr>
                                         {/* </form> */}
