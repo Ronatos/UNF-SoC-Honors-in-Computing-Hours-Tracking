@@ -24,11 +24,15 @@ export const getServerSideProps = withSessionSsr(
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({
+                user: user.username
+            }),
         });
     
         const faculty_list_object = await response.json();
         const faculty_list = faculty_list_object.faculty_list;
+        
 
         return {
             props: { user, faculty_list}

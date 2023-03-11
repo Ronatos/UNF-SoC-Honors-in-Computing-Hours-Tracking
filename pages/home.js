@@ -34,7 +34,7 @@ export const getServerSideProps = withSessionSsr(
             const entry_list_package = await response.json();
             const entry_list = entry_list_package.entry_list;
 
-            console.log(entry_list);
+            
     
             return {
                 props: { user, entry_list }
@@ -55,7 +55,7 @@ export const getServerSideProps = withSessionSsr(
             const entry_list_package = await response.json();
             const entry_list = entry_list_package.entry_list;
 
-            console.log(entry_list);
+            
     
             return {
                 props: { user, entry_list }
@@ -63,7 +63,7 @@ export const getServerSideProps = withSessionSsr(
         }
 
         return {
-            props: { user }
+            props: { user, entry_list}
         }
     }
 );
