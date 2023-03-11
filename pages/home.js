@@ -174,7 +174,9 @@ const Home = ({ user, entry_list }) => {
                                                 <td className={styles.tableData}>{entry.entry_status}</td>
                                                 <td>
                                                     {/* Needs work */}
-                                                    <Link href="/student_Form_Resubmit"><button type="button" className={styles.newFormButton}>Edit Hours</button></Link>
+                                                    <Link href="/student_Form_Resubmit"><button type="button" onClick={() => {
+                                                        sessionStorage.studentEntryResubmit = entry;
+                                                    }} className={styles.newFormButton} >Edit Hours</button></Link>
                                                 </td>
                                             </tr>
                                         {/* </form> */}

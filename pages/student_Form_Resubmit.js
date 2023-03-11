@@ -12,6 +12,7 @@ import { server, withSessionSsr } from './lib/config/withSession';
 export const getServerSideProps = withSessionSsr(
     async ({req, res}) => {
         const user = req.session.user;
+        const studentEntryResubmit = req.session.studentEntryResubmit;
 
         if(!user || user.role != 'student') {
             return {
@@ -30,7 +31,7 @@ export const getServerSideProps = withSessionSsr(
         const faculty_list = faculty_list_object.faculty_list;
 
         return {
-            props: { user, faculty_list }
+            props: { user, faculty_list}
         }
     }
 );
@@ -44,7 +45,7 @@ const handleSubmit = async (event) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            entry_id: event.target.entry_id.value,
+            // entry_id: event.target.entry_id.value,
             username: event.target.username.value,
             event: event.target.event.value,
             date: event.target.date.value,
@@ -78,7 +79,9 @@ const logout = async () => {
 
 
 
-const StudentForm = ({ user, faculty_list, entry }) => (
+const StudentForm = ({ user, faculty_list }) => (
+// const studentEntryResubmit = sessionStorage.studentEntryResubmit;
+
     <div>
         <Head>
             <title>Submit Hours</title>
@@ -99,7 +102,7 @@ const StudentForm = ({ user, faculty_list, entry }) => (
         </div>
 
         <h1 className={styles.description}>
-                Resubmit Hours {JSON.stringify(entry)}
+                Resubmit Hours 
         </h1>
 
         <main>
