@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 
+
 export default function Home() {
     const [dataResponse, setdataResponse] = useState([]);
 

@@ -173,10 +173,11 @@ const Home = ({ user, entry_list }) => {
                                                 <td className={styles.tableData}>{entry.latest_comment}</td>
                                                 <td className={styles.tableData}>{entry.entry_status}</td>
                                                 <td>
-                                                    {/* Needs work */}
-                                                    <Link href="/student_Form_Resubmit"><button type="button" onClick={() => {
+                                                    {/* { entry.entry_status === "Unreviewed" && <p>Only shown if unreviewed</p> } */}
+                                                    
+                                                    { entry.entry_status === "Unreviewed" && <Link href={`/student_resubmit/${entry.entry_id}`}><button type="button" onClick={() => {
                                                         sessionStorage.studentEntryResubmit = entry;
-                                                    }} className={styles.newFormButton} >Edit Hours</button></Link>
+                                                    }} className={styles.newFormButton} >Edit Hours</button></Link> }
                                                 </td>
                                             </tr>
                                         {/* </form> */}
