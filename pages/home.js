@@ -2,10 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react';
+import { useState } from 'react';
 import Router from 'next/router'
 import newFormIcon from '../public/new_form.png';
 import viewFormsIcon from '../public/view_forms.png';
 import { withSessionSsr, server } from './lib/config/withSession';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
@@ -68,6 +71,7 @@ export const getServerSideProps = withSessionSsr(
     }
 );
 
+
 const logout = async () => {
     const response = await fetch('/api/logout', {
         method: 'POST',
@@ -78,28 +82,78 @@ const logout = async () => {
     Router.push("/");
 }
 
-const updateForm = async(event) => {
-    event.preventDefault();
-
-    let Approve = "Approved";
-    let Deny = "Denied";
-
-    const response = await fetch('/api/update_form', {
+async function submitApproval(entry_id, new_status) {
+    const resp = await fetch('/api/update_form', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+<<<<<<< Updated upstream
 
             entry_id: event.target.entry_id.value,
             // new_status: event.target.new_status.value
             entry_status: event.target.entry_status.value
+=======
+           
+            entry_id: entry_id,
+            new_status: new_status
+>>>>>>> Stashed changes
         }),
-    });
-    window.location.reload(false);
+    })
+    // todo: replace reload with changing list in state
+    if (resp.ok) {
+        window.location.reload(false);
+    } {
+        const errorBody = await resp.text()
+        console.error("Unexpected response from server when submitting approval.", errorBody)
+    }
 }
 
+
+
+function ApproveDenyEntry({ entryId }) {
+    // show if not null, hide if null
+    // shove in state = Approve, Deny
+    const [approvalType, startApprovalForType] = useState(null);
+    
+
+    const handleClose = () => startApprovalForType(null);
+    const verifyApprove = () => startApprovalForType("Approve");
+    const verifyDeny = () => startApprovalForType("Deny");
+    const onVerified = () => submitApproval(entryId, approvalType)
+  
+    return (
+      <>
+        <button className={styles.approveButton} onClick={verifyApprove}>
+            Approve
+        </button>
+        <button className={styles.denyButton} onClick={verifyDeny}>
+            Deny
+        </button>
+  
+        <Modal show={approvalType !== null} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to {approvalType}</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={onVerified}>
+              {approvalType}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+  
+  
 const Home = ({ user, entry_list }) => {
+    // put the entry list in state
+    // when Approve or Deny happens, we know the id, so we can filter the list and get rid of it
+
     if (user.role == 'student') {
         if (entry_list.length == 0) {
             return (
@@ -216,6 +270,14 @@ const Home = ({ user, entry_list }) => {
             )
         }
         else {
+            const [studentSearchString, setStudentSearchString] = useState("")
+            // have an input box onChange call setStudentSearchString
+            const localEntryList = 
+                studentSearchString === "" ? entry_list : entry_list.filter(e => { 
+                    const search = studentSearchString.toUpperCase()
+                    return e.first_name.toUpperCase().includes(search) ||  e.last_name.toUpperCase().includes(search) || e.event_name.toUpperCase().includes(search)
+                })
+
             return (
                 <div>
                     <Head>
@@ -233,10 +295,13 @@ const Home = ({ user, entry_list }) => {
                     </header>
     
                     <main>
+<<<<<<< Updated upstream
                         {/* Needs work */}
                         {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
+=======
+>>>>>>> Stashed changes
                         <div className={styles.description}>
-                        <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="entry-list"></input>
+                        <input type="text" id="input"  onChange={(e) => setStudentSearchString(e.target.value)}  placeholder="Search Submitted Forms" title="searchInput" className="search-input" data-table="entry-list"></input>
                         </div>
     
                         <table className={styles.table}>
@@ -247,12 +312,12 @@ const Home = ({ user, entry_list }) => {
                                     <th className={styles.container}>Event Date</th>
                                     <th className={styles.container}>Hours</th>
                                     <th className={styles.container}>Comment</th>
-                                    <th className={styles.container}>Status</th>
+                                    <th className={styles.container}>Action</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {entry_list.map((entry) => {
+                                {localEntryList.map((entry) => {
                                     return (                           
                                         <tr key={entry.entry_id} className={styles.tableRow}>
                                             <td className={styles.tableData}>{entry.last_name}, {entry.first_name}</td>
@@ -261,6 +326,7 @@ const Home = ({ user, entry_list }) => {
                                             <td className={styles.tableData}>{entry.time_accrued}</td>
                                             <td className={styles.tableData}>{entry.latest_comment}</td>
                                             <td>
+<<<<<<< Updated upstream
                                                 {/* <form onSubmit={updateForm} method="post">
                                                     <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
                                                     <input type="submit" className={styles.approveButton} name="new_status" value="Approve"/>
@@ -271,6 +337,11 @@ const Home = ({ user, entry_list }) => {
                                             <input type="submit" className={styles.approveButton} name="entry_status" value="Approve"/>
                                             <input type="submit" className={styles.denyButton} name="entry_status" value="Deny"/>
                                                 </form>
+=======
+                                              
+                                                <ApproveDenyEntry entryId={entry.entry_id} />
+
+>>>>>>> Stashed changes
                                             </td>
                                         </tr>
                                     );

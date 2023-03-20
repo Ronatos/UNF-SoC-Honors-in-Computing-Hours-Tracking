@@ -2,16 +2,11 @@ const { pool: dbPool } = require('@/db/connection');
 
 export default async function handler(req, res) {
 
-    /*
-        body: JSON.stringify({
-            entry_id: int,
-            new_status: 'Approve' or 'Deny',
-        }),
-    */
 
     const body = req.body;
 
     try {
+<<<<<<< Updated upstream
         // console.log("body.news_status: " + body.new_status);
         // const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [(body.new_status == 'Approve' ? 'Approved' : 'Denied'), body.entry_id]))[0][0];
 
@@ -30,29 +25,18 @@ export default async function handler(req, res) {
             return res.status(200).json({});
     }
 } catch (e) {
+=======
+        console.log("body.news_status: " + body.new_status);
+        const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [(body.new_status == 'Approve' ? 'Approved' : 'Denied'), body.entry_id]))[0][0];
+
+        return res.status(200).json({
+            
+        });
+    }
+    catch (e) {
+>>>>>>> Stashed changes
         console.log(e);
         return res.status(500).json({message: e});
     }
 }
 
-
-
-
-
-
-
-//     const body = req.body;
-
-//     try {
-//         console.log("body.news_status: " + body.new_status);
-//         const update_data = (await dbPool.query('UPDATE entries SET entry_status = ? WHERE entry_id = ?;', [(body.new_status == 'Approve' ? 'Approved' : 'Denied'), body.entry_id]))[0][0];
-
-//         return res.status(200).json({
-            
-//         });
-//     }
-//     catch (e) {
-//         console.log(e);
-//         return res.status(500).json({message: e});
-//     }
-// }

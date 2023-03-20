@@ -78,6 +78,7 @@ const Login = ({user}) => {
                     <br></br>
                     <input name='password' className={styles.input} type="password" placeholder="Password" required/>
                     <br></br>
+                    <br></br>
                     <input type="submit" value="Log in"/>
                 </form>
 
