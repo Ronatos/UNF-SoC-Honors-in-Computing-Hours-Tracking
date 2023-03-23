@@ -89,16 +89,9 @@ async function submitApproval(entry_id, new_status) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-<<<<<<< Updated upstream
-
-            entry_id: event.target.entry_id.value,
-            // new_status: event.target.new_status.value
-            entry_status: event.target.entry_status.value
-=======
            
             entry_id: entry_id,
             new_status: new_status
->>>>>>> Stashed changes
         }),
     })
     // todo: replace reload with changing list in state
@@ -295,11 +288,6 @@ const Home = ({ user, entry_list }) => {
                     </header>
     
                     <main>
-<<<<<<< Updated upstream
-                        {/* Needs work */}
-                        {/* <input type="text" id="input"  placeholder="Search for Submitted Forms" title="searchInput" className="search-input" data-table="reports-list"></input> */}
-=======
->>>>>>> Stashed changes
                         <div className={styles.description}>
                         <input type="text" id="input"  onChange={(e) => setStudentSearchString(e.target.value)}  placeholder="Search Submitted Forms" title="searchInput" className="search-input" data-table="entry-list"></input>
                         </div>
@@ -326,22 +314,9 @@ const Home = ({ user, entry_list }) => {
                                             <td className={styles.tableData}>{entry.time_accrued}</td>
                                             <td className={styles.tableData}>{entry.latest_comment}</td>
                                             <td>
-<<<<<<< Updated upstream
-                                                {/* <form onSubmit={updateForm} method="post">
-                                                    <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
-                                                    <input type="submit" className={styles.approveButton} name="new_status" value="Approve"/>
-                                                    <input type="submit" className={styles.denyButton} name="new_status" value="Deny"/> 
-                                                </form> */}
-                                            <form onSubmit={updateForm} method="post">
-                                            <input name="entry_id" type="hidden" value={entry.entry_id} readOnly></input>
-                                            <input type="submit" className={styles.approveButton} name="entry_status" value="Approve"/>
-                                            <input type="submit" className={styles.denyButton} name="entry_status" value="Deny"/>
-                                                </form>
-=======
                                               
                                                 <ApproveDenyEntry entryId={entry.entry_id} />
 
->>>>>>> Stashed changes
                                             </td>
                                         </tr>
                                     );
