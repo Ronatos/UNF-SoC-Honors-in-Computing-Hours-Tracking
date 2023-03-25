@@ -134,7 +134,7 @@ const StudentForm = ({ user, faculty_list, currentEntry }) => (
         </h1>
 
         <main>
-            <pre>{JSON.stringify({currentEntry}, undefined, 2)}</pre>
+            {/* <pre>{JSON.stringify({currentEntry}, undefined, 2)}</pre> */}
             <form onSubmit={handleSubmit} className={styles.description} method='post'>
     
                 <input name="entry_id" type='hidden' className={styles.input} value={currentEntry.entry_id} readOnly/>

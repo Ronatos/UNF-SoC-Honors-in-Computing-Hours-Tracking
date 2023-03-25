@@ -227,7 +227,7 @@ const Home = ({ user, entry_list }) => {
                                     <th className={styles.container}>Hours</th>
                                     <th className={styles.container}>Comment</th>
                                     <th className={styles.container}>Status</th>
-                                    <th className={styles.container}>Action</th>
+                                    {/* <th className={styles.container}>Action</th> */}
                                 </tr>
                             </thead>
                             {entry_list.map((entry) => {
@@ -242,13 +242,11 @@ const Home = ({ user, entry_list }) => {
                                                 <td className={styles.tableData}>{entry.time_accrued}</td>
                                                 <td className={styles.tableData}>{entry.latest_comment}</td>
                                                 <td className={styles.tableData}>{entry.entry_status}</td>
-                                                <td>
                                                     {/* { entry.entry_status === "Unreviewed" && <p>Only shown if unreviewed</p> } */}
-                                                    
+{/*                                                     
                                                     { entry.entry_status === "Unreviewed" && <Link href={`/student_resubmit/${entry.entry_id}`}><button type="button" onClick={() => {
                                                         sessionStorage.studentEntryResubmit = entry;
-                                                    }} className={styles.newFormButton} >Edit Hours</button></Link> }
-                                                </td>
+                                                    }} className={styles.newFormButton} >Edit Hours</button></Link> } */}
                                             </tr>
                                         {/* </form> */}
                                     </tbody>
