@@ -61,7 +61,7 @@ export default async function handler(req, res) {
     // Get all data from database that will be needed at once to reduce # of queries
     try {
         // this could return undefined if the user entered the wrong code or an expired one
-        let {account_id} = (await dbPool.query("SELECT account_id FROM email_verification_codes WHERE TIMESTAMPDIFF(MINUTE, creation_time, CURRENT_TIMESTAMP) < 10;", [body.code]))[0][0];
+        let {account_id} = (await dbPool.query("SELECT account_id FROM email_verification_codes WHERE code = ? AND TIMESTAMPDIFF(MINUTE, creation_time, CURRENT_TIMESTAMP) < 10;", [body.code]))[0][0];
         console.log("AccountID = " + account_id);
 
         // if account_id is undefined this will fail
