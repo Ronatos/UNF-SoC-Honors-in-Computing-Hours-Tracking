@@ -41,4 +41,5 @@ sendgrid.env
 
 # typescript
 *.tsbuildinfo
-next-env.d.tssendgrid.env
+next-env.d.tssendgrid.envsendgrid.env
+sendgrid.env
