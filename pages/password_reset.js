@@ -8,37 +8,45 @@ import unfLogo from '../public/UNF_Logo.gif'
 
 export default function PasswordReset() {
 
-    const handleSubmit = async (event) => {
+    const handleSubmit1 = async (event) => {
         event.preventDefault()
 
-        const data = {
-            username: event.target.username.value,
-            email: event.target.email.value,
-            password: event.target.password.value,
-            passwordConfirmation: event.target.passwordConfirmation.value,
-        }
-
-        const JSONdata = JSON.stringify(data)
-        const endpoint = '/api/password_reset_form'
-        const options = {
+        const response = await fetch('/api/password_reset_form', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSONdata,
-        }
+            body: JSON.stringify({
+                username: event.target.username.value,
+                email: event.target.email.value
+            }),
+        });
 
-        const response = await fetch(endpoint, options)
-        const result = await response.json()
+        const result = await response.json();
 
-        // Update here
-        if (response.status == 200) {
-            alert(result.message)
-            Router.push("/")
-        }
-        else if (response.status == 400) {
-            alert(result.message)
-        }
+        alert(result.message);
+        window.location.reload(false);
+    }
+
+    const handleSubmit2 = async (event) => {
+        event.preventDefault()
+
+        const response = await fetch('/api/password_reset_form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                code: event.target.code.value,
+                new_password: event.target.new_password.value,
+                confirm_new_password: event.target.confirm_new_password.value
+            }),
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+        window.location.reload(false);
     }
 
     return (
@@ -62,14 +70,26 @@ export default function PasswordReset() {
                     Password Reset
                 </h1>
 
-                <form className={styles.description} onSubmit={handleSubmit} method="post">
+                <p className={styles.descriptionSmall}>
+                    To reset your password, please generate a reset code.
+                    <br></br>
+                    You will receive an email with a code from unfsochonorsincomputing@gmail.com with your code.
+                </p>
+
+                <form className={styles.description} onSubmit={handleSubmit1} method="post">
                     <input name='username' className={styles.input} type="text" placeholder="Username" required/>
                     <br></br>
                     <input name='email' className={styles.input} type="text" placeholder="Email Address" required/>
                     <br></br>
-                    <input name='password' className={styles.input} type="password" placeholder="Password" required/>
+                    <input type="submit" value="Generate Reset Code"/>
+                </form>
+
+                <form className={styles.description} onSubmit={handleSubmit2} method="post">
+                    <input name='code' className={styles.input} type="text" placeholder="Reset Code"/>
                     <br></br>
-                    <input name='passwordConfirmation' className={styles.input} type="password" placeholder="Confirm Password" required/>
+                    <input name='new_password' className={styles.input} type="password" placeholder="New Password"/>
+                    <br></br>
+                    <input name='confirm_new_password' className={styles.input} type="password" placeholder="Confirm New Password"/>
                     <br></br>
                     <input type="submit" value="Reset Password"/>
                 </form>

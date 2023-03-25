@@ -40,6 +40,14 @@ CREATE TABLE notifications (
     FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );
 
+CREATE TABLE password_reset_codes (
+    code_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL,
+    code VARCHAR(8) NOT NULL,
+    creation_time DATETIME NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);
+
 CREATE TABLE report_filters (
     report_filter_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     admin_id INT NOT NULL,
