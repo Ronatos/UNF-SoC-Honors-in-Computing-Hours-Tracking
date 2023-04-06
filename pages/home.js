@@ -284,7 +284,7 @@ const Home = ({ user, entry_list }) => {
             )
         }
         else {
-            const [studentSearchString, setStudentSearchString] = useState("")
+            // const [studentSearchString, setStudentSearchString] = useState("")
             // have an input box onChange call setStudentSearchString
             const localEntryList = 
                 studentSearchString === "" ? entry_list : entry_list.filter(e => { 
