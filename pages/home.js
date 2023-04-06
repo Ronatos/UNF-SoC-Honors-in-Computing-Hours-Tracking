@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Router from 'next/router'
 import newFormIcon from '../public/new_form.png';
 import viewFormsIcon from '../public/view_forms.png';
-import { withSessionSsr, server } from './lib/config/withSession';
+import { withSessionSsr, server } from '../lib/withSession';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 

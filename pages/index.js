@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Router from 'next/router'
-import { withSessionSsr, server } from './lib/config/withSession';
+import { withSessionSsr, server } from '../lib/withSession';
 
 import styles from '../styles/Login.module.css'
 import unfLogo from '../public/UNF_Logo.gif'

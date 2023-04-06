@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import Router from 'next/router'
 import styles from '../styles/Student.module.css'
 import unfLogo from '../public/UNF_Logo.gif';
-import { server, withSessionSsr } from './lib/config/withSession';
+import { server, withSessionSsr } from '../lib/withSession';
 
 
 
