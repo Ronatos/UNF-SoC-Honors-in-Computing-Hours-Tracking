@@ -93,8 +93,8 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.username}</td>
                                     <td className={styles.tableData}>{account.last_name}, {account.first_name}</td>
                                     <td className={styles.tableData}>{account.email_address}</td>
-                                    <td className={styles.tableData}>{account.account_status}</td>
                                     <td className={styles.tableData}>{account.role}</td>
+                                    <td className={styles.tableData}>{account.account_status}</td>
                                     <td>
                                         {/* <form onSubmit={updateForm} method="post">
                                             <input name="account_id" type="hidden" value={account.account_id} readOnly></input>

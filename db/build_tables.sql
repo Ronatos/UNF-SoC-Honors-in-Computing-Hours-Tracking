@@ -6,7 +6,7 @@ CREATE TABLE accounts (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     role VARCHAR(8) NOT NULL, -- student, admin, or faculty
-    account_status VARCHAR(255) NOT NULL, -- active, email unverified, status pending
+    account_status VARCHAR(255) NOT NULL, -- active, email unverified, pending admin approval
     UNIQUE (username)
 );
 
