@@ -372,10 +372,28 @@ const Home = ({ user, entry_list }) => {
                     </span>
                 </header>
 
-                <main className={styles.description}>
-                    <Link href="/account_requests"><button type="button" className={styles.approveButton}>Account Requests</button></Link>
-                    <Link href="/reports"><button type="button" className={styles.approveButton}>View Reports</button></Link>
-                    <Link href="/adminAccount"><button type="button" className={styles.approveButton}>View Accounts</button></Link>
+                <main className={styles.main}>
+                <h1 className={styles.title}>Welcome</h1>
+                <div>
+                    <Link href="/account_requests">
+                    <button className={styles.approveButton}>Account Requests</button>
+                    </Link>
+                </div>
+                   <br></br>
+
+                <div>
+                    <Link href="/reports">
+                    <button className={styles.approveButton}>View Reports</button>
+                    </Link>
+                </div>
+                <br></br>
+
+                <div>
+                    <Link href="/adminAccount">
+                    <button className={styles.approveButton}>View Accounts</button>
+                    </Link>
+                </div>
+                <br></br>
                 </main>
             </div>
         )
