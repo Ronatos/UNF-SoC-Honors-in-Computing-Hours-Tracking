@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 import Link from 'next/link'
+import moment from "moment";
+
 
 function exportTableToExcel(tableID, filename = ''){
     var downloadLink;
@@ -40,6 +42,43 @@ export default function Home() {
     const [query, setQuery] = useState("")
     const [dataResponse, setdataResponse] = useState([]);
 
+    const [order, setOrder] = useState("ASC")
+    const sorting =(col)=>{
+      if (order === "ASC") {
+        const sorted = [...dataResponse].sort((a,b)=>
+        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+        );
+        setdataResponse(sorted);
+        setOrder("DSC")
+    }
+    
+    if (order === "DSC") {
+      const sorted = [...dataResponse].sort((a,b)=>
+      a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
+      );
+      setdataResponse(sorted);
+      setOrder("ASC")
+    };
+    }
+    
+    const sortingInt =(col)=>{
+      if (order === "ASC") {
+        const sorted = [...dataResponse].sort((a,b)=>
+        a[col] > b[col] ? 1 : -1
+        );
+        setdataResponse(sorted);
+        setOrder("DSC")
+    }
+    
+    if (order === "DSC") {
+      const sorted = [...dataResponse].sort((a,b)=>
+      a[col] < b[col] ? 1 : -1
+      );
+      setdataResponse(sorted);
+      setOrder("ASC")
+    };
+    }
+
     useEffect(() => {
         async function getPageData() {
             const response = await fetch('/api/entry_pull');
@@ -56,7 +95,7 @@ export default function Home() {
             <Head>
                 <title>Reports</title>
                 <meta name="description" content="Reports" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
             </Head>
       
             <header className={styles.header}>
@@ -78,19 +117,19 @@ export default function Home() {
                     <input type="text" id="input"  placeholder="Filter" className="search-input" data-table="reports-list" onChange={event => setQuery(event.target.value)}></input>
                 </div>
 
-                <table id="tableID" className={styles.table}>
-                    <thead>
+                <table class="table table-hover table-bordered" id="tableID" className={styles.table}>
+                    <thead class="thead-light">
                         <tr>
-                            <th className={styles.container}>Entry ID</th>
-                            <th className={styles.container}>Student ID</th>
-                            <th className={styles.container}>Faculty ID</th>
-                            <th className={styles.container}>Event Name</th>
-                            <th className={styles.container}>Event Date</th>
-                            <th className={styles.container}>Time Accrued</th>
-                            <th className={styles.container}>Latest Comment</th>
-                            <th className={styles.container}>Comment ID</th>
-                            <th className={styles.container}>Entry Status</th>
-                            <th className={styles.container}>Semester</th>
+                            <th onClick={()=>sortingInt("entry_id")}className={styles.container}>Entry ID</th>
+                            <th onClick={()=>sortingInt("student_id")}className={styles.container}>Student ID</th>
+                            <th onClick={()=>sortingInt("faculty_id")}className={styles.container}>Faculty ID</th>
+                            <th onClick={()=>sorting("event_name")} className={styles.container}>Event Name</th>
+                            <th onClick={()=>sortingInt("event_date")}className={styles.container}>Event Date</th>
+                            <th  onClick={()=>sortingInt("time_accrued")}className={styles.container}>Time Accrued</th>
+                            <th onClick={()=>sorting("latest_comment")}className={styles.container}>Latest Comment</th>
+                            <th onClick={()=>sortingInt("comment_id")}className={styles.container}>Comment ID</th>
+                            <th onClick={()=>sorting("entry_status")}className={styles.container}>Entry Status</th>
+                            <th onClick={()=>sorting("semester")}className={styles.container}>Semester</th>
                         </tr>
                     </thead>
 
@@ -127,7 +166,7 @@ export default function Home() {
                                     <td className={styles.tableData}>{account.student_id}</td>
                                     <td className={styles.tableData}>{account.faculty_id}</td>
                                     <td className={styles.tableData}>{account.event_name}</td>
-                                    <td className={styles.tableData}>{account.event_date}</td>
+                                    <td className={styles.tableData}>{moment(account.event_date).utc().format('YYYY-MM-DD')}</td>
                                     <td className={styles.tableData}>{account.time_accrued}</td>
                                     <td className={styles.tableData}>{account.latest_comment}</td>
                                     <td className={styles.tableData}>{account.latest_commentor_id}</td>
@@ -139,6 +178,9 @@ export default function Home() {
                         );
                     })}
                 </table>
+                <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
             </main>
         </div>
     )

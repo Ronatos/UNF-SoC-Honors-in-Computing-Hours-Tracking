@@ -14,6 +14,7 @@
     "bootstrap": "^5.2.3",
     "iron-session": "^6.3.1",
     "mdb-react-ui-kit": "^5.1.0",
+    "moment": "^2.29.4",
     "mysql2": "^2.3.3",
     "next": "12.3.1",
     "pug": "^3.0.2",
