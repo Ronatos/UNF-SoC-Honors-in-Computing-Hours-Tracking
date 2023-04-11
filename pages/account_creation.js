@@ -23,7 +23,7 @@ export default function AccountCreation() {
                 password: event.target.password.value,
                 role: event.target.role.value,
                 first_name: event.target.first_name.value,
-                last_name: event.target.first_name.value,
+                last_name: event.target.last_name.value,
             }),
         });
 
