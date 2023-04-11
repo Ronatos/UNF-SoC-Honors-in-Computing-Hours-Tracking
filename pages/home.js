@@ -30,7 +30,7 @@ export const getServerSideProps = withSessionSsr(
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: user.username,
+                    username: user.username
                 }),
             });
 
