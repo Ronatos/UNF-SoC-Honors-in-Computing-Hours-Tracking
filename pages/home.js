@@ -66,7 +66,7 @@ export const getServerSideProps = withSessionSsr(
         }
 
         return {
-            props: { user, entry_list}
+            props: { user }
         }
     }
 );
