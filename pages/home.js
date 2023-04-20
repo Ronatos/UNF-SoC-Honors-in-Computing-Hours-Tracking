@@ -9,6 +9,7 @@ import viewFormsIcon from '../public/view_forms.png';
 import { withSessionSsr, server } from '../lib/withSession';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
@@ -82,7 +83,7 @@ const logout = async () => {
     Router.push("/");
 }
 
-async function submitApproval(entry_id, new_status) {
+async function submitApproval(entry_id, new_status, reason) {
     const resp = await fetch('/api/update_form', {
         method: 'POST',
         headers: {
@@ -93,8 +94,9 @@ async function submitApproval(entry_id, new_status) {
 
             // new_status: event.target.new_status.value
             entry_id: entry_id,
-            new_status: new_status
-
+            new_status: new_status,
+            // put it in the field the server will expect
+            reason: reason
 
         }),
     })
@@ -113,12 +115,24 @@ function ApproveDenyEntry({ entryId }) {
     // show if not null, hide if null
     // shove in state = Approve, Deny
     const [approvalType, startApprovalForType] = useState(null);
+    // [data, setData] = default
+    const [reason, setReason] = useState("")
+    const [errorMsg, setErrorMsg] = useState(null)
     
 
     const handleClose = () => startApprovalForType(null);
     const verifyApprove = () => startApprovalForType("Approve");
     const verifyDeny = () => startApprovalForType("Deny");
-    const onVerified = () => submitApproval(entryId, approvalType)
+    const onVerified = () => {
+        if (!reason) {
+            setErrorMsg("Reason is missing")
+        } else {
+            setErrorMsg(null)
+            submitApproval(entryId, approvalType, reason)
+        }
+
+
+    }
   
     return (
       <>
@@ -134,6 +148,12 @@ function ApproveDenyEntry({ entryId }) {
             <Modal.Title>Are you sure you want to {approvalType}</Modal.Title>
           </Modal.Header>
           <Modal.Footer>
+          <Form.Group className="mb-3">
+            <Form.Label>Reason for {approvalType}</Form.Label>
+            <Form.Control type="input" value={reason} onChange={(e) => setReason(e.target.value)} required={true} placeholder="Type the reason" />
+            {errorMsg && <span>{errorMsg}</span>}
+          </Form.Group>
+
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
@@ -163,12 +183,17 @@ function ApproveDenyEntry({ entryId }) {
             entry_status: event.target.entry_status.value
         }),
     });
+    // if we finish the filtered view in Home below, then we can trust it knows how to update the list and can remove this
     window.location.reload(false);
 }
   
 const Home = ({ user, entry_list }) => {
     // put the entry list in state
     // when Approve or Deny happens, we know the id, so we can filter the list and get rid of it
+    // tldr of stateful entry_list = store the incoming array in a useState hook so it's the initial filtered view
+    // use the set when ApproveDeny happens to then setFilteredEntries
+    // makes sure all existing references to entry_list point to new filtered hook state variable 
+    const [studentSearchString, setStudentSearchString] = useState("")
 
     if (user.role == 'student') {
         if (entry_list.length == 0) {
@@ -284,7 +309,6 @@ const Home = ({ user, entry_list }) => {
             )
         }
         else {
-            // const [studentSearchString, setStudentSearchString] = useState("")
             // have an input box onChange call setStudentSearchString
             const localEntryList = 
                 studentSearchString === "" ? entry_list : entry_list.filter(e => { 

@@ -27,6 +27,7 @@ CREATE TABLE entries (
     time_accrued INT NOT NULL, -- hours requested
     latest_comment VARCHAR(255),
     entry_status VARCHAR(255), -- Approved, Denied, Status Pending
+    -- todo: add entry_status_reason to hold approval/deny reason
     semester VARCHAR(255), -- Fall, Spring, Summer
     FOREIGN KEY (student_id) REFERENCES accounts(account_id),
     FOREIGN KEY (faculty_id) REFERENCES accounts(account_id)
