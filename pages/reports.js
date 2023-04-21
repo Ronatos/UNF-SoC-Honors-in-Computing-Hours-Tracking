@@ -98,7 +98,11 @@ export default function Home() {
             </Head>
       
             <header className={styles.header}>
-                <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/home">
+                    <div>
+                    <Image className={styles.image} src={unfLogo} alt="UNF"/>
+                    </div>
+                    </Link>
                 <span className={styles.headerContent}>
                     {/* Removed old links, they were not needed for production */}
                     <button type="button" className={styles.headerButton}>Logout</button>
@@ -110,17 +114,17 @@ export default function Home() {
 
                
 
-                <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
+                <nav className="navbar navbar-light bg-light">
+  <div className="container-fluid">
 
-  <a class="nav-link active" aria-current="page">
+
     <Link href="/home">Home</Link>
-    </a>
+   
 
-    <form class="d-flex input-group w-auto">
+    <form className="d-flex input-group w-auto">
       <input
         type="search"
-        class="form-control rounded"
+        className="form-control rounded"
         placeholder="Search"
         aria-label="Search"
         aria-describedby="search-addon"
@@ -128,7 +132,7 @@ export default function Home() {
         onChange={event => setQuery(event.target.value)}
       />
     </form>
-    <div class="d-flex align-items-center">
+    <div className="d-flex align-items-center">
         <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>
           Export
         </button>
@@ -147,9 +151,8 @@ export default function Home() {
                             <th onClick={()=>sortingInt("event_date")}className={styles.container}>Event Date</th>
                             <th  onClick={()=>sortingInt("time_accrued")}className={styles.container}>Time Accrued</th>
                             <th onClick={()=>sorting("latest_comment")}className={styles.container}>Latest Comment</th>
-                            <th onClick={()=>sortingInt("comment_id")}className={styles.container}>Comment ID</th>
                             <th onClick={()=>sorting("entry_status")}className={styles.container}>Entry Status</th>
-                            <th onClick={()=>sorting("semester")}className={styles.container}>Semester</th>
+                          
                         </tr>
                     </thead>
 
@@ -175,9 +178,6 @@ export default function Home() {
                         if (account.event_date.toString().includes(query.toLowerCase())) {
                             return account;
                         }
-                        if (account.semester.toLowerCase().includes(query.toLowerCase())) {
-                            return account;
-                        }
                     }).map((account) => {
                         return (
                             <tbody key={account.entry_id}>
@@ -189,9 +189,8 @@ export default function Home() {
                                     <td className={styles.tableData}>{moment(account.event_date).utc().format('YYYY-MM-DD')}</td>
                                     <td className={styles.tableData}>{account.time_accrued}</td>
                                     <td className={styles.tableData}>{account.latest_comment}</td>
-                                    <td className={styles.tableData}>{account.latest_commentor_id}</td>
                                     <td className={styles.tableData}>{account.entry_status}</td> 
-                                    <td className={styles.tableData}>{account.semester}</td>
+                                   
                                     <td className={styles.tableData}>{}</td>
                                 </tr>
                             </tbody>

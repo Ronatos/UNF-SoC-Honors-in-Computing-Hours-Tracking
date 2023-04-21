@@ -5,7 +5,6 @@ import Router from 'next/router'
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
-import SortTable from '.'
 
 
 export default function Home() {
@@ -56,6 +55,8 @@ export default function Home() {
         window.location.reload(false);
     }
 
+    
+
     return (
         <div>
             <Head>
@@ -64,7 +65,11 @@ export default function Home() {
             </Head>
       
             <header className={styles.header}>
-                <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/home">
+                    <div>
+                    <Image className={styles.image} src={unfLogo} alt="UNF"/>
+                    </div>
+                    </Link>
                 <span className={styles.headerContent}>
                     {/* Removed old links, they were not needed for production */}
                     <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
@@ -74,14 +79,13 @@ export default function Home() {
             <main>
                
 
-                <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-
-  <a class="nav-link active" aria-current="page">
-    <Link href="/home">Home</Link>
-    </a>
-  </div>
-</nav>
+                <nav className="navbar navbar-light bg-light">
+                     <div className="container-fluid">
+                        
+                          <Link href="/home">Home</Link>
+                      
+                    </div>
+                </nav>
 
 
 
