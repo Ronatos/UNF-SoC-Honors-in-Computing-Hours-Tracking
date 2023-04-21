@@ -106,17 +106,38 @@ export default function Home() {
             </header>
       
             <main>
-                <div className={styles.breadcrumb}>
-                    <Link href="/home">Home</Link>
-                </div>
+               
 
-                <div className={styles.description}>
-                    <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>Export</button>
-                    <br></br>
-                    <input type="text" id="input"  placeholder="Filter" className="search-input" data-table="reports-list" onChange={event => setQuery(event.target.value)}></input>
-                </div>
+               
 
-                <table className="table table-hover table-bordered" id="tableID">
+                <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+
+  <a class="nav-link active" aria-current="page">
+    <Link href="/home">Home</Link>
+    </a>
+
+    <form class="d-flex input-group w-auto">
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        data-table="reports-list"
+        onChange={event => setQuery(event.target.value)}
+      />
+    </form>
+    <div class="d-flex align-items-center">
+        <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>
+          Export
+        </button>
+      </div>
+  </div>
+</nav>
+
+
+                <table className="table table-hover table-bordered align-middle" id="tableID">
                     <thead className="thead-light">
                         <tr>
                             <th onClick={()=>sortingInt("entry_id")}className={styles.container}>Entry ID</th>

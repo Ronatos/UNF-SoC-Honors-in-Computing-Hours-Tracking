@@ -72,9 +72,18 @@ export default function Home() {
             </header>
       
             <main>
-                <div className={styles.breadcrumb}>
-                    <Link href="/home">Home</Link>
-                </div>
+               
+
+                <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+
+  <a class="nav-link active" aria-current="page">
+    <Link href="/home">Home</Link>
+    </a>
+  </div>
+</nav>
+
+
 
                 <table className="table table-hover table-bordered" id="tableID">
                     <thead className="thead-light">

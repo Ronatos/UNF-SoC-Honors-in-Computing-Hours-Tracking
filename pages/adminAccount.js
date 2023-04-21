@@ -115,17 +115,33 @@ getPageData();
             </header>
       
             <main>
-            <div className={styles.breadcrumb}>
-                    <Link href="/home">Home</Link>
-                </div>
 
+                <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
 
+  <a class="nav-link active" aria-current="page">
+    <Link href="/home">Home</Link>
+    </a>
+
+    <form class="d-flex input-group w-auto">
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        data-table="reports-list"
+        onChange={event => setQuery(event.target.value)}
+      />
+    </form>
+    <div class="d-flex align-items-center">
+        <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>
+          Export
+        </button>
+      </div>
+  </div>
+</nav>
      
-                <div className={styles.description}>
-                    <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>Export</button>
-                    <br></br>
-                    <input type="text" id="input"  placeholder="Filter" className="search-input" data-table="reports-list" onChange={event => setQuery(event.target.value)}></input>
-                </div>
 
 
 
