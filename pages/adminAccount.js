@@ -4,12 +4,31 @@ import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 import Link from 'next/link'
-
+import { server, withSessionSsr } from '../lib/withSession';
 /*Reports Page
 Shows unresolved reports
 'http://localhost:3000/api/getAccounts'
 */
 
+
+
+
+
+export const getServerSideProps = withSessionSsr(
+    async ({req, res}) => {
+        const user = req.session.user;
+
+        if(!user || user.role != 'admin') {
+            return {
+                notFound: true,
+            }
+        }
+
+        return {
+            props: { user,  },
+        }
+    }
+);
 
 
 
@@ -44,7 +63,7 @@ function exportTableToExcel(tableID, filename = ''){
       downloadLink.click();
   }
 }
-export default function Home() {
+const AdministratorAccount = ({ user, faculty_list }) => {
 const [query, setQuery] = useState("")
 const [dataResponse, setdataResponse] = useState([]);
 
@@ -214,3 +233,4 @@ getPageData();
     )
 }
     
+export default AdministratorAccount;

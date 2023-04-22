@@ -5,6 +5,26 @@ import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 import Link from 'next/link'
 import moment from "moment";
+import { server, withSessionSsr } from '../lib/withSession';
+
+
+
+
+export const getServerSideProps = withSessionSsr(
+    async ({req, res}) => {
+        const user = req.session.user;
+
+        if(!user || user.role != 'admin') {
+            return {
+                notFound: true,
+            }
+        }
+
+        return {
+            props: { user,  },
+        }
+    }
+);
 
 
 function exportTableToExcel(tableID, filename = ''){
@@ -38,7 +58,8 @@ function exportTableToExcel(tableID, filename = ''){
     }
 }
 
-export default function Home() {
+const AdministratorReport = ({ user, faculty_list }) => {
+
     const [query, setQuery] = useState("")
     const [dataResponse, setdataResponse] = useState([]);
 
@@ -78,6 +99,8 @@ export default function Home() {
       setOrder("ASC")
     };
     }
+
+  
 
     useEffect(() => {
         async function getPageData() {
@@ -201,5 +224,5 @@ export default function Home() {
         </div>
     )
 }
-    
+export default AdministratorReport;
   

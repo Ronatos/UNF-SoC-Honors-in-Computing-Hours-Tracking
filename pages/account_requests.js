@@ -5,24 +5,27 @@ import Router from 'next/router'
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
+import { server, withSessionSsr } from '../lib/withSession';
 
 
-export default function Home() {
-    const [dataResponse, setdataResponse] = useState([]);
 
-    
+export const getServerSideProps = withSessionSsr(
+    async ({req, res}) => {
+        const user = req.session.user;
 
-    useEffect(() => {
-        async function getPageData() {
-            const apiURLEndpoint = '/api/account_request_pull';
-            const response = await fetch(apiURLEndpoint);
-            const res = await response.json();
-            console.log(res);
-            setdataResponse(res.accounts);
+        if(!user || user.role != 'admin') {
+            return {
+                notFound: true,
+            }
         }
+
+        return {
+            props: { user,  },
+        }
+    }
+);
     
-        getPageData();
-    }, []);
+    
 
     const logout = async () => {
         const response = await fetch('/api/logout', {
@@ -56,6 +59,20 @@ export default function Home() {
     }
 
     
+    const Administrator = ({ user, faculty_list }) => {
+
+        const [dataResponse, setdataResponse] = useState([]);
+    useEffect(() => {
+        async function getPageData() {
+            const apiURLEndpoint = '/api/account_request_pull';
+            const response = await fetch(apiURLEndpoint);
+            const res = await response.json();
+            console.log(res);
+            setdataResponse(res.accounts);
+        }
+    
+        getPageData();
+    }, []);
 
     return (
         <div>
@@ -133,3 +150,4 @@ export default function Home() {
     )
 }
 
+export default Administrator;
