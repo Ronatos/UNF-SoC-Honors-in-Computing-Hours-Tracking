@@ -102,7 +102,8 @@ async function submitApproval(entry_id, new_status, reason) {
     })
     // todo: replace reload with changing list in state
     if (resp.ok) {
-        window.location.reload(false);
+        // window.location.reload(false);
+        console.log("got back approval result");
     } {
         const errorBody = await resp.text()
         console.error("Unexpected response from server when submitting approval.", errorBody)
@@ -111,7 +112,7 @@ async function submitApproval(entry_id, new_status, reason) {
 
 
 
-function ApproveDenyEntry({ entryId }) {
+function ApproveDenyEntry({ entryId, onSubmit }) {
     // show if not null, hide if null
     // shove in state = Approve, Deny
     const [approvalType, startApprovalForType] = useState(null);
@@ -123,12 +124,14 @@ function ApproveDenyEntry({ entryId }) {
     const handleClose = () => startApprovalForType(null);
     const verifyApprove = () => startApprovalForType("Approve");
     const verifyDeny = () => startApprovalForType("Deny");
-    const onVerified = () => {
+    const onVerified = async () => {
         if (!reason) {
             setErrorMsg("Reason is missing")
         } else {
             setErrorMsg(null)
-            submitApproval(entryId, approvalType, reason)
+            await submitApproval(entryId, approvalType, reason)
+            onSubmit(entryId)
+            handleClose()
         }
 
 
@@ -147,19 +150,26 @@ function ApproveDenyEntry({ entryId }) {
           <Modal.Header closeButton>
             <Modal.Title>Are you sure you want to {approvalType}</Modal.Title>
           </Modal.Header>
-          <Modal.Footer>
-          <Form.Group className="mb-3">
-            <Form.Label>Reason for {approvalType}</Form.Label>
-            <Form.Control type="input" value={reason} onChange={(e) => setReason(e.target.value)} required={true} placeholder="Type the reason" />
-            {errorMsg && <span>{errorMsg}</span>}
-          </Form.Group>
+          <Modal.Body>
+            <Form.Group className="mb-3">
+                <Form.Label>Reason for {approvalType}</Form.Label>
+            
+                <Form.Control type="input" value={reason} onChange={(e) => setReason(e.target.value)} required={true} placeholder="Type the reason" />
+            
+                {errorMsg && <span>{errorMsg}</span>}
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>        
+           
+            <Button variant="primary" onClick={onVerified}>
+              {approvalType}
+            </Button>
 
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={onVerified}>
-              {approvalType}
-            </Button>
+        
+        
           </Modal.Footer>
         </Modal>
       </>
@@ -194,6 +204,15 @@ const Home = ({ user, entry_list }) => {
     // use the set when ApproveDeny happens to then setFilteredEntries
     // makes sure all existing references to entry_list point to new filtered hook state variable 
     const [studentSearchString, setStudentSearchString] = useState("")
+    const [filteredEntries, setFilteredEntries] = useState(entry_list ?? [])
+    
+    function removeEntry(id) {
+        const updatedEntries = filteredEntries.filter(entry => entry.entry_id !== id)
+        // get the filteredEntries and filter out the one with the passed in entryId
+        // console.log("We are ready to remove entryId", entryId)
+        // const updatedEntries = filteredEntries.slice(1) // this is not right
+        setFilteredEntries(updatedEntries)
+    }
 
     if (user.role == 'student') {
         if (entry_list.length == 0) {
@@ -311,7 +330,7 @@ const Home = ({ user, entry_list }) => {
         else {
             // have an input box onChange call setStudentSearchString
             const localEntryList = 
-                studentSearchString === "" ? entry_list : entry_list.filter(e => { 
+                studentSearchString === "" ? filteredEntries : filteredEntries.filter(e => { 
                     const search = studentSearchString.toUpperCase()
                     return e.first_name.toUpperCase().includes(search) ||  e.last_name.toUpperCase().includes(search) || e.event_name.toUpperCase().includes(search)
                 })
@@ -366,7 +385,7 @@ const Home = ({ user, entry_list }) => {
 
 
                                         
-                                                <ApproveDenyEntry entryId={entry.entry_id} />
+                                                <ApproveDenyEntry entryId={entry.entry_id} onSubmit={(entryId) => removeEntry(entryId)} />
 
                                             </td>
                                         </tr>
