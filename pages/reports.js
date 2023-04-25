@@ -5,6 +5,7 @@ import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 import Link from 'next/link'
 import moment from "moment";
+import Router from 'next/router'
 import { server, withSessionSsr } from '../lib/withSession';
 
 
@@ -100,7 +101,15 @@ const AdministratorReport = ({ user, faculty_list }) => {
     };
     }
 
-  
+    const logout = async () => {
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        Router.push("/");
+      }
 
     useEffect(() => {
         async function getPageData() {
@@ -121,6 +130,14 @@ const AdministratorReport = ({ user, faculty_list }) => {
             </Head>
       
             <header className={styles.header}>
+                        <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                        <span className={styles.headerContent}>
+                            {/* Removed old links, they were not needed for production */}
+                            <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
+                        </span>
+                    </header>
+
+            {/* <header className={styles.header}>
                 <Link href="/home">
                     <div>
                     <Image className={styles.image} src={unfLogo} alt="UNF"/>
@@ -128,9 +145,9 @@ const AdministratorReport = ({ user, faculty_list }) => {
                     </Link>
                 <span className={styles.headerContent}>
                     {/* Removed old links, they were not needed for production */}
-                    <button type="button" className={styles.headerButton}>Logout</button>
-                </span>
-            </header>
+                    {/* <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
+                </span> */}
+            {/* </header> */}
       
             <main>
                
