@@ -408,7 +408,10 @@ const Home = ({ user, entry_list }) => {
                 </Head>
 
                 <header className={styles.header}>
-                    <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                    <Link href="/home">
+                        <div><Image className={styles.image} src={unfLogo} alt="UNF"/>
+                        </div>
+                        </Link>
                     <span className={styles.headerContent}>
                         {/* Removed old links, they were not needed for production */}
                         <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>

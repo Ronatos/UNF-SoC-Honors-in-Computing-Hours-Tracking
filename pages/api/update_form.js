@@ -10,10 +10,11 @@ export default async function handler(req, res) {
         // body now has body.reason, now i need to put it into the database as entry_status_reason
         const update_data = (await dbPool.query('UPDATE entries SET  entry_status = ? , latest_comment = ? WHERE entry_id = ?;', [ // AND entry_status_reason = ? 
             (body.new_status == 'Approve' ? 'Approved' : 'Denied'), 
-            //body.reason
+            
+            body.reason,
             body.entry_id]
         ))[0][0];
-
+        
         return res.status(200).json({
             
         });

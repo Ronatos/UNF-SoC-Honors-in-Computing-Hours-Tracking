@@ -5,25 +5,27 @@ import Router from 'next/router'
 import styles from '../styles/Home.module.css'
 import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
-import SortTable from '.'
+import { server, withSessionSsr } from '../lib/withSession';
 
 
-export default function Home() {
-    const [dataResponse, setdataResponse] = useState([]);
 
-    
+export const getServerSideProps = withSessionSsr(
+    async ({req, res}) => {
+        const user = req.session.user;
 
-    useEffect(() => {
-        async function getPageData() {
-            const apiURLEndpoint = '/api/account_request_pull';
-            const response = await fetch(apiURLEndpoint);
-            const res = await response.json();
-            console.log(res);
-            setdataResponse(res.accounts);
+        if(!user || user.role != 'admin') {
+            return {
+                notFound: true,
+            }
         }
+
+        return {
+            props: { user,  },
+        }
+    }
+);
     
-        getPageData();
-    }, []);
+    
 
     const logout = async () => {
         const response = await fetch('/api/logout', {
@@ -56,6 +58,22 @@ export default function Home() {
         window.location.reload(false);
     }
 
+    
+    const Administrator = ({ user, faculty_list }) => {
+
+        const [dataResponse, setdataResponse] = useState([]);
+    useEffect(() => {
+        async function getPageData() {
+            const apiURLEndpoint = '/api/account_request_pull';
+            const response = await fetch(apiURLEndpoint);
+            const res = await response.json();
+            console.log(res);
+            setdataResponse(res.accounts);
+        }
+    
+        getPageData();
+    }, []);
+
     return (
         <div>
             <Head>
@@ -64,7 +82,11 @@ export default function Home() {
             </Head>
       
             <header className={styles.header}>
-                <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                <Link href="/home">
+                    <div>
+                    <Image className={styles.image} src={unfLogo} alt="UNF"/>
+                    </div>
+                    </Link>
                 <span className={styles.headerContent}>
                     {/* Removed old links, they were not needed for production */}
                     <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
@@ -72,9 +94,17 @@ export default function Home() {
             </header>
       
             <main>
-                <div className={styles.breadcrumb}>
-                    <Link href="/home">Home</Link>
-                </div>
+               
+
+                <nav className="navbar navbar-light bg-light">
+                     <div className="container-fluid">
+                        
+                          <Link href="/home">Home</Link>
+                      
+                    </div>
+                </nav>
+
+
 
                 <table className="table table-hover table-bordered" id="tableID">
                     <thead className="thead-light">
@@ -120,3 +150,4 @@ export default function Home() {
     )
 }
 
+export default Administrator;

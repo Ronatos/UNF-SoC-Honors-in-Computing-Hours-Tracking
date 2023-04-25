@@ -5,6 +5,27 @@ import unfLogo from '../public/UNF_Logo.gif'
 import {useEffect, useState} from "react";
 import Link from 'next/link'
 import moment from "moment";
+import Router from 'next/router'
+import { server, withSessionSsr } from '../lib/withSession';
+
+
+
+
+export const getServerSideProps = withSessionSsr(
+    async ({req, res}) => {
+        const user = req.session.user;
+
+        if(!user || user.role != 'admin') {
+            return {
+                notFound: true,
+            }
+        }
+
+        return {
+            props: { user,  },
+        }
+    }
+);
 
 
 function exportTableToExcel(tableID, filename = ''){
@@ -38,7 +59,8 @@ function exportTableToExcel(tableID, filename = ''){
     }
 }
 
-export default function Home() {
+const AdministratorReport = ({ user, faculty_list }) => {
+
     const [query, setQuery] = useState("")
     const [dataResponse, setdataResponse] = useState([]);
 
@@ -79,6 +101,16 @@ export default function Home() {
     };
     }
 
+    const logout = async () => {
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        Router.push("/");
+      }
+
     useEffect(() => {
         async function getPageData() {
             const response = await fetch('/api/entry_pull');
@@ -98,25 +130,58 @@ export default function Home() {
             </Head>
       
             <header className={styles.header}>
-                <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                        <Link href="/home"><Image className={styles.image} src={unfLogo} alt="UNF"/></Link>
+                        <span className={styles.headerContent}>
+                            {/* Removed old links, they were not needed for production */}
+                            <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
+                        </span>
+                    </header>
+
+            {/* <header className={styles.header}>
+                <Link href="/home">
+                    <div>
+                    <Image className={styles.image} src={unfLogo} alt="UNF"/>
+                    </div>
+                    </Link>
                 <span className={styles.headerContent}>
                     {/* Removed old links, they were not needed for production */}
-                    <button type="button" className={styles.headerButton}>Logout</button>
-                </span>
-            </header>
+                    {/* <button type="button" className={styles.headerButton} onClick={logout}>Logout</button>
+                </span> */}
+            {/* </header> */}
       
             <main>
-                <div className={styles.breadcrumb}>
-                    <Link href="/home">Home</Link>
-                </div>
+               
 
-                <div className={styles.description}>
-                    <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>Export</button>
-                    <br></br>
-                    <input type="text" id="input"  placeholder="Filter" className="search-input" data-table="reports-list" onChange={event => setQuery(event.target.value)}></input>
-                </div>
+               
 
-                <table className="table table-hover table-bordered" id="tableID">
+                <nav className="navbar navbar-light bg-light">
+  <div className="container-fluid">
+
+
+    <Link href="/home">Home</Link>
+   
+
+    <form className="d-flex input-group w-auto">
+      <input
+        type="search"
+        className="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        data-table="reports-list"
+        onChange={event => setQuery(event.target.value)}
+      />
+    </form>
+    <div className="d-flex align-items-center">
+        <button type="button" className={styles.approveButton} onClick={()=>exportTableToExcel("tableID")}>
+          Export
+        </button>
+      </div>
+  </div>
+</nav>
+
+
+                <table className="table table-hover table-bordered align-middle" id="tableID">
                     <thead className="thead-light">
                         <tr>
                             <th onClick={()=>sortingInt("entry_id")}className={styles.container}>Entry ID</th>
@@ -126,9 +191,8 @@ export default function Home() {
                             <th onClick={()=>sortingInt("event_date")}className={styles.container}>Event Date</th>
                             <th  onClick={()=>sortingInt("time_accrued")}className={styles.container}>Time Accrued</th>
                             <th onClick={()=>sorting("latest_comment")}className={styles.container}>Latest Comment</th>
-                            <th onClick={()=>sortingInt("comment_id")}className={styles.container}>Comment ID</th>
                             <th onClick={()=>sorting("entry_status")}className={styles.container}>Entry Status</th>
-                            <th onClick={()=>sorting("semester")}className={styles.container}>Semester</th>
+                          
                         </tr>
                     </thead>
 
@@ -154,9 +218,6 @@ export default function Home() {
                         if (account.event_date.toString().includes(query.toLowerCase())) {
                             return account;
                         }
-                        if (account.semester.toLowerCase().includes(query.toLowerCase())) {
-                            return account;
-                        }
                     }).map((account) => {
                         return (
                             <tbody key={account.entry_id}>
@@ -168,9 +229,8 @@ export default function Home() {
                                     <td className={styles.tableData}>{moment(account.event_date).utc().format('YYYY-MM-DD')}</td>
                                     <td className={styles.tableData}>{account.time_accrued}</td>
                                     <td className={styles.tableData}>{account.latest_comment}</td>
-                                    <td className={styles.tableData}>{account.latest_commentor_id}</td>
                                     <td className={styles.tableData}>{account.entry_status}</td> 
-                                    <td className={styles.tableData}>{account.semester}</td>
+                                   
                                     <td className={styles.tableData}>{}</td>
                                 </tr>
                             </tbody>
@@ -181,5 +241,5 @@ export default function Home() {
         </div>
     )
 }
-    
+export default AdministratorReport;
   
